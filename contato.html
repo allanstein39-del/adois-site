@@ -162,6 +162,7 @@ h
         </div>
         <div class="form-group"><label>mensagem</label><textarea name="message" autocomplete="off" placeholder="Conte sobre seu projeto, seus desafios ou o que você quer construir..." required></textarea></div>
         <button type="submit" class="form-submit">enviar mensagem →</button>
+        <div id="contact-feedback" style="display:none;margin-top:16px;padding:14px 18px;border-radius:10px;font-size:14px;font-weight:400;text-align:center"></div>
       </form>
     </div>
   </div>
@@ -180,15 +181,18 @@ h
 const nb=document.getElementById('navbar');if(nb)window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',scrollY>40),{passive:true});
 const hbg=document.getElementById('hamburger'),mob=document.getElementById('mobile-menu');if(hbg&&mob){hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':''});mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hbg.classList.remove('open');mob.classList.remove('open');document.body.style.overflow=''}))}
 const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.08,rootMargin:'0px 0px -30px 0px'});document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-document.getElementById('contact-form').addEventListener('submit',function(e){
+document.getElementById('contact-form').addEventListener('submit',async function(e){
   e.preventDefault();
+  const btn=this.querySelector('.form-submit'),fb=document.getElementById('contact-feedback');
   const nome=this.name.value.trim(),email=this.email.value.trim(),empresa=this.company.value.trim(),servico=this.service.value.trim(),msg=this.message.value.trim();
-  const assunto=encodeURIComponent('Novo contato'+(nome?' de '+nome:''));
-  const linhas=['Nome: '+nome,'E-mail: '+email];
-  if(empresa)linhas.push('Empresa / Marca: '+empresa);
-  if(servico)linhas.push('Serviço: '+servico);
-  linhas.push('','Mensagem:',msg);
-  window.location.href='mailto:contato@adoisc.com.br?subject='+assunto+'&body='+encodeURIComponent(linhas.join('\n'));
+  btn.disabled=true;btn.textContent='enviando...';fb.style.display='none';
+  try{
+    const res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({access_key:'41ce45d1-b8af-4463-954c-57aa2c85c513',subject:'Novo contato de '+nome,from_name:nome,replyto:email,'Nome':nome,'E-mail':email,'Empresa / Marca':empresa||'—','Serviço':servico||'—','Mensagem':msg})});
+    const data=await res.json();
+    if(data.success){fb.style.cssText='display:block;margin-top:16px;padding:14px 18px;border-radius:10px;font-size:14px;font-weight:400;text-align:center;background:rgba(47,212,232,.08);border:1px solid rgba(47,212,232,.25);color:#2FD4E8';fb.textContent='Mensagem enviada! Em breve entraremos em contato.';this.reset();}
+    else{fb.style.cssText='display:block;margin-top:16px;padding:14px 18px;border-radius:10px;font-size:14px;font-weight:400;text-align:center;background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.25);color:#ff6b6b';fb.textContent='Algo deu errado. Tente novamente ou nos chame pelo WhatsApp.';}
+  }catch{fb.style.cssText='display:block;margin-top:16px;padding:14px 18px;border-radius:10px;font-size:14px;font-weight:400;text-align:center;background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.25);color:#ff6b6b';fb.textContent='Erro de conexão. Verifique sua internet e tente novamente.';}
+  btn.disabled=false;btn.textContent='enviar mensagem →';
 });
 </script>
 </body></html>
