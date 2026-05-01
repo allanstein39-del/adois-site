@@ -153,14 +153,14 @@ h
     </div>
     <div class="contact-form reveal rd2">
       <div class="form-title">Deixe sua mensagem</div>
-      <form action="mailto:contato@adoisc.com.br" method="post" enctype="text/plain">
-        <div class="form-group"><label>seu nome</label><input type="text" placeholder="Como devemos chamar você?" required></div>
-        <div class="form-group"><label>e-mail</label><input type="email" placeholder="seu@email.com" required></div>
-        <div class="form-group"><label>empresa ou marca</label><input type="text" placeholder="Nome da empresa ou projeto"></div>
+      <form action="mailto:contato@adoisc.com.br" method="post" enctype="text/plain" autocomplete="on">
+        <div class="form-group"><label>seu nome</label><input type="text" name="name" autocomplete="name" placeholder="Como devemos chamar você?" required></div>
+        <div class="form-group"><label>e-mail</label><input type="email" name="email" autocomplete="email" placeholder="seu@email.com" required></div>
+        <div class="form-group"><label>empresa ou marca</label><input type="text" name="company" autocomplete="organization" placeholder="Nome da empresa ou projeto"></div>
         <div class="form-group"><label>o que você precisa</label>
-          <select><option value="">selecione um serviço</option><option>Design de Marca</option><option>Identidade Visual</option><option>Criação de Logotipo</option><option>Estratégia de Comunicação</option><option>Publicidade e Campanha</option><option>Experiência do Cliente</option><option>Não sei ainda, quero conversar</option></select>
+          <select name="service" autocomplete="off"><option value="">selecione um serviço</option><option>Design de Marca</option><option>Identidade Visual</option><option>Criação de Logotipo</option><option>Estratégia de Comunicação</option><option>Publicidade e Campanha</option><option>Experiência do Cliente</option><option>Não sei ainda, quero conversar</option></select>
         </div>
-        <div class="form-group"><label>mensagem</label><textarea placeholder="Conte sobre seu projeto, seus desafios ou o que você quer construir..." required></textarea></div>
+        <div class="form-group"><label>mensagem</label><textarea name="message" autocomplete="off" placeholder="Conte sobre seu projeto, seus desafios ou o que você quer construir..." required></textarea></div>
         <button type="submit" class="form-submit">enviar mensagem →</button>
       </form>
     </div>

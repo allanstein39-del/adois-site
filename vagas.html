@@ -273,13 +273,13 @@ footer{background:#030609;border-top:1px solid rgba(255,255,255,.06);padding:60p
       </div>
       <div class="form-card reveal rd2">
         <div class="form-title">Candidatura</div>
-        <form action="mailto:contato@adoisc.com.br" method="post" enctype="text/plain">
+        <form action="mailto:contato@adoisc.com.br" method="post" enctype="text/plain" autocomplete="on">
           <div class="form-row">
-            <div class="form-group"><label>nome completo</label><input type="text" placeholder="Seu nome" required></div>
-            <div class="form-group"><label>e-mail</label><input type="email" placeholder="seu@email.com" required></div>
+            <div class="form-group"><label>nome completo</label><input type="text" name="name" autocomplete="name" placeholder="Seu nome" required></div>
+            <div class="form-group"><label>e-mail</label><input type="email" name="email" autocomplete="email" placeholder="seu@email.com" required></div>
           </div>
           <div class="form-group"><label>área de atuação</label>
-            <select required>
+            <select name="area" autocomplete="off" required>
               <option value="">selecione sua área</option>
               <option>Design Gráfico e Identidade Visual</option>
               <option>Redação Criativa e Copywriting</option>
@@ -290,14 +290,14 @@ footer{background:#030609;border-top:1px solid rgba(255,255,255,.06);padding:60p
               <option>Outra área</option>
             </select>
           </div>
-          <div class="form-group"><label>link do portfólio</label><input type="url" placeholder="behance.net/seuperfil ou link do seu trabalho"></div>
+          <div class="form-group"><label>link do portfólio</label><input type="url" name="portfolio" autocomplete="url" placeholder="behance.net/seuperfil ou link do seu trabalho"></div>
           <div class="form-group"><label>currículo (pdf)</label>
             <div class="file-input-wrap">
-              <input type="file" accept=".pdf" id="curriculo-file">
+              <input type="file" name="curriculo" accept=".pdf" id="curriculo-file">
               <div class="file-label" id="file-label-display"><span>escolher arquivo</span> — apenas PDF, até 5MB</div>
             </div>
           </div>
-          <div class="form-group"><label>sobre você</label><textarea placeholder="Conte o que você faz, o que te move e por que a Adois faz sentido pra você." required></textarea></div>
+          <div class="form-group"><label>sobre você</label><textarea name="message" autocomplete="off" placeholder="Conte o que você faz, o que te move e por que a Adois faz sentido pra você." required></textarea></div>
           <button type="submit" class="form-submit">enviar candidatura →</button>
           <p class="form-note">Respondemos todas as candidaturas. Pode levar até 15 dias úteis.</p>
         </form>
