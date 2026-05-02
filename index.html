@@ -244,6 +244,19 @@ footer{background:#030609;border-top:1px solid rgba(255,255,255,.06);padding:60p
   .services-grid{grid-template-columns:1fr}
   .stat-row{grid-template-columns:1fr 1fr}
 }
+
+/* CLIENTS CAROUSEL */
+.clients-section{padding:56px 0;background:#05080F;border-top:1px solid rgba(255,255,255,.06);overflow:hidden}
+.clients-header{text-align:center;padding:0 56px;margin-bottom:36px}
+.clients-carousel{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%)}
+.clients-track{display:flex;align-items:center;gap:24px;list-style:none;width:max-content;padding:8px 0;animation:scroll-clients 55s linear infinite}
+.clients-track:hover{animation-play-state:paused}
+.client-item{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:148px;height:68px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;transition:border-color .2s,background .2s}
+.client-item:hover{background:rgba(47,212,232,.05);border-color:rgba(47,212,232,.2)}
+.client-item img{max-width:116px;max-height:52px;object-fit:contain;filter:brightness(0) invert(1);opacity:.45;transition:opacity .2s;display:block}
+.client-item:hover img{opacity:.8}
+@keyframes scroll-clients{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:600px){.clients-header{padding:0 24px}}
 </style>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -308,6 +321,50 @@ footer{background:#030609;border-top:1px solid rgba(255,255,255,.06);padding:60p
         <span class="ticker-item">Experiência do Cliente<em>·</em></span>
       </div>
     </div>
+  </div>
+</section>
+
+<!--
+  CLIENTES — carrossel infinito
+  Para adicionar um logo: coloque o arquivo em img/clientes/ e
+  adicione um novo <li class="client-item"> seguindo o padrão abaixo.
+  O JS duplica os itens automaticamente — não precisa alterar mais nada.
+-->
+<section class="clients-section">
+  <div class="clients-header">
+    <div class="eyebrow reveal" style="justify-content:center">clientes</div>
+  </div>
+  <div class="clients-carousel">
+    <ul class="clients-track" id="clients-track">
+      <li class="client-item"><img src="img/clientes/cliente-01.webp" alt="Cliente 01" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-02.webp" alt="Cliente 02" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-03.webp" alt="Cliente 03" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-04.webp" alt="Cliente 04" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-05.webp" alt="Cliente 05" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-06.webp" alt="Cliente 06" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-07.webp" alt="Cliente 07" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-08.webp" alt="Cliente 08" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-09.webp" alt="Cliente 09" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-10.webp" alt="Cliente 10" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-11.webp" alt="Cliente 11" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-12.webp" alt="Cliente 12" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-13.webp" alt="Cliente 13" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-14.webp" alt="Cliente 14" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-15.webp" alt="Cliente 15" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-16.webp" alt="Cliente 16" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-17.webp" alt="Cliente 17" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-18.webp" alt="Cliente 18" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-19.webp" alt="Cliente 19" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-20.webp" alt="Cliente 20" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-21.webp" alt="Cliente 21" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-22.webp" alt="Cliente 22" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-23.webp" alt="Cliente 23" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-24.webp" alt="Cliente 24" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-25.webp" alt="Cliente 25" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-26.webp" alt="Cliente 26" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-27.webp" alt="Cliente 27" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-28.webp" alt="Cliente 28" loading="lazy" onerror="this.style.display='none'"></li>
+    </ul>
   </div>
 </section>
 
@@ -463,6 +520,13 @@ const cntObs=new IntersectionObserver(entries=>{
   });
 },{threshold:0.5});
 document.querySelectorAll('.count-up').forEach(el=>cntObs.observe(el));
+
+// CLIENTS CAROUSEL — duplica os itens para o loop ser contínuo
+(function(){
+  const track=document.getElementById('clients-track');
+  if(!track)return;
+  Array.from(track.children).forEach(item=>track.appendChild(item.cloneNode(true)));
+})();
 </script>
 
 </body>
