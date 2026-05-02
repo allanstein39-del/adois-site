@@ -142,11 +142,6 @@ footer{background:#030609;border-top:1px solid rgba(255,255,255,.06);padding:60p
 .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.2)}
 .form-group textarea{resize:vertical;min-height:100px}
 .form-group select option{background:#0A1628;color:#fff}
-.file-input-wrap{position:relative}
-.file-input-wrap input[type=file]{opacity:0;position:absolute;inset:0;cursor:pointer;z-index:2}
-.file-label{display:flex;align-items:center;gap:12px;padding:13px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;font-size:14px;font-weight:300;color:rgba(255,255,255,.45);transition:border-color .2s}
-.file-label span{color:#2FD4E8;font-weight:500}
-.file-input-wrap:hover .file-label{border-color:rgba(47,212,232,.35)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .form-submit{width:100%;padding:16px;background:#2E6FB8;border:none;border-radius:999px;color:#fff;font-size:15px;font-weight:500;font-family:inherit;cursor:pointer;transition:background .2s,box-shadow .2s,transform .15s;margin-top:8px}
 .form-submit:hover{background:#1B4B8F;box-shadow:0 0 0 1px rgba(47,212,232,.28),0 0 36px rgba(47,212,232,.18);transform:translateY(-1px)}
@@ -273,13 +268,13 @@ footer{background:#030609;border-top:1px solid rgba(255,255,255,.06);padding:60p
       </div>
       <div class="form-card reveal rd2">
         <div class="form-title">Candidatura</div>
-        <form action="mailto:contato@adoisc.com.br" method="post" enctype="text/plain">
+        <form id="candidatura-form" autocomplete="on">
           <div class="form-row">
-            <div class="form-group"><label>nome completo</label><input type="text" placeholder="Seu nome" required></div>
-            <div class="form-group"><label>e-mail</label><input type="email" placeholder="seu@email.com" required></div>
+            <div class="form-group"><label>nome completo</label><input type="text" name="name" autocomplete="name" placeholder="Seu nome" required></div>
+            <div class="form-group"><label>e-mail</label><input type="email" name="email" autocomplete="email" placeholder="seu@email.com" required></div>
           </div>
           <div class="form-group"><label>área de atuação</label>
-            <select required>
+            <select name="area" autocomplete="off" required>
               <option value="">selecione sua área</option>
               <option>Design Gráfico e Identidade Visual</option>
               <option>Redação Criativa e Copywriting</option>
@@ -290,15 +285,10 @@ footer{background:#030609;border-top:1px solid rgba(255,255,255,.06);padding:60p
               <option>Outra área</option>
             </select>
           </div>
-          <div class="form-group"><label>link do portfólio</label><input type="url" placeholder="behance.net/seuperfil ou link do seu trabalho"></div>
-          <div class="form-group"><label>currículo (pdf)</label>
-            <div class="file-input-wrap">
-              <input type="file" accept=".pdf" id="curriculo-file">
-              <div class="file-label" id="file-label-display"><span>escolher arquivo</span> — apenas PDF, até 5MB</div>
-            </div>
-          </div>
-          <div class="form-group"><label>sobre você</label><textarea placeholder="Conte o que você faz, o que te move e por que a Adois faz sentido pra você." required></textarea></div>
+          <div class="form-group"><label>link do portfólio</label><input type="url" name="portfolio" autocomplete="url" placeholder="behance.net/seuperfil ou link do seu trabalho"></div>
+          <div class="form-group"><label>sobre você</label><textarea name="message" autocomplete="off" placeholder="Conte o que você faz, o que te move e por que a Adois faz sentido pra você." required></textarea></div>
           <button type="submit" class="form-submit">enviar candidatura →</button>
+          <div id="candidatura-feedback" style="display:none;margin-top:16px;padding:14px 18px;border-radius:10px;font-size:14px;font-weight:400;text-align:center"></div>
           <p class="form-note">Respondemos todas as candidaturas. Pode levar até 15 dias úteis.</p>
         </form>
       </div>
@@ -324,20 +314,24 @@ footer{background:#030609;border-top:1px solid rgba(255,255,255,.06);padding:60p
 <footer><div class="footer-grid"><div class="footer-brand"><img src="img/logo.webp" alt="Adois comunicação integrativa" width="92" height="52" loading="lazy"><p class="footer-desc">Agência de publicidade e design de marca em São Carlos. Comunicação que começa antes da comunicação.</p></div><div><div class="footer-col-title">serviços</div><ul class="footer-links"><li><a href="servicos.html">design de marca</a></li><li><a href="servicos.html">identidade visual</a></li><li><a href="servicos.html">criação de logotipo</a></li><li><a href="servicos.html">publicidade</a></li><li><a href="servicos.html">estratégia</a></li></ul></div><div><div class="footer-col-title">agência</div><ul class="footer-links"><li><a href="sobre.html">sobre nós</a></li><li><a href="manifesto.html">manifesto</a></li><li><a href="vagas.html">vagas</a></li><li><a href="blog.html">blog</a></li><li><a href="contato.html">contato</a></li></ul></div><div><div class="footer-col-title">redes sociais</div><ul class="footer-links"><li><a href="https://www.instagram.com/adoisc/" target="_blank" rel="noopener">instagram @adoisc</a></li><li><a href="mailto:contato@adoisc.com.br">contato@adoisc.com.br</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 Adois comunicação integrativa · São Carlos, Brasil</span><span>agência de publicidade · design de marca · identidade visual</span></div></footer>
 
 <script>
-const fileInput = document.getElementById('curriculo-file');
-const fileLabel = document.getElementById('file-label-display');
-if(fileInput && fileLabel) {
-  fileInput.addEventListener('change', () => {
-    const f = fileInput.files[0];
-    if(f) fileLabel.innerHTML = '<span>' + f.name + '</span>';
-    else fileLabel.innerHTML = '<span>escolher arquivo</span> — apenas PDF, até 5MB';
-  });
-}
 </script>
 <script>
 (function(){const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');if(!cur||!ring||!matchMedia('(hover:hover)').matches)return;let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();document.querySelectorAll('a,button,.vaga-card,.val-card,.channel,.form-group').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('big');ring.classList.add('big')});el.addEventListener('mouseleave',()=>{cur.classList.remove('big');ring.classList.remove('big')})});})();
 const nb=document.getElementById('navbar');if(nb)window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',scrollY>40),{passive:true});
 const hbg=document.getElementById('hamburger'),mob=document.getElementById('mobile-menu');if(hbg&&mob){hbg.addEventListener('click',()=>{hbg.classList.toggle('open');mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':''});mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hbg.classList.remove('open');mob.classList.remove('open');document.body.style.overflow=''}))}
 const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.08,rootMargin:'0px 0px -30px 0px'});document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+document.getElementById('candidatura-form').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=this.querySelector('.form-submit'),fb=document.getElementById('candidatura-feedback');
+  const nome=this.name.value.trim(),email=this.email.value.trim(),area=this.area.value.trim(),portfolio=this.portfolio.value.trim(),msg=this.message.value.trim();
+  btn.disabled=true;btn.textContent='enviando...';fb.style.display='none';
+  try{
+    const res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({access_key:'41ce45d1-b8af-4463-954c-57aa2c85c513',subject:'Candidatura — '+area+' de '+nome,from_name:nome,replyto:email,'Nome':nome,'E-mail':email,'Área de Atuação':area,'Portfólio':portfolio||'—','Sobre mim':msg})});
+    const data=await res.json();
+    if(data.success){fb.style.cssText='display:block;margin-top:16px;padding:14px 18px;border-radius:10px;font-size:14px;font-weight:400;text-align:center;background:rgba(47,212,232,.08);border:1px solid rgba(47,212,232,.25);color:#2FD4E8';fb.textContent='Candidatura enviada! Respondemos em até 15 dias úteis.';this.reset();}
+    else{fb.style.cssText='display:block;margin-top:16px;padding:14px 18px;border-radius:10px;font-size:14px;font-weight:400;text-align:center;background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.25);color:#ff6b6b';fb.textContent='Algo deu errado. Tente novamente ou nos envie um e-mail direto.';}
+  }catch{fb.style.cssText='display:block;margin-top:16px;padding:14px 18px;border-radius:10px;font-size:14px;font-weight:400;text-align:center;background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.25);color:#ff6b6b';fb.textContent='Erro de conexão. Verifique sua internet e tente novamente.';}
+  btn.disabled=false;btn.textContent='enviar candidatura →';
+});
 </script>
 </body></html>
