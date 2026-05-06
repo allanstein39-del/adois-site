@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <title>adöis · onboarding audiovisual</title>
 <link rel="stylesheet" href="colors_and_type.css">
 <script src="deck-stage.js"></script>
@@ -10,7 +11,7 @@
   section { position:relative; overflow:hidden; display:flex; color:#fff; }
   .pad { padding: 88px 120px; width:100%; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2; }
 
-  /* shared chrome ---------------------------------------------------- */
+  /* shared chrome */
   .chrome-top, .chrome-bot {
     position:absolute; left:120px; right:120px; z-index:3;
     display:flex; justify-content:space-between; align-items:center;
@@ -20,15 +21,9 @@
   .chrome-top { top:48px; }
   .chrome-bot { bottom:48px; font-size:13px; letter-spacing:.1em; }
   .brand-logo { height:42px; width:auto; display:block; }
-  .cap { display:inline-flex; align-items:center; gap:8px; padding:7px 16px 7px 8px;
-         border:1px solid rgba(255,255,255,.18); border-radius:999px;
-         text-transform:none; letter-spacing:0; font-size:14px; color:#fff; font-weight:500;}
-  .cap .dots { display:inline-flex; gap:4px; }
-  .cap .sph { width:14px; height:14px; border-radius:50%;
-              background: radial-gradient(circle at 30% 25%, #B9D7EE, #4A91D4 50%, #13315C 100%);}
   .pageno { font-variant-numeric: tabular-nums; }
 
-  /* slide 1 — cover -------------------------------------------------- */
+  /* slide 1 — cover */
   .cover {
     background-image: url('assets/bg-gradient-dark-blue-glow.jpg');
     background-size: cover; background-position: center;
@@ -57,10 +52,8 @@
   .cover .meta-row .lab { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:6px; font-weight:500;}
   .cover .meta-row .val { font-size:18px; color:#fff; font-weight:300;}
 
-  /* slide 2 — hub with 3 clickable cards ------------------------------ */
-  .hub {
-    background: #05080F;
-  }
+  /* slide 2 — hub */
+  .hub { background: #05080F; }
   .hub::before {
     content:""; position:absolute; inset:0; z-index:0;
     background-image: url('assets/bg-gradient-cyan-bloom.jpg');
@@ -89,9 +82,7 @@
   }
   .hub .hint .arrow { display:inline-block; transform:translateY(1px); margin-right:6px; color:#2FD4E8;}
 
-  .cards {
-    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
-  }
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
   .card-link {
     position:relative; display:block; text-decoration:none; color:inherit;
     background: rgba(255,255,255,.04);
@@ -120,9 +111,7 @@
   .card-link:active { transform: translateY(-1px); }
   .card-link:focus-visible { outline:2px solid #2FD4E8; outline-offset:3px; }
 
-  .card-link .top {
-    display:flex; justify-content:space-between; align-items:flex-start;
-  }
+  .card-link .top { display:flex; justify-content:space-between; align-items:flex-start; }
   .card-link .num {
     font-family: var(--font-display); font-weight:300;
     font-size: 18px; color:#7CB5E6; letter-spacing:.18em;
@@ -143,9 +132,7 @@
     color:#fff; margin:0;
   }
   .card-link .name em { font-style:italic; color:#A8EEF6;}
-  .card-link .meta {
-    margin-top:18px; font-size:14px; color:#7CB5E6; line-height:1.55;
-  }
+  .card-link .meta { margin-top:18px; font-size:14px; color:#7CB5E6; line-height:1.55; }
   .card-link .footer {
     margin-top:32px; padding-top:18px;
     border-top:1px solid rgba(255,255,255,.08);
@@ -157,23 +144,16 @@
   .card-link .footer .go .a { display:inline-block; transition:transform .24s ease; margin-left:4px;}
   .card-link:hover .footer .go .a { transform: translateX(4px);}
 
-  /* slide 3 — folder structure --------------------------------------- */
-  .folders {
-    background: #FAFBFD;
-    color: #05080F;
-  }
+  /* slide 3 — folder structure */
+  .folders { background: #FAFBFD; color: #05080F; }
   .folders .pad { padding: 80px 120px; }
   .folders .top-row { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px;}
   .folders .eye { color:#5B6472; font-size:12px; letter-spacing:.22em; text-transform:uppercase; font-weight:500; margin-bottom:16px;}
   .folders h2 { font-family: var(--font-display); font-weight:200; font-size:72px; line-height:1; letter-spacing:-0.035em; margin:0; color:#05080F; max-width:900px;}
   .folders h2 em { font-style:italic; color:#2E6FB8;}
   .folders .lede { font-size:16px; color:#3B424D; max-width:340px; line-height:1.55; text-align:right; padding-bottom:6px;}
+  .folders .layout { display:grid; grid-template-columns: 1.05fr 1fr; gap:48px; align-items:start; }
 
-  .folders .layout {
-    display:grid; grid-template-columns: 1.05fr 1fr; gap:48px; align-items:start;
-  }
-
-  /* tree column */
   .tree-card {
     background:#fff; border:1px solid #DBE0E8; border-radius:18px;
     padding:32px 36px;
@@ -199,21 +179,12 @@
   }
   .tree-card .root-sub { font-size:14px; color:#5B6472; margin-bottom:24px;}
 
-  ul.folder-tree {
-    list-style:none; margin:0; padding:0;
-    font-family: var(--font-sans);
-  }
+  ul.folder-tree { list-style:none; margin:0; padding:0; font-family: var(--font-sans); }
   ul.folder-tree li {
-    position:relative;
-    padding: 7px 0;
-    display:grid;
-    grid-template-columns: auto 14px 22px 1fr auto;
-    gap:8px;
-    align-items:center;
-    font-size:15px;
-    color:#05080F;
-    font-weight:500;
-    letter-spacing:.02em;
+    position:relative; padding: 7px 0;
+    display:grid; grid-template-columns: auto 14px 22px 1fr auto;
+    gap:8px; align-items:center;
+    font-size:15px; color:#05080F; font-weight:500; letter-spacing:.02em;
   }
   ul.folder-tree li .branch { width:0; }
   ul.folder-tree li.lvl-0 { padding-left: 0; }
@@ -222,14 +193,12 @@
   ul.folder-tree li.lvl-3 { padding-left: 72px; }
   ul.folder-tree li.lvl-4 { padding-left: 96px; }
 
-  /* vertical guide lines */
   ul.folder-tree li.lvl-1::before,
   ul.folder-tree li.lvl-2::before,
   ul.folder-tree li.lvl-3::before,
   ul.folder-tree li.lvl-4::before {
     content:""; position:absolute; top:0; bottom:0;
-    width:1px; background:#DBE0E8;
-    left:8px;
+    width:1px; background:#DBE0E8; left:8px;
   }
   ul.folder-tree li.lvl-2::after,
   ul.folder-tree li.lvl-3::after,
@@ -240,18 +209,10 @@
   ul.folder-tree li.lvl-3::after { left:56px; }
   ul.folder-tree li.lvl-4::after { left:80px; }
 
-  ul.folder-tree li .chev {
-    color:#8B94A3; font-size:11px; line-height:1;
-    width:14px; text-align:center;
-  }
+  ul.folder-tree li .chev { color:#8B94A3; font-size:11px; line-height:1; width:14px; text-align:center; }
   ul.folder-tree li .ficon { width:22px; height:18px; display:inline-flex; }
   ul.folder-tree li .ficon svg { width:100%; height:100%; }
-  ul.folder-tree li .fname {
-    font-size:15px; letter-spacing:.04em;
-    text-transform:none;
-    color:#05080F;
-    white-space:nowrap;
-  }
+  ul.folder-tree li .fname { font-size:15px; letter-spacing:.04em; text-transform:none; color:#05080F; white-space:nowrap; }
   ul.folder-tree li.lvl-0 .fname,
   ul.folder-tree li.lvl-1 .fname,
   ul.folder-tree li.lvl-2 .fname { font-weight:600; }
@@ -261,13 +222,8 @@
     color:#0FAEC5; vertical-align:middle;
   }
   ul.folder-tree li.highlight .fname { color:#1B4B8F; }
-  ul.folder-tree li .fdesc {
-    font-size:12px; color:#8B94A3; font-weight:400;
-    text-align:right; letter-spacing:0;
-    font-style:italic;
-  }
+  ul.folder-tree li .fdesc { font-size:12px; color:#8B94A3; font-weight:400; text-align:right; letter-spacing:0; font-style:italic; }
 
-  /* right column */
   .side { display:flex; flex-direction:column; gap:20px; }
   .side .block {
     background:linear-gradient(135deg,#0A1628 0%,#13315C 100%);
@@ -275,37 +231,26 @@
     border:1px solid rgba(255,255,255,.08);
     position:relative; overflow:hidden;
   }
-  .side .block.light {
-    background:#fff; color:#05080F; border:1px solid #DBE0E8;
-    box-shadow: 0 2px 6px rgba(10,22,40,.04);
-  }
-  .side .block .lab {
-    font-size:11px; letter-spacing:.22em; text-transform:uppercase;
-    color:#7CB5E6; font-weight:500; margin-bottom:14px;
-  }
+  .side .block.light { background:#fff; color:#05080F; border:1px solid #DBE0E8; box-shadow: 0 2px 6px rgba(10,22,40,.04); }
+  .side .block .lab { font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:#7CB5E6; font-weight:500; margin-bottom:14px; }
   .side .block.light .lab { color:#5B6472; }
-  .side .block h3 {
-    font-family:var(--font-display); font-weight:300;
-    font-size:24px; letter-spacing:-0.015em; margin:0 0 14px; color:inherit;
-  }
+  .side .block h3 { font-family:var(--font-display); font-weight:300; font-size:24px; letter-spacing:-0.015em; margin:0 0 14px; color:inherit; }
   .side .name-conv {
     font-family: var(--font-mono); font-size:16px;
     color:#A8EEF6; letter-spacing:.02em; line-height:1.6;
     background: rgba(0,0,0,.2); padding:14px 18px; border-radius:10px;
-    border:1px solid rgba(168,238,246,.18);
-    word-break: break-word;
+    border:1px solid rgba(168,238,246,.18); word-break: break-word;
   }
   .side .name-conv .seg { color:#A8EEF6; }
   .side .name-conv .sep { color:#5B6472; padding: 0 2px;}
   .side .name-conv .ex { display:block; margin-top:10px; font-size:13px; color:#7CB5E6;}
-
   .specs-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 28px; margin-top:6px;}
   .specs-grid .spec { display:flex; flex-direction:column; gap:4px;}
   .specs-grid .spec .k { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#8B94A3; font-weight:500;}
   .specs-grid .spec .v { font-family:var(--font-display); font-size:22px; font-weight:300; letter-spacing:-0.01em; color:#05080F;}
   .specs-grid .spec .v em { font-style:italic; color:#2E6FB8; font-weight:400;}
 
-  /* slide 4 — contact ------------------------------------------------ */
+  /* slide 4 — contact */
   .contact {
     background-image: url('assets/bg-gradient-dark-teal.jpg');
     background-size:cover; background-position:center;
@@ -330,10 +275,7 @@
   }
   .contact .person .who { flex:1.1; }
   .contact .person .lab { font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.55); font-weight:500; margin-bottom:10px;}
-  .contact .person .name {
-    font-family:var(--font-display); font-weight:300;
-    font-size:54px; letter-spacing:-0.03em; color:#fff; line-height:1; margin:0 0 10px;
-  }
+  .contact .person .name { font-family:var(--font-display); font-weight:300; font-size:54px; letter-spacing:-0.03em; color:#fff; line-height:1; margin:0 0 10px;}
   .contact .person .role { font-size:18px; color:#B9D7EE; line-height:1.5; max-width:420px; font-weight:300;}
   .contact .person .channels { display:flex; flex-direction:column; gap:14px; padding-bottom:6px;}
   .contact .person .ch {
@@ -350,7 +292,6 @@
   .contact .person .ch:hover { border-color:#A8EEF6; background: rgba(168,238,246,.08);}
   .contact .person .ch svg { color:#A8EEF6; flex-shrink:0;}
   .contact .person .ch .num { font-variant-numeric: tabular-nums; letter-spacing:.02em;}
-
   .contact .closer {
     margin-top:60px; max-width: 900px;
     font-family:var(--font-display); font-weight:200;
@@ -363,7 +304,7 @@
 <body>
 <deck-stage width="1920" height="1080">
 
-  <!-- ============== SLIDE 1: COVER ============== -->
+  <!-- SLIDE 1: COVER -->
   <section class="cover" data-screen-label="01 Capa">
     <div class="chrome-top">
       <img class="brand-logo" src="assets/logo-adois.png" alt="adöis" />
@@ -396,7 +337,7 @@
   </section>
 
 
-  <!-- ============== SLIDE 2: HUB / 3 BUTTONS ============== -->
+  <!-- SLIDE 2: HUB / 3 BUTTONS -->
   <section class="hub" data-screen-label="02 Clientes">
     <div class="chrome-top">
       <span></span>
@@ -416,7 +357,6 @@
       </div>
 
       <div class="cards">
-        <!-- 1. Hey! Burgers -->
         <a class="card-link"
            href="https://drive.google.com/drive/folders/1DxSgFvZHDmZFqLtv_3bC0FvfneE5F5tY?usp=sharing"
            target="_blank" rel="noopener noreferrer">
@@ -438,7 +378,6 @@
           </div>
         </a>
 
-        <!-- 2. Jardim Cafeteira -->
         <a class="card-link"
            href="https://drive.google.com/drive/folders/1NeJMMzDUA1Tr4Knxcrm9PRs-iR3F_Gdp"
            target="_blank" rel="noopener noreferrer">
@@ -460,7 +399,6 @@
           </div>
         </a>
 
-        <!-- 3. Igor Nicolau -->
         <a class="card-link"
            href="https://drive.google.com/drive/folders/1_DQ8krXt--QSaKqxqo-m-6_CdWTACgU3?usp=sharing"
            target="_blank" rel="noopener noreferrer">
@@ -491,7 +429,7 @@
   </section>
 
 
-  <!-- ============== SLIDE 3: FOLDER STRUCTURE ============== -->
+  <!-- SLIDE 3: FOLDER STRUCTURE -->
   <section class="folders" data-screen-label="03 Estrutura">
     <div class="chrome-top" style="color:#5B6472;">
       <span></span>
@@ -510,8 +448,6 @@
       </div>
 
       <div class="layout">
-
-        <!-- left: tree -->
         <div class="tree-card">
           <div class="tag"><span class="dot"></span>raiz · /cliente · drive</div>
           <div class="root">[CLIENTE]<span class="pill">2026</span></div>
@@ -519,127 +455,61 @@
 
           <ul class="folder-tree">
             <li class="lvl-0 has-children">
-              <span class="branch"></span>
-              <span class="chev">▾</span>
-              <span class="ficon">
-                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
-                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
-                </svg>
-              </span>
-              <span class="fname">[CLIENTE]</span>
-              <span class="fdesc">raiz do cliente</span>
+              <span class="branch"></span><span class="chev">▾</span>
+              <span class="ficon"><svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round"><path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/></svg></span>
+              <span class="fname">[CLIENTE]</span><span class="fdesc">raiz do cliente</span>
             </li>
-
             <li class="lvl-1 has-children">
-              <span class="branch"></span>
-              <span class="chev">▾</span>
-              <span class="ficon">
-                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
-                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
-                </svg>
-              </span>
-              <span class="fname">2026</span>
-              <span class="fdesc">ano corrente</span>
+              <span class="branch"></span><span class="chev">▾</span>
+              <span class="ficon"><svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round"><path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/></svg></span>
+              <span class="fname">2026</span><span class="fdesc">ano corrente</span>
             </li>
-
             <li class="lvl-2 has-children">
-              <span class="branch"></span>
-              <span class="chev">▾</span>
-              <span class="ficon">
-                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
-                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
-                </svg>
-              </span>
-              <span class="fname">BRUTOS</span>
-              <span class="fdesc">material capturado · não editar</span>
+              <span class="branch"></span><span class="chev">▾</span>
+              <span class="ficon"><svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round"><path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/></svg></span>
+              <span class="fname">BRUTOS</span><span class="fdesc">material capturado · não editar</span>
             </li>
-
             <li class="lvl-3 has-children">
-              <span class="branch"></span>
-              <span class="chev">▾</span>
-              <span class="ficon">
-                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
-                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
-                </svg>
-              </span>
-              <span class="fname">FOTOS</span>
-              <span class="fdesc"></span>
+              <span class="branch"></span><span class="chev">▾</span>
+              <span class="ficon"><svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round"><path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/></svg></span>
+              <span class="fname">FOTOS</span><span class="fdesc"></span>
             </li>
             <li class="lvl-4">
-              <span class="branch"></span>
-              <span class="chev">▸</span>
-              <span class="ficon">
-                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
-                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
-                </svg>
-              </span>
-              <span class="fname">05_MAIO</span>
-              <span class="fdesc">subpasta por mês</span>
+              <span class="branch"></span><span class="chev">▸</span>
+              <span class="ficon"><svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round"><path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/></svg></span>
+              <span class="fname">05_MAIO</span><span class="fdesc">subpasta por mês</span>
             </li>
-
             <li class="lvl-3 has-children">
-              <span class="branch"></span>
-              <span class="chev">▾</span>
-              <span class="ficon">
-                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
-                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
-                </svg>
-              </span>
-              <span class="fname">VIDEOS</span>
-              <span class="fdesc"></span>
+              <span class="branch"></span><span class="chev">▾</span>
+              <span class="ficon"><svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round"><path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/></svg></span>
+              <span class="fname">VIDEOS</span><span class="fdesc"></span>
             </li>
             <li class="lvl-4">
-              <span class="branch"></span>
-              <span class="chev">▸</span>
-              <span class="ficon">
-                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
-                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
-                </svg>
-              </span>
-              <span class="fname">05_MAIO</span>
-              <span class="fdesc">subpasta por mês</span>
+              <span class="branch"></span><span class="chev">▸</span>
+              <span class="ficon"><svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round"><path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/></svg></span>
+              <span class="fname">05_MAIO</span><span class="fdesc">subpasta por mês</span>
             </li>
-
             <li class="lvl-2 has-children highlight">
-              <span class="branch"></span>
-              <span class="chev">▾</span>
-              <span class="ficon">
-                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
-                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
-                </svg>
-              </span>
+              <span class="branch"></span><span class="chev">▾</span>
+              <span class="ficon"><svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round"><path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/></svg></span>
               <span class="fname">VÍDEOS FINALIZADOS <span class="tagme">você entrega aqui</span></span>
               <span class="fdesc">versões finais aprovadas</span>
             </li>
             <li class="lvl-3">
-              <span class="branch"></span>
-              <span class="chev">▸</span>
-              <span class="ficon">
-                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
-                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
-                </svg>
-              </span>
-              <span class="fname">05_MAIO</span>
-              <span class="fdesc">subpasta por mês</span>
+              <span class="branch"></span><span class="chev">▸</span>
+              <span class="ficon"><svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round"><path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/></svg></span>
+              <span class="fname">05_MAIO</span><span class="fdesc">subpasta por mês</span>
             </li>
-
             <li class="lvl-2">
-              <span class="branch"></span>
-              <span class="chev">▸</span>
-              <span class="ficon">
-                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
-                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
-                </svg>
-              </span>
+              <span class="branch"></span><span class="chev">▸</span>
+              <span class="ficon"><svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round"><path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/></svg></span>
               <span class="fname">ROTEIROS, BRIEFINGS E REFERÊNCIAS</span>
               <span class="fdesc">marca, moodboards e direção</span>
             </li>
           </ul>
         </div>
 
-        <!-- right: nomenclature + specs -->
         <div class="side">
-
           <div class="block">
             <div class="lab">nomenclatura · arquivos</div>
             <h3>Como nomear cada arquivo entregue</h3>
@@ -653,25 +523,12 @@
             <div class="lab">especificações · entrega</div>
             <h3 style="color:#05080F;">Padrão técnico para Reels</h3>
             <div class="specs-grid">
-              <div class="spec">
-                <span class="k">Resolução</span>
-                <span class="v">1080p <em>mín.</em></span>
-              </div>
-              <div class="spec">
-                <span class="k">Frame rate</span>
-                <span class="v">24 <em>fps</em></span>
-              </div>
-              <div class="spec">
-                <span class="k">Bitrate · entrada</span>
-                <span class="v">15 <em>mb/s</em></span>
-              </div>
-              <div class="spec">
-                <span class="k">Bitrate · saída</span>
-                <span class="v">20 <em>mb/s</em></span>
-              </div>
+              <div class="spec"><span class="k">Resolução</span><span class="v">1080p <em>mín.</em></span></div>
+              <div class="spec"><span class="k">Frame rate</span><span class="v">24 <em>fps</em></span></div>
+              <div class="spec"><span class="k">Bitrate · entrada</span><span class="v">15 <em>mb/s</em></span></div>
+              <div class="spec"><span class="k">Bitrate · saída</span><span class="v">20 <em>mb/s</em></span></div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -683,7 +540,7 @@
   </section>
 
 
-  <!-- ============== SLIDE 4: CONTACT ============== -->
+  <!-- SLIDE 4: CONTACT -->
   <section class="contact" data-screen-label="04 Contato">
     <div class="chrome-top">
       <img class="brand-logo" src="assets/logo-adois.png" alt="adöis" />
