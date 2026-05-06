@@ -1,0 +1,374 @@
+/* =========================================================================
+   ADois — Colors & Typography Tokens
+   Brand: adöis comunicação integrativa
+   Aesthetic: tech-gradient · minimalist · futuristic · high contrast
+   ========================================================================= */
+
+/* -------- Font face declarations ---------------------------------------- */
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-Light_Italic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-Regular_Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-Bold_Italic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/BlauerNue-Heavy.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* -------- Tokens -------------------------------------------------------- */
+:root {
+  /* --- Brand palette ------------------------------------------------------
+     A "tech-gradient" professional blue ladder: from near-black navy up to
+     icy white-blue, with teal/cyan accents. Use deeper stops on dark
+     surfaces, lighter stops on light surfaces, cyan as the interactive
+     spark. Never saturate beyond this range — it would break the calm,
+     strategic tone. */
+  --adois-ink:         #05080F;  /* near-black, brand anchor */
+  --adois-navy-900:    #0A1628;  /* deepest navy, used on dark surfaces */
+  --adois-navy-800:    #0F2340;  /* panels / dark headers */
+  --adois-navy-700:    #13315C;  /* primary dark blue */
+  --adois-navy-600:    #1B4B8F;  /* mid blue */
+  --adois-blue-500:    #2E6FB8;  /* core brand blue (matches logo spheres) */
+  --adois-blue-400:    #4A91D4;
+  --adois-blue-300:    #7CB5E6;  /* soft blue */
+  --adois-blue-200:    #B9D7EE;  /* near-white blue */
+  --adois-blue-100:    #E4EEF7;  /* pale blue */
+  --adois-blue-50:     #F4F8FC;  /* whisper blue, used on light bgs */
+
+  --adois-teal-700:    #0B5B6E;  /* deep teal */
+  --adois-teal-500:    #0FAEC5;  /* teal accent */
+  --adois-cyan-400:    #2FD4E8;  /* cyan highlight / interactive */
+  --adois-cyan-200:    #A8EEF6;  /* icy cyan */
+
+  /* --- Neutrals ---------------------------------------------------------- */
+  --adois-white:       #FFFFFF;
+  --adois-cream:       #FDFCF5;   /* warm off-white used in logotype */
+  --adois-grey-50:     #F7F8FA;
+  --adois-grey-100:    #EEF0F4;
+  --adois-grey-200:    #DBE0E8;
+  --adois-grey-300:    #BCC4D0;
+  --adois-grey-400:    #8B94A3;
+  --adois-grey-500:    #5B6472;
+  --adois-grey-600:    #3B424D;
+  --adois-grey-700:    #232832;
+  --adois-black:       #05080F;
+
+  /* --- Signature gradients ---------------------------------------------- */
+  --gradient-sphere:       radial-gradient(circle at 30% 25%, #B9D7EE 0%, #4A91D4 35%, #13315C 75%, #0A1628 100%);
+  --gradient-brand:        linear-gradient(135deg, #0A1628 0%, #13315C 35%, #2E6FB8 70%, #2FD4E8 100%);
+  --gradient-brand-soft:   linear-gradient(135deg, #F4F8FC 0%, #B9D7EE 50%, #4A91D4 100%);
+  --gradient-dark-glow:    radial-gradient(ellipse at 20% 80%, #0FAEC5 0%, #13315C 40%, #05080F 80%);
+  --gradient-tech-line:    linear-gradient(90deg, #13315C 0%, #2E6FB8 50%, #2FD4E8 100%);
+
+  /* --- Semantic colors (light surface) --------------------------------- */
+  --bg:           var(--adois-white);
+  --bg-muted:     var(--adois-grey-50);
+  --bg-subtle:    var(--adois-blue-50);
+  --surface:      var(--adois-white);
+  --surface-alt:  var(--adois-grey-50);
+
+  --fg:           var(--adois-ink);
+  --fg-1:         var(--adois-ink);
+  --fg-2:         var(--adois-grey-600);
+  --fg-3:         var(--adois-grey-500);
+  --fg-muted:     var(--adois-grey-400);
+  --fg-inverse:   var(--adois-white);
+
+  --border:         var(--adois-grey-200);
+  --border-strong:  var(--adois-grey-300);
+  --border-subtle:  var(--adois-grey-100);
+
+  --accent:         var(--adois-blue-500);
+  --accent-hover:   var(--adois-navy-600);
+  --accent-press:   var(--adois-navy-700);
+  --accent-soft:    var(--adois-blue-100);
+  --accent-contrast:var(--adois-white);
+
+  --highlight:      var(--adois-cyan-400);
+  --highlight-soft: var(--adois-cyan-200);
+
+  /* --- Semantic states -------------------------------------------------- */
+  --success:  #2F9E6B;
+  --warning:  #D89A2A;
+  --danger:   #D1465A;
+  --info:     var(--adois-blue-500);
+
+  /* --- Dark surface tokens (when dark mode/section is used) ------------ */
+  --dark-bg:           var(--adois-ink);
+  --dark-surface:      var(--adois-navy-900);
+  --dark-surface-alt:  var(--adois-navy-800);
+  --dark-fg:           var(--adois-white);
+  --dark-fg-2:         var(--adois-blue-200);
+  --dark-border:       rgba(255,255,255,0.10);
+
+  /* --- Typography ------------------------------------------------------- */
+  --font-sans: "Blauer Nue", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Blauer Nue", "Inter", system-ui, sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  /* Weight scale — Blauer Nue ships the full range; use it */
+  --weight-thin:        100;
+  --weight-extralight:  200;
+  --weight-light:       300;
+  --weight-regular:     400;
+  --weight-medium:      500;
+  --weight-semibold:    600;
+  --weight-bold:        700;
+  --weight-extrabold:   800;
+  --weight-heavy:       900;
+
+  /* Type scale — modular, 1.25 ratio. Display sizes skew airy-tight. */
+  --size-display-xl: clamp(64px, 9vw, 128px);
+  --size-display-lg: clamp(48px, 6vw, 88px);
+  --size-display:    clamp(40px, 5vw, 64px);
+  --size-h1:         clamp(32px, 3.4vw, 48px);
+  --size-h2:         clamp(26px, 2.6vw, 36px);
+  --size-h3:         22px;
+  --size-h4:         18px;
+  --size-body-lg:    18px;
+  --size-body:       16px;
+  --size-body-sm:    14px;
+  --size-caption:    12px;
+  --size-micro:      11px;
+
+  --leading-tight:   1.05;
+  --leading-snug:    1.2;
+  --leading-normal:  1.45;
+  --leading-relaxed: 1.6;
+
+  --tracking-tightest: -0.04em;
+  --tracking-tight:    -0.02em;
+  --tracking-normal:   0em;
+  --tracking-wide:     0.04em;
+  --tracking-widest:   0.18em;  /* used for small caps / eyebrow labels */
+
+  /* --- Spacing (4px base) ---------------------------------------------- */
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  32px;
+  --space-8:  40px;
+  --space-9:  48px;
+  --space-10: 64px;
+  --space-11: 80px;
+  --space-12: 96px;
+  --space-13: 128px;
+  --space-14: 160px;
+
+  /* --- Radii ----------------------------------------------------------- */
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   14px;
+  --radius-xl:   22px;
+  --radius-2xl:  32px;
+  --radius-pill: 999px;
+
+  /* --- Shadows --------------------------------------------------------- */
+  --shadow-xs:   0 1px 2px rgba(10, 22, 40, 0.04);
+  --shadow-sm:   0 2px 6px rgba(10, 22, 40, 0.06), 0 1px 2px rgba(10, 22, 40, 0.04);
+  --shadow-md:   0 8px 24px rgba(10, 22, 40, 0.08), 0 2px 6px rgba(10, 22, 40, 0.04);
+  --shadow-lg:   0 20px 48px rgba(10, 22, 40, 0.12), 0 6px 14px rgba(10, 22, 40, 0.06);
+  --shadow-glow: 0 0 0 1px rgba(47, 212, 232, 0.25), 0 0 40px rgba(47, 212, 232, 0.25);
+  --shadow-inset-sphere: inset -6px -8px 18px rgba(10,22,40,0.45), inset 6px 8px 18px rgba(185,215,238,0.35);
+
+  /* --- Motion ---------------------------------------------------------- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  --dur-instant: 80ms;
+  --dur-fast:    160ms;
+  --dur-normal:  240ms;
+  --dur-slow:    420ms;
+  --dur-slowest: 680ms;
+
+  /* --- Layout ---------------------------------------------------------- */
+  --container-narrow:  720px;
+  --container:         1080px;
+  --container-wide:    1280px;
+  --container-bleed:   1440px;
+
+  /* --- Grain / noise overlay ------------------------------------------ */
+  --noise-url: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
+}
+
+/* -------- Semantic typography classes ---------------------------------- */
+.h-display-xl, .display-xl {
+  font-family: var(--font-display);
+  font-weight: var(--weight-thin);
+  font-size: var(--size-display-xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tightest);
+  color: var(--fg-1);
+}
+.h-display, .display {
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: var(--size-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+}
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-light);
+  font-size: var(--size-h1);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+  margin: 0;
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-regular);
+  font-size: var(--size-h2);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+  margin: 0;
+}
+h3, .h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: var(--size-h3);
+  line-height: var(--leading-snug);
+  letter-spacing: 0;
+  color: var(--fg-1);
+  margin: 0;
+}
+h4, .h4 {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-semibold);
+  font-size: var(--size-h4);
+  line-height: var(--leading-normal);
+  letter-spacing: 0;
+  color: var(--fg-1);
+  margin: 0;
+}
+p, .p, .body {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-regular);
+  font-size: var(--size-body);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-2);
+  margin: 0;
+}
+.body-lg {
+  font-size: var(--size-body-lg);
+  line-height: var(--leading-relaxed);
+}
+.body-sm {
+  font-size: var(--size-body-sm);
+  line-height: var(--leading-normal);
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  font-size: var(--size-caption);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+.caption {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-regular);
+  font-size: var(--size-caption);
+  line-height: var(--leading-normal);
+  color: var(--fg-3);
+}
+code, .mono {
+  font-family: var(--font-mono);
+  font-size: 0.94em;
+}
+
+/* -------- Utility: grain overlay -------------------------------------- */
+.has-grain { position: relative; }
+.has-grain::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: var(--noise-url);
+  mix-blend-mode: overlay;
+  opacity: 0.4;
+  pointer-events: none;
+}

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>adöis · onboarding audiovisual</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="deck-stage.js"></script>
+<style>
+  body { margin:0; background:#05080F; font-family: var(--font-sans); }
+  section { position:relative; overflow:hidden; display:flex; color:#fff; }
+  .pad { padding: 88px 120px; width:100%; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2; }
+
+  /* shared chrome ---------------------------------------------------- */
+  .chrome-top, .chrome-bot {
+    position:absolute; left:120px; right:120px; z-index:3;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:14px; letter-spacing:.14em; text-transform:uppercase;
+    color: rgba(255,255,255,.55); font-weight:500;
+  }
+  .chrome-top { top:48px; }
+  .chrome-bot { bottom:48px; font-size:13px; letter-spacing:.1em; }
+  .brand-logo { height:42px; width:auto; display:block; }
+  .cap { display:inline-flex; align-items:center; gap:8px; padding:7px 16px 7px 8px;
+         border:1px solid rgba(255,255,255,.18); border-radius:999px;
+         text-transform:none; letter-spacing:0; font-size:14px; color:#fff; font-weight:500;}
+  .cap .dots { display:inline-flex; gap:4px; }
+  .cap .sph { width:14px; height:14px; border-radius:50%;
+              background: radial-gradient(circle at 30% 25%, #B9D7EE, #4A91D4 50%, #13315C 100%);}
+  .pageno { font-variant-numeric: tabular-nums; }
+
+  /* slide 1 — cover -------------------------------------------------- */
+  .cover {
+    background-image: url('assets/bg-gradient-dark-blue-glow.jpg');
+    background-size: cover; background-position: center;
+  }
+  .cover::before {
+    content:""; position:absolute; inset:0; z-index:1;
+    background: linear-gradient(180deg, rgba(5,8,15,.35) 0%, rgba(5,8,15,.15) 40%, rgba(5,8,15,.7) 100%);
+  }
+  .cover .eye { color:#A8EEF6; font-size:16px; letter-spacing:.22em; text-transform:uppercase;
+                font-weight:500; margin-bottom:36px;}
+  .cover h1 {
+    font-family: var(--font-display); font-weight:200;
+    font-size: 132px; line-height:.96; letter-spacing:-0.045em;
+    color:#fff; margin:0; max-width:1500px;
+  }
+  .cover h1 em { font-style:italic; color:#A8EEF6; font-weight:300;}
+  .cover .sub {
+    margin-top:44px; font-size:26px; color:#B9D7EE; max-width:880px;
+    line-height:1.45; font-weight:300;
+  }
+  .cover .meta-row {
+    margin-top:72px; display:flex; gap:48px; align-items:center;
+    padding-top:28px; border-top:1px solid rgba(255,255,255,.14);
+    max-width:880px;
+  }
+  .cover .meta-row .lab { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:6px; font-weight:500;}
+  .cover .meta-row .val { font-size:18px; color:#fff; font-weight:300;}
+
+  /* slide 2 — hub with 3 clickable cards ------------------------------ */
+  .hub {
+    background: #05080F;
+  }
+  .hub::before {
+    content:""; position:absolute; inset:0; z-index:0;
+    background-image: url('assets/bg-gradient-cyan-bloom.jpg');
+    background-size:cover; background-position:center;
+    opacity:.55;
+  }
+  .hub::after {
+    content:""; position:absolute; inset:0; z-index:1;
+    background: linear-gradient(180deg, rgba(5,8,15,.6), rgba(5,8,15,.85));
+  }
+  .hub .header {
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:64px;
+  }
+  .hub .eye { color:#A8EEF6; font-size:13px; letter-spacing:.22em; text-transform:uppercase;
+              font-weight:500; margin-bottom:20px;}
+  .hub h2 {
+    font-family: var(--font-display); font-weight:200;
+    font-size: 84px; line-height:1; letter-spacing:-0.035em;
+    color:#fff; margin:0; max-width:1100px;
+  }
+  .hub h2 em { font-style:italic; color:#A8EEF6; font-weight:300;}
+  .hub .header .hint {
+    font-size:14px; color:#7CB5E6; max-width:280px; line-height:1.5;
+    text-align:right; padding-bottom:8px;
+  }
+  .hub .hint .arrow { display:inline-block; transform:translateY(1px); margin-right:6px; color:#2FD4E8;}
+
+  .cards {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  .card-link {
+    position:relative; display:block; text-decoration:none; color:inherit;
+    background: rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:22px;
+    padding:36px 36px 32px;
+    min-height:380px;
+    backdrop-filter: blur(16px) saturate(120%);
+    transition: transform .28s cubic-bezier(.2,.8,.2,1), border-color .24s ease, background .24s ease, box-shadow .28s ease;
+    overflow:hidden;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .card-link::before {
+    content:""; position:absolute; inset:0; border-radius:22px;
+    background: radial-gradient(circle at 80% 0%, rgba(47,212,232,.12), transparent 60%);
+    opacity:0; transition:opacity .28s ease;
+    pointer-events:none;
+  }
+  .card-link:hover {
+    transform: translateY(-4px);
+    border-color: rgba(168,238,246,.42);
+    background: rgba(255,255,255,.07);
+    box-shadow: 0 0 0 1px rgba(47,212,232,.22), 0 24px 56px rgba(5,8,15,.5), 0 0 60px rgba(47,212,232,.18);
+  }
+  .card-link:hover::before { opacity:1; }
+  .card-link:active { transform: translateY(-1px); }
+  .card-link:focus-visible { outline:2px solid #2FD4E8; outline-offset:3px; }
+
+  .card-link .top {
+    display:flex; justify-content:space-between; align-items:flex-start;
+  }
+  .card-link .num {
+    font-family: var(--font-display); font-weight:300;
+    font-size: 18px; color:#7CB5E6; letter-spacing:.18em;
+  }
+  .card-link .ext {
+    width:48px; height:48px; border-radius:50%;
+    border:1px solid rgba(255,255,255,.18);
+    display:flex; align-items:center; justify-content:center;
+    color:#A8EEF6; transition: all .24s ease;
+  }
+  .card-link:hover .ext {
+    background:#A8EEF6; color:#05080F; border-color:#A8EEF6;
+    transform: rotate(-12deg);
+  }
+  .card-link .name {
+    font-family: var(--font-display); font-weight:300;
+    font-size:48px; line-height:1.02; letter-spacing:-0.025em;
+    color:#fff; margin:0;
+  }
+  .card-link .name em { font-style:italic; color:#A8EEF6;}
+  .card-link .meta {
+    margin-top:18px; font-size:14px; color:#7CB5E6; line-height:1.55;
+  }
+  .card-link .footer {
+    margin-top:32px; padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.08);
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color:rgba(255,255,255,.45); font-weight:500;
+  }
+  .card-link .footer .go { color:#A8EEF6; }
+  .card-link .footer .go .a { display:inline-block; transition:transform .24s ease; margin-left:4px;}
+  .card-link:hover .footer .go .a { transform: translateX(4px);}
+
+  /* slide 3 — folder structure --------------------------------------- */
+  .folders {
+    background: #FAFBFD;
+    color: #05080F;
+  }
+  .folders .pad { padding: 80px 120px; }
+  .folders .top-row { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px;}
+  .folders .eye { color:#5B6472; font-size:12px; letter-spacing:.22em; text-transform:uppercase; font-weight:500; margin-bottom:16px;}
+  .folders h2 { font-family: var(--font-display); font-weight:200; font-size:72px; line-height:1; letter-spacing:-0.035em; margin:0; color:#05080F; max-width:900px;}
+  .folders h2 em { font-style:italic; color:#2E6FB8;}
+  .folders .lede { font-size:16px; color:#3B424D; max-width:340px; line-height:1.55; text-align:right; padding-bottom:6px;}
+
+  .folders .layout {
+    display:grid; grid-template-columns: 1.05fr 1fr; gap:48px; align-items:start;
+  }
+
+  /* tree column */
+  .tree-card {
+    background:#fff; border:1px solid #DBE0E8; border-radius:18px;
+    padding:32px 36px;
+    box-shadow: 0 2px 6px rgba(10,22,40,.04);
+  }
+  .tree-card .tag {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:6px 14px; border:1px solid #DBE0E8; border-radius:999px;
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:#5B6472; font-weight:500; margin-bottom:24px;
+  }
+  .tree-card .tag .dot { width:8px; height:8px; border-radius:50%; background:#2E6FB8;}
+  .tree-card .root {
+    font-family: var(--font-display); font-weight:300;
+    font-size:32px; letter-spacing:-0.02em; color:#05080F; margin:0 0 4px;
+  }
+  .tree-card .root .pill {
+    display:inline-block; padding:2px 12px; margin-left:8px;
+    background:#E4EEF7; color:#1B4B8F; font-size:13px;
+    font-weight:500; letter-spacing:0; border-radius:999px;
+    font-family: var(--font-sans); vertical-align:middle;
+    transform: translateY(-3px);
+  }
+  .tree-card .root-sub { font-size:14px; color:#5B6472; margin-bottom:24px;}
+
+  ul.folder-tree {
+    list-style:none; margin:0; padding:0;
+    font-family: var(--font-sans);
+  }
+  ul.folder-tree li {
+    position:relative;
+    padding: 7px 0;
+    display:grid;
+    grid-template-columns: auto 14px 22px 1fr auto;
+    gap:8px;
+    align-items:center;
+    font-size:15px;
+    color:#05080F;
+    font-weight:500;
+    letter-spacing:.02em;
+  }
+  ul.folder-tree li .branch { width:0; }
+  ul.folder-tree li.lvl-0 { padding-left: 0; }
+  ul.folder-tree li.lvl-1 { padding-left: 24px; }
+  ul.folder-tree li.lvl-2 { padding-left: 48px; }
+  ul.folder-tree li.lvl-3 { padding-left: 72px; }
+  ul.folder-tree li.lvl-4 { padding-left: 96px; }
+
+  /* vertical guide lines */
+  ul.folder-tree li.lvl-1::before,
+  ul.folder-tree li.lvl-2::before,
+  ul.folder-tree li.lvl-3::before,
+  ul.folder-tree li.lvl-4::before {
+    content:""; position:absolute; top:0; bottom:0;
+    width:1px; background:#DBE0E8;
+    left:8px;
+  }
+  ul.folder-tree li.lvl-2::after,
+  ul.folder-tree li.lvl-3::after,
+  ul.folder-tree li.lvl-4::after {
+    content:""; position:absolute; top:0; bottom:0; width:1px; background:#DBE0E8;
+  }
+  ul.folder-tree li.lvl-2::after { left:32px; }
+  ul.folder-tree li.lvl-3::after { left:56px; }
+  ul.folder-tree li.lvl-4::after { left:80px; }
+
+  ul.folder-tree li .chev {
+    color:#8B94A3; font-size:11px; line-height:1;
+    width:14px; text-align:center;
+  }
+  ul.folder-tree li .ficon { width:22px; height:18px; display:inline-flex; }
+  ul.folder-tree li .ficon svg { width:100%; height:100%; }
+  ul.folder-tree li .fname {
+    font-size:15px; letter-spacing:.04em;
+    text-transform:none;
+    color:#05080F;
+    white-space:nowrap;
+  }
+  ul.folder-tree li.lvl-0 .fname,
+  ul.folder-tree li.lvl-1 .fname,
+  ul.folder-tree li.lvl-2 .fname { font-weight:600; }
+  ul.folder-tree li .fname .tagme {
+    display:inline-block; margin-left:10px;
+    font-size:10px; font-weight:500; letter-spacing:.18em; text-transform:uppercase;
+    color:#0FAEC5; vertical-align:middle;
+  }
+  ul.folder-tree li.highlight .fname { color:#1B4B8F; }
+  ul.folder-tree li .fdesc {
+    font-size:12px; color:#8B94A3; font-weight:400;
+    text-align:right; letter-spacing:0;
+    font-style:italic;
+  }
+
+  /* right column */
+  .side { display:flex; flex-direction:column; gap:20px; }
+  .side .block {
+    background:linear-gradient(135deg,#0A1628 0%,#13315C 100%);
+    color:#fff; border-radius:18px; padding:28px 32px;
+    border:1px solid rgba(255,255,255,.08);
+    position:relative; overflow:hidden;
+  }
+  .side .block.light {
+    background:#fff; color:#05080F; border:1px solid #DBE0E8;
+    box-shadow: 0 2px 6px rgba(10,22,40,.04);
+  }
+  .side .block .lab {
+    font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+    color:#7CB5E6; font-weight:500; margin-bottom:14px;
+  }
+  .side .block.light .lab { color:#5B6472; }
+  .side .block h3 {
+    font-family:var(--font-display); font-weight:300;
+    font-size:24px; letter-spacing:-0.015em; margin:0 0 14px; color:inherit;
+  }
+  .side .name-conv {
+    font-family: var(--font-mono); font-size:16px;
+    color:#A8EEF6; letter-spacing:.02em; line-height:1.6;
+    background: rgba(0,0,0,.2); padding:14px 18px; border-radius:10px;
+    border:1px solid rgba(168,238,246,.18);
+    word-break: break-word;
+  }
+  .side .name-conv .seg { color:#A8EEF6; }
+  .side .name-conv .sep { color:#5B6472; padding: 0 2px;}
+  .side .name-conv .ex { display:block; margin-top:10px; font-size:13px; color:#7CB5E6;}
+
+  .specs-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 28px; margin-top:6px;}
+  .specs-grid .spec { display:flex; flex-direction:column; gap:4px;}
+  .specs-grid .spec .k { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#8B94A3; font-weight:500;}
+  .specs-grid .spec .v { font-family:var(--font-display); font-size:22px; font-weight:300; letter-spacing:-0.01em; color:#05080F;}
+  .specs-grid .spec .v em { font-style:italic; color:#2E6FB8; font-weight:400;}
+
+  /* slide 4 — contact ------------------------------------------------ */
+  .contact {
+    background-image: url('assets/bg-gradient-dark-teal.jpg');
+    background-size:cover; background-position:center;
+  }
+  .contact::before {
+    content:""; position:absolute; inset:0;
+    background: linear-gradient(135deg, rgba(5,8,15,.55), rgba(5,8,15,.25) 50%, rgba(5,8,15,.65));
+    z-index:1;
+  }
+  .contact .pad { padding: 88px 120px; }
+  .contact .eye { color:#A8EEF6; font-size:14px; letter-spacing:.22em; text-transform:uppercase; font-weight:500; margin-bottom:24px;}
+  .contact h2 {
+    font-family:var(--font-display); font-weight:200;
+    font-size: 96px; line-height:1; letter-spacing:-0.04em;
+    color:#fff; margin:0 0 40px; max-width:1300px;
+  }
+  .contact h2 em { font-style:italic; color:#A8EEF6; font-weight:300;}
+  .contact .person {
+    margin-top:40px; display:flex; gap:48px; align-items:flex-end;
+    padding-top:36px; border-top:1px solid rgba(255,255,255,.16);
+    max-width:1100px;
+  }
+  .contact .person .who { flex:1.1; }
+  .contact .person .lab { font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.55); font-weight:500; margin-bottom:10px;}
+  .contact .person .name {
+    font-family:var(--font-display); font-weight:300;
+    font-size:54px; letter-spacing:-0.03em; color:#fff; line-height:1; margin:0 0 10px;
+  }
+  .contact .person .role { font-size:18px; color:#B9D7EE; line-height:1.5; max-width:420px; font-weight:300;}
+  .contact .person .channels { display:flex; flex-direction:column; gap:14px; padding-bottom:6px;}
+  .contact .person .ch {
+    display:flex; align-items:center; gap:14px;
+    padding: 14px 22px;
+    background: rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:999px;
+    color:#fff; text-decoration:none;
+    font-size:18px; font-weight:400;
+    backdrop-filter: blur(10px);
+    transition: all .2s ease;
+  }
+  .contact .person .ch:hover { border-color:#A8EEF6; background: rgba(168,238,246,.08);}
+  .contact .person .ch svg { color:#A8EEF6; flex-shrink:0;}
+  .contact .person .ch .num { font-variant-numeric: tabular-nums; letter-spacing:.02em;}
+
+  .contact .closer {
+    margin-top:60px; max-width: 900px;
+    font-family:var(--font-display); font-weight:200;
+    font-size:32px; line-height:1.3; letter-spacing:-0.015em;
+    color:#B9D7EE;
+  }
+  .contact .closer em { font-style:italic; color:#A8EEF6;}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- ============== SLIDE 1: COVER ============== -->
+  <section class="cover" data-screen-label="01 Capa">
+    <div class="chrome-top">
+      <img class="brand-logo" src="assets/logo-adois.png" alt="adöis" />
+      <span>onboarding · audiovisual</span>
+    </div>
+
+    <div class="pad">
+      <div class="eye">manual de instrução</div>
+      <h1>Bem-vindo<br/>ao <em>fluxo.</em></h1>
+      <div class="sub">
+        Um guia rápido para você começar a editar com a gente — onde encontrar os arquivos de cada cliente e como organizar suas entregas.
+      </div>
+
+      <div class="meta-row">
+        <div>
+          <div class="lab">para</div>
+          <div class="val">Kora</div>
+        </div>
+        <div>
+          <div class="lab">clientes</div>
+          <div class="val">Hey! Burgers · Jardim Cafeteira · Igor Nicolau</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <span>2026 · são paulo</span>
+      <span class="pageno">01 / 04</span>
+    </div>
+  </section>
+
+
+  <!-- ============== SLIDE 2: HUB / 3 BUTTONS ============== -->
+  <section class="hub" data-screen-label="02 Clientes">
+    <div class="chrome-top">
+      <span></span>
+      <span>02 · pastas dos clientes</span>
+    </div>
+
+    <div class="pad">
+      <div class="header">
+        <div>
+          <div class="eye">drive · acesso direto</div>
+          <h2>Escolha o cliente <em>e abra a pasta.</em></h2>
+        </div>
+        <div class="hint">
+          <span class="arrow">↗</span>
+          Cada card abre o Google Drive em uma nova aba. A organização interna é a mesma para os três — veja o slide 03.
+        </div>
+      </div>
+
+      <div class="cards">
+        <!-- 1. Hey! Burgers -->
+        <a class="card-link"
+           href="https://drive.google.com/drive/folders/1DxSgFvZHDmZFqLtv_3bC0FvfneE5F5tY?usp=sharing"
+           target="_blank" rel="noopener noreferrer">
+          <div class="top">
+            <span class="num">01</span>
+            <span class="ext" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7"/><path d="M8 7h9v9"/>
+              </svg>
+            </span>
+          </div>
+          <div>
+            <div class="name">Hey! <em>Burgers</em></div>
+            <div class="meta">Hambúrgueres · conteúdo recorrente para Reels e estática.</div>
+          </div>
+          <div class="footer">
+            <span>Google Drive</span>
+            <span class="go">abrir pasta <span class="a">→</span></span>
+          </div>
+        </a>
+
+        <!-- 2. Jardim Cafeteira -->
+        <a class="card-link"
+           href="https://drive.google.com/drive/folders/1NeJMMzDUA1Tr4Knxcrm9PRs-iR3F_Gdp"
+           target="_blank" rel="noopener noreferrer">
+          <div class="top">
+            <span class="num">02</span>
+            <span class="ext" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7"/><path d="M8 7h9v9"/>
+              </svg>
+            </span>
+          </div>
+          <div>
+            <div class="name">Jardim <em>Cafeteira</em></div>
+            <div class="meta">Cafeteria · ambientação, atmosfera e produto em vídeo.</div>
+          </div>
+          <div class="footer">
+            <span>Google Drive</span>
+            <span class="go">abrir pasta <span class="a">→</span></span>
+          </div>
+        </a>
+
+        <!-- 3. Igor Nicolau -->
+        <a class="card-link"
+           href="https://drive.google.com/drive/folders/1_DQ8krXt--QSaKqxqo-m-6_CdWTACgU3?usp=sharing"
+           target="_blank" rel="noopener noreferrer">
+          <div class="top">
+            <span class="num">03</span>
+            <span class="ext" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7"/><path d="M8 7h9v9"/>
+              </svg>
+            </span>
+          </div>
+          <div>
+            <div class="name">Igor <em>Nicolau</em></div>
+            <div class="meta">Pessoal · cortes, falas e conteúdo de presença digital.</div>
+          </div>
+          <div class="footer">
+            <span>Google Drive</span>
+            <span class="go">abrir pasta <span class="a">→</span></span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <span>3 clientes · estrutura idêntica</span>
+      <span class="pageno">02 / 04</span>
+    </div>
+  </section>
+
+
+  <!-- ============== SLIDE 3: FOLDER STRUCTURE ============== -->
+  <section class="folders" data-screen-label="03 Estrutura">
+    <div class="chrome-top" style="color:#5B6472;">
+      <span></span>
+      <span>03 · estrutura padrão</span>
+    </div>
+
+    <div class="pad">
+      <div class="top-row">
+        <div>
+          <div class="eye">organização das pastas</div>
+          <h2>Mesma <em>estrutura</em> para os três.</h2>
+        </div>
+        <div class="lede">
+          Cada pasta de cliente segue a hierarquia ao lado. <span style="color:#2E6FB8;font-style:italic;">Brutos</span> separa fotos e vídeos por mês; <span style="color:#2E6FB8;font-style:italic;">Vídeos finalizados</span> recebe a entrega aprovada.
+        </div>
+      </div>
+
+      <div class="layout">
+
+        <!-- left: tree -->
+        <div class="tree-card">
+          <div class="tag"><span class="dot"></span>raiz · /cliente · drive</div>
+          <div class="root">[CLIENTE]<span class="pill">2026</span></div>
+          <div class="root-sub">Mesma hierarquia para Hey! Burgers, Jardim Cafeteira e Igor Nicolau. Crie subpastas mensais conforme o conteúdo for chegando (ex: 05_MAIO, 06_JUNHO).</div>
+
+          <ul class="folder-tree">
+            <li class="lvl-0 has-children">
+              <span class="branch"></span>
+              <span class="chev">▾</span>
+              <span class="ficon">
+                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
+                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
+                </svg>
+              </span>
+              <span class="fname">[CLIENTE]</span>
+              <span class="fdesc">raiz do cliente</span>
+            </li>
+
+            <li class="lvl-1 has-children">
+              <span class="branch"></span>
+              <span class="chev">▾</span>
+              <span class="ficon">
+                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
+                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
+                </svg>
+              </span>
+              <span class="fname">2026</span>
+              <span class="fdesc">ano corrente</span>
+            </li>
+
+            <li class="lvl-2 has-children">
+              <span class="branch"></span>
+              <span class="chev">▾</span>
+              <span class="ficon">
+                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
+                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
+                </svg>
+              </span>
+              <span class="fname">BRUTOS</span>
+              <span class="fdesc">material capturado · não editar</span>
+            </li>
+
+            <li class="lvl-3 has-children">
+              <span class="branch"></span>
+              <span class="chev">▾</span>
+              <span class="ficon">
+                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
+                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
+                </svg>
+              </span>
+              <span class="fname">FOTOS</span>
+              <span class="fdesc"></span>
+            </li>
+            <li class="lvl-4">
+              <span class="branch"></span>
+              <span class="chev">▸</span>
+              <span class="ficon">
+                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
+                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
+                </svg>
+              </span>
+              <span class="fname">05_MAIO</span>
+              <span class="fdesc">subpasta por mês</span>
+            </li>
+
+            <li class="lvl-3 has-children">
+              <span class="branch"></span>
+              <span class="chev">▾</span>
+              <span class="ficon">
+                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
+                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
+                </svg>
+              </span>
+              <span class="fname">VIDEOS</span>
+              <span class="fdesc"></span>
+            </li>
+            <li class="lvl-4">
+              <span class="branch"></span>
+              <span class="chev">▸</span>
+              <span class="ficon">
+                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
+                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
+                </svg>
+              </span>
+              <span class="fname">05_MAIO</span>
+              <span class="fdesc">subpasta por mês</span>
+            </li>
+
+            <li class="lvl-2 has-children highlight">
+              <span class="branch"></span>
+              <span class="chev">▾</span>
+              <span class="ficon">
+                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
+                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
+                </svg>
+              </span>
+              <span class="fname">VÍDEOS FINALIZADOS <span class="tagme">você entrega aqui</span></span>
+              <span class="fdesc">versões finais aprovadas</span>
+            </li>
+            <li class="lvl-3">
+              <span class="branch"></span>
+              <span class="chev">▸</span>
+              <span class="ficon">
+                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
+                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
+                </svg>
+              </span>
+              <span class="fname">05_MAIO</span>
+              <span class="fdesc">subpasta por mês</span>
+            </li>
+
+            <li class="lvl-2">
+              <span class="branch"></span>
+              <span class="chev">▸</span>
+              <span class="ficon">
+                <svg viewBox="0 0 24 18" fill="#FFC857" stroke="#B98A1F" stroke-width="1" stroke-linejoin="round">
+                  <path d="M1 4 a2 2 0 0 1 2-2 h6 l2 2 h10 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-18 a2 2 0 0 1 -2 -2 z"/>
+                </svg>
+              </span>
+              <span class="fname">ROTEIROS, BRIEFINGS E REFERÊNCIAS</span>
+              <span class="fdesc">marca, moodboards e direção</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- right: nomenclature + specs -->
+        <div class="side">
+
+          <div class="block">
+            <div class="lab">nomenclatura · arquivos</div>
+            <h3>Como nomear cada arquivo entregue</h3>
+            <div class="name-conv">
+              <span class="seg">NOMECLIENTE</span><span class="sep">_</span><span class="seg">DATA</span><span class="sep">_</span><span class="seg">VERSAO</span><span class="sep">_</span><span class="seg">FORMATO</span>
+              <span class="ex">ex · HEYBURGERS_20260512_V02_REELS.mp4</span>
+            </div>
+          </div>
+
+          <div class="block light">
+            <div class="lab">especificações · entrega</div>
+            <h3 style="color:#05080F;">Padrão técnico para Reels</h3>
+            <div class="specs-grid">
+              <div class="spec">
+                <span class="k">Resolução</span>
+                <span class="v">1080p <em>mín.</em></span>
+              </div>
+              <div class="spec">
+                <span class="k">Frame rate</span>
+                <span class="v">24 <em>fps</em></span>
+              </div>
+              <div class="spec">
+                <span class="k">Bitrate · entrada</span>
+                <span class="v">15 <em>mb/s</em></span>
+              </div>
+              <div class="spec">
+                <span class="k">Bitrate · saída</span>
+                <span class="v">20 <em>mb/s</em></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="chrome-bot" style="color:#8B94A3;">
+      <span>aplique a mesma lógica para os 3 clientes</span>
+      <span class="pageno">03 / 04</span>
+    </div>
+  </section>
+
+
+  <!-- ============== SLIDE 4: CONTACT ============== -->
+  <section class="contact" data-screen-label="04 Contato">
+    <div class="chrome-top">
+      <img class="brand-logo" src="assets/logo-adois.png" alt="adöis" />
+      <span>04 · dúvidas</span>
+    </div>
+
+    <div class="pad">
+      <div class="eye">qualquer dúvida</div>
+      <h2>Fala direto<br/>com o <em>Allan.</em></h2>
+
+      <div class="person">
+        <div class="who">
+          <div class="lab">responsável</div>
+          <div class="name">Allan</div>
+          <div class="role">Diretor de operações &amp; diretor de arte — alinha briefing, fluxo de aprovação e padrão de entrega.</div>
+        </div>
+
+        <div class="channels">
+          <a class="ch" href="https://wa.me/5516996009414" target="_blank" rel="noopener noreferrer">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 3.4L3 21"/>
+              <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1c0 4 4 4 4 4h1a.5.5 0 0 0 0-1h-1"/>
+            </svg>
+            <span class="num">+55 16 99600-9414</span>
+          </a>
+          <span style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.4); padding-left:24px;">whatsapp · clique para abrir</span>
+        </div>
+      </div>
+
+      <div class="closer">
+        Em caso de qualquer dúvida sobre o material, fluxo ou entrega — <em>chama antes de assumir.</em>
+      </div>
+    </div>
+
+    <div class="chrome-bot">
+      <span>obrigado · boas edições</span>
+      <span class="pageno">04 / 04</span>
+    </div>
+  </section>
+
+</deck-stage>
+<script>
+(async () => {
+  try { await customElements.whenDefined('deck-stage'); } catch (e) {}
+  try { await document.fonts.ready; } catch (e) {}
+  setTimeout(() => { try { window.print(); } catch (e) {} }, 500);
+})();
+</script>
+</body>
+</html>
