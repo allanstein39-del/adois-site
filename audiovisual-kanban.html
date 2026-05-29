@@ -156,6 +156,15 @@ body{font-family:'BlauerNue',system-ui,sans-serif;background:var(--bg);color:var
 .modal-tab:hover{color:var(--fg-2);}
 .modal-tab.active{color:var(--fg-1);border-bottom-color:var(--blue-500);}
 .modal-tab.tab-docs.active{color:var(--client-hey);border-bottom-color:var(--client-hey);}
+.modal-tab.tab-briefing.active{color:#a78bfa;border-bottom-color:#a78bfa;}
+.briefing-textarea{width:100%;min-height:200px;resize:vertical;background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-md);color:var(--fg-1);font-size:13px;padding:12px;font-family:inherit;line-height:1.65;box-sizing:border-box;}
+.briefing-textarea:focus{border-color:var(--blue-500);box-shadow:0 0 0 3px rgba(46,111,184,0.15);outline:none;}
+.video-count-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.video-count-row label{font-size:11px;color:var(--fg-muted);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;}
+.video-count-row select{width:auto;min-width:110px;}
+.video-dates-list{display:flex;flex-direction:column;gap:7px;}
+.video-date-row{display:grid;grid-template-columns:56px 1fr 1fr;gap:8px;align-items:center;}
+.video-date-num{font-size:11px;color:var(--fg-muted);font-weight:600;}
 
 /* modal panels */
 .modal-panel{display:none;padding:18px 22px 22px;}
@@ -313,6 +322,10 @@ body{font-family:'BlauerNue',system-ui,sans-serif;background:var(--bg);color:var
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z"/></svg>
           informacoes
         </button>
+        <button class="modal-tab tab-briefing" id="tab-briefing" onclick="switchTab('briefing')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
+          briefing
+        </button>
         <button class="modal-tab tab-docs" id="tab-docs" onclick="switchTab('docs')">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
           docs de ajuste
@@ -360,19 +373,41 @@ body{font-family:'BlauerNue',system-ui,sans-serif;background:var(--bg);color:var
           <input id="f-resp" type="text" placeholder="Ex: Pedro, Joao..." />
         </div>
         <div class="field">
-          <label>data de entrega</label>
-          <input id="f-date" type="date" />
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label>horario limite</label>
-          <input id="f-time" type="time" />
-        </div>
-        <div class="field">
           <label>link drive / pasta</label>
           <input id="f-drive" type="url" placeholder="https://drive.google.com/..." />
         </div>
+      </div>
+      <div class="field">
+        <label>datas de entrega</label>
+        <div class="video-count-row">
+          <label>quantos videos?</label>
+          <select id="f-video-count" onchange="renderVideoDates()">
+            <option value="1">1 video</option>
+            <option value="2">2 videos</option>
+            <option value="3">3 videos</option>
+            <option value="4">4 videos</option>
+            <option value="5">5 videos</option>
+            <option value="6">6 videos</option>
+            <option value="7">7 videos</option>
+            <option value="8">8 videos</option>
+            <option value="9">9 videos</option>
+            <option value="10">10 videos</option>
+            <option value="11">11 videos</option>
+            <option value="12">12 videos</option>
+            <option value="13">13 videos</option>
+            <option value="14">14 videos</option>
+            <option value="15">15 videos</option>
+          </select>
+        </div>
+        <div class="video-dates-list" id="video-dates"></div>
+      </div>
+    </div>
+
+    <!-- PANEL: BRIEFING -->
+    <div class="modal-panel" id="panel-briefing">
+      <div class="field">
+        <label>briefing / descricao detalhada</label>
+        <textarea class="briefing-textarea" id="f-briefing" placeholder="Descreva aqui o briefing completo do conteudo: referências, tom de voz, roteiro, observacoes..."></textarea>
       </div>
     </div>
 
@@ -430,8 +465,8 @@ var CLIENTS={
 };
 
 var _sb=supabase.createClient('https://sonnjdqoaeufsxrvpnqa.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvbm5qZHFvYWV1ZnN4cnZwbnFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNTgxOTksImV4cCI6MjA5NTYzNDE5OX0.uRmX8jLkkB87Pqx3t3x93MMn7uvtSDK4USG8Vz9XFMI');
-function _cardToRow(c){return{id:c.id,title:c.title,resp:c.resp||'',tipo:c.tipo||'reels',client:c.client||'jardim',col:c.col||'briefing',due:c.due||'',time_val:c.time||'',drive:c.drive||'',docs:c.docs||[]};}
-function _rowToCard(r){return{id:r.id,title:r.title,resp:r.resp,tipo:r.tipo,client:r.client,col:r.col,due:r.due,time:r.time_val,drive:r.drive,docs:r.docs||[]};}
+function _cardToRow(c){var vids=c.videos&&c.videos.length?c.videos:[];var pd=vids[0]||{};return{id:c.id,title:c.title,resp:c.resp||'',tipo:c.tipo||'reels',client:c.client||'jardim',col:c.col||'briefing',due:pd.due||c.due||'',time_val:pd.time||c.time||'',drive:c.drive||'',docs:c.docs||[],briefing:c.briefing||'',videos:vids};}
+function _rowToCard(r){return{id:r.id,title:r.title,resp:r.resp,tipo:r.tipo,client:r.client,col:r.col,due:r.due,time:r.time_val,drive:r.drive,docs:r.docs||[],briefing:r.briefing||'',videos:r.videos||[]};}
 
 var cards=[];
 var hist=[];
@@ -439,6 +474,7 @@ var editingId=null,dragId=null;
 var activeClient='all',activeType='all',searchQ='';
 var modalTipo='reels';
 var modalDocs=[];
+var modalVideos=[];
 
 function save(){}
 function saveHist(){}
@@ -500,10 +536,39 @@ function tipoCls(t){if(t==='reels')return'tag-reels';if(t==='foto')return'tag-fo
 
 /* ── MODAL TABS ─── */
 function switchTab(tab){
-  ['info','docs'].forEach(function(id){
+  ['info','briefing','docs'].forEach(function(id){
     document.getElementById('tab-'+id).classList.toggle('active',id===tab);
     document.getElementById('panel-'+id).classList.toggle('active',id===tab);
   });
+}
+
+/* ── VIDEO DATES ─── */
+function renderVideoDates(){
+  var count=parseInt(document.getElementById('f-video-count').value)||1;
+  var container=document.getElementById('video-dates');
+  // preserve existing values
+  var existing=[];
+  container.querySelectorAll('.video-date-row').forEach(function(row,i){
+    existing[i]={due:row.querySelector('.vd-date').value,time:row.querySelector('.vd-time').value};
+  });
+  container.innerHTML='';
+  for(var i=0;i<count;i++){
+    var row=document.createElement('div');
+    row.className='video-date-row';
+    var prev=existing[i]||{due:'',time:''};
+    row.innerHTML='<span class="video-date-num">video '+(i+1)+'</span>'
+      +'<input class="vd-date" type="date" value="'+esc(prev.due||'')+'" />'
+      +'<input class="vd-time" type="time" value="'+esc(prev.time||'')+'" />';
+    container.appendChild(row);
+  }
+}
+function collectVideos(){
+  var rows=document.getElementById('video-dates').querySelectorAll('.video-date-row');
+  var result=[];
+  rows.forEach(function(row){
+    result.push({due:row.querySelector('.vd-date').value,time:row.querySelector('.vd-time').value});
+  });
+  return result;
 }
 
 /* ── DOCS ─── */
@@ -616,15 +681,19 @@ function buildCard(card,colColor){
   el.className='card';el.draggable=true;el.dataset.id=card.id;
   el.style.setProperty('--col-color',colColor);
   var cli=CLIENTS[card.client||'jardim']||CLIENTS.jardim;
-  var ds=dueStatus(card.due,card.time);
   var tipo=card.tipo||'reels';
+  var vids=card.videos&&card.videos.length?card.videos:((card.due)?[{due:card.due,time:card.time||''}]:[]);
+  var nearestDue='',nearestTime='';
+  if(vids.length){var sorted=vids.filter(function(v){return v.due;}).slice().sort(function(a,b){return new Date(a.due)-new Date(b.due);});if(sorted.length){nearestDue=sorted[0].due;nearestTime=sorted[0].time||'';}}
+  var ds=dueStatus(nearestDue,nearestTime);
 
   /* due chip */
   var dueHtml='';
-  if(card.due){
+  if(nearestDue){
     var dc=ds==='late'?' due-late':ds==='soon'?' due-soon':'';
-    var dl=fmtDate(card.due)+(card.time?' '+card.time:'');
-    dueHtml='<span class="due-chip'+dc+'"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>'+dl+'</span>';
+    var dl=fmtDate(nearestDue)+(nearestTime?' '+nearestTime:'');
+    var vcLabel=vids.length>1?' ('+vids.length+' vids)':'';
+    dueHtml='<span class="due-chip'+dc+'"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>'+dl+vcLabel+'</span>';
   }
 
   /* links block: drive + docs */
@@ -657,7 +726,9 @@ function buildCard(card,colColor){
     +'<button class="icon-btn danger" onclick="delCard(\''+card.id+'\')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></button>'
     +'</div></div>'
     +'<div class="card-meta"><span class="tag '+cli.cls+'">'+cli.label+'</span><span class="tag '+tipoCls(tipo)+'">'+tipoLabel(tipo)+'</span>'
-    +(card.resp?'<span class="tag tag-resp">'+esc(card.resp)+'</span>':'')+dueHtml+'</div>'
+    +(card.resp?'<span class="tag tag-resp">'+esc(card.resp)+'</span>':'')
+    +(card.briefing?'<span class="tag" style="background:rgba(167,139,250,0.1);color:#a78bfa;border-color:rgba(167,139,250,0.2)">briefing</span>':'')
+    +dueHtml+'</div>'
     +linksHtml
     +'<button class="add-adj-btn" onclick="openDocsModal(\''+card.id+'\')">'
     +'<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5v15m7.5-7.5h-15"/></svg>'
@@ -696,16 +767,27 @@ function openModal(id,startTab){
     document.getElementById('f-resp').value=card.resp||'';
     document.getElementById('f-client').value=card.client||'jardim';
     document.getElementById('f-col').value=card.col||'briefing';
-    document.getElementById('f-date').value=card.due||'';
-    document.getElementById('f-time').value=card.time||'';
     document.getElementById('f-drive').value=card.drive||'';
+    document.getElementById('f-briefing').value=card.briefing||'';
     modalTipo=card.tipo||'reels';
     modalDocs=[].concat((card.docs||[]).map(function(d){return{label:d.label,url:d.url};}));
+    // load videos
+    var vids=card.videos&&card.videos.length?card.videos:[{due:card.due||'',time:card.time||''}];
+    document.getElementById('f-video-count').value=vids.length;
+    renderVideoDates();
+    // set saved values
+    var rows=document.getElementById('video-dates').querySelectorAll('.video-date-row');
+    rows.forEach(function(row,i){
+      if(vids[i]){row.querySelector('.vd-date').value=vids[i].due||'';row.querySelector('.vd-time').value=vids[i].time||'';}
+    });
   }else{
     document.getElementById('modal-title').textContent='novo conteudo';
-    ['f-title','f-resp','f-date','f-time','f-drive'].forEach(function(i){document.getElementById(i).value='';});
+    ['f-title','f-resp','f-drive'].forEach(function(i){document.getElementById(i).value='';});
+    document.getElementById('f-briefing').value='';
     document.getElementById('f-client').value=activeClient!=='all'?activeClient:'jardim';
     document.getElementById('f-col').value='briefing';
+    document.getElementById('f-video-count').value='1';
+    renderVideoDates();
     modalTipo='reels';modalDocs=[];
   }
   renderTipoToggle();renderDocsList();updateDocsBadge();
@@ -714,21 +796,24 @@ function openModal(id,startTab){
   setTimeout(function(){document.getElementById('f-title').focus();},60);
 }
 function openDocsModal(id){openModal(id,'docs');}
-function closeModal(){document.getElementById('modal').classList.remove('open');editingId=null;modalDocs=[];}
+function closeModal(){document.getElementById('modal').classList.remove('open');editingId=null;modalDocs=[];modalVideos=[];}
 
 function saveCard(){
   var title=document.getElementById('f-title').value.trim();
   if(!title){switchTab('info');document.getElementById('f-title').focus();return;}
+  var vids=collectVideos();
   var data={
     title:title,
     resp:document.getElementById('f-resp').value.trim(),
     tipo:modalTipo,
     client:document.getElementById('f-client').value,
     col:document.getElementById('f-col').value,
-    due:document.getElementById('f-date').value,
-    time:document.getElementById('f-time').value,
+    due:(vids[0]&&vids[0].due)||'',
+    time:(vids[0]&&vids[0].time)||'',
     drive:document.getElementById('f-drive').value.trim(),
     docs:[].concat(modalDocs),
+    briefing:document.getElementById('f-briefing').value,
+    videos:vids,
   };
   if(editingId){
     var i=cards.findIndex(function(c){return c.id===editingId;});
