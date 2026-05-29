@@ -157,6 +157,18 @@ body{font-family:'BlauerNue',system-ui,sans-serif;background:var(--bg);color:var
 .modal-tab.active{color:var(--fg-1);border-bottom-color:var(--blue-500);}
 .modal-tab.tab-docs.active{color:var(--client-hey);border-bottom-color:var(--client-hey);}
 .modal-tab.tab-briefing.active{color:#a78bfa;border-bottom-color:#a78bfa;}
+.modal-tab.tab-roteiro.active{color:#34d399;border-bottom-color:#34d399;}
+.modal-tab.tab-ref.active{color:#f59e0b;border-bottom-color:#f59e0b;}
+.ref-list{display:flex;flex-direction:column;gap:6px;margin-top:8px;}
+.ref-item{display:flex;align-items:center;gap:8px;background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-md);padding:8px 10px;}
+.ref-item-label{flex:1;font-size:12px;color:var(--fg-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ref-item-url a{font-size:11px;color:#f59e0b;text-decoration:none;}
+.ref-item-url a:hover{color:#fbbf24;}
+.ref-del{background:none;border:none;color:var(--fg-muted);cursor:pointer;font-size:14px;padding:0 2px;line-height:1;}
+.ref-del:hover{color:#ff5c5c;}
+.ref-add-row{display:grid;grid-template-columns:1fr 2fr auto;gap:8px;align-items:end;margin-top:10px;}
+.ref-add-btn{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-md);color:var(--fg-2);font-size:12px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.ref-add-btn:hover{background:rgba(245,158,11,0.1);border-color:#f59e0b;color:#f59e0b;}
 .briefing-textarea{width:100%;min-height:200px;resize:vertical;background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-md);color:var(--fg-1);font-size:13px;padding:12px;font-family:inherit;line-height:1.65;box-sizing:border-box;}
 .briefing-textarea:focus{border-color:var(--blue-500);box-shadow:0 0 0 3px rgba(46,111,184,0.15);outline:none;}
 .video-count-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
@@ -326,6 +338,14 @@ body{font-family:'BlauerNue',system-ui,sans-serif;background:var(--bg);color:var
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
           briefing
         </button>
+        <button class="modal-tab tab-roteiro" id="tab-roteiro" onclick="switchTab('roteiro')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"/></svg>
+          roteiro
+        </button>
+        <button class="modal-tab tab-ref" id="tab-ref" onclick="switchTab('ref')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+          ref. captacao
+        </button>
         <button class="modal-tab tab-docs" id="tab-docs" onclick="switchTab('docs')">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
           docs de ajuste
@@ -411,6 +431,30 @@ body{font-family:'BlauerNue',system-ui,sans-serif;background:var(--bg);color:var
       </div>
     </div>
 
+    <!-- PANEL: ROTEIRO -->
+    <div class="modal-panel" id="panel-roteiro">
+      <div class="field">
+        <label>roteiro do video</label>
+        <textarea class="briefing-textarea" id="f-roteiro" style="min-height:240px;" placeholder="Escreva aqui o roteiro completo: cenas, falas, legendas, transicoes..."></textarea>
+      </div>
+    </div>
+
+    <!-- PANEL: REFERENCIA DE CAPTACAO -->
+    <div class="modal-panel" id="panel-ref">
+      <ul class="ref-list" id="ref-list"></ul>
+      <div class="ref-add-row">
+        <div class="field">
+          <label>titulo</label>
+          <input id="ref-label" type="text" placeholder="Ex: Referencia 1" />
+        </div>
+        <div class="field">
+          <label>link (youtube, drive, instagram...)</label>
+          <input id="ref-url" type="url" placeholder="https://..." />
+        </div>
+        <button class="ref-add-btn" onclick="addRef()">+ add</button>
+      </div>
+    </div>
+
     <!-- PANEL: DOCS DE AJUSTE -->
     <div class="modal-panel" id="panel-docs">
       <ul class="docs-list" id="docs-list"></ul>
@@ -465,8 +509,8 @@ var CLIENTS={
 };
 
 var _sb=supabase.createClient('https://sonnjdqoaeufsxrvpnqa.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvbm5qZHFvYWV1ZnN4cnZwbnFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNTgxOTksImV4cCI6MjA5NTYzNDE5OX0.uRmX8jLkkB87Pqx3t3x93MMn7uvtSDK4USG8Vz9XFMI');
-function _cardToRow(c){var vids=c.videos&&c.videos.length?c.videos:[];var pd=vids[0]||{};return{id:c.id,title:c.title,resp:c.resp||'',tipo:c.tipo||'reels',client:c.client||'jardim',col:c.col||'briefing',due:pd.due||c.due||'',time_val:pd.time||c.time||'',drive:c.drive||'',docs:c.docs||[],briefing:c.briefing||'',videos:vids};}
-function _rowToCard(r){return{id:r.id,title:r.title,resp:r.resp,tipo:r.tipo,client:r.client,col:r.col,due:r.due,time:r.time_val,drive:r.drive,docs:r.docs||[],briefing:r.briefing||'',videos:r.videos||[]};}
+function _cardToRow(c){var vids=c.videos&&c.videos.length?c.videos:[];var pd=vids[0]||{};return{id:c.id,title:c.title,resp:c.resp||'',tipo:c.tipo||'reels',client:c.client||'jardim',col:c.col||'briefing',due:pd.due||c.due||'',time_val:pd.time||c.time||'',drive:c.drive||'',docs:c.docs||[],briefing:c.briefing||'',videos:vids,roteiro:c.roteiro||'',refs:c.refs||[]};}
+function _rowToCard(r){return{id:r.id,title:r.title,resp:r.resp,tipo:r.tipo,client:r.client,col:r.col,due:r.due,time:r.time_val,drive:r.drive,docs:r.docs||[],briefing:r.briefing||'',videos:r.videos||[],roteiro:r.roteiro||'',refs:r.refs||[]};}
 
 var cards=[];
 var hist=[];
@@ -475,6 +519,7 @@ var activeClient='all',activeType='all',searchQ='';
 var modalTipo='reels';
 var modalDocs=[];
 var modalVideos=[];
+var modalRefs=[];
 
 function save(){}
 function saveHist(){}
@@ -536,7 +581,7 @@ function tipoCls(t){if(t==='reels')return'tag-reels';if(t==='foto')return'tag-fo
 
 /* ── MODAL TABS ─── */
 function switchTab(tab){
-  ['info','briefing','docs'].forEach(function(id){
+  ['info','briefing','roteiro','ref','docs'].forEach(function(id){
     document.getElementById('tab-'+id).classList.toggle('active',id===tab);
     document.getElementById('panel-'+id).classList.toggle('active',id===tab);
   });
@@ -603,6 +648,30 @@ function renderDocsList(){
       +'<div class="docs-item-actions">'
       +'<button class="docs-del" onclick="delDoc('+i+')" title="remover">x</button>'
       +'</div></div></li>';
+  }).join('');
+}
+
+/* ── REFS ─── */
+function addRef(){
+  var lbl=document.getElementById('ref-label').value.trim();
+  var url=document.getElementById('ref-url').value.trim();
+  if(!url){document.getElementById('ref-url').focus();return;}
+  modalRefs.push({label:lbl||'Ref '+(modalRefs.length+1),url:url});
+  document.getElementById('ref-label').value='';
+  document.getElementById('ref-url').value='';
+  renderRefList();
+}
+document.getElementById('ref-url').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();addRef();}});
+function delRef(i){modalRefs.splice(i,1);renderRefList();}
+function renderRefList(){
+  var list=document.getElementById('ref-list');
+  if(!modalRefs.length){list.innerHTML='<li style="list-style:none;font-size:12px;color:var(--fg-muted);padding:8px 0;">nenhuma referencia adicionada</li>';return;}
+  list.innerHTML=modalRefs.map(function(r,i){
+    return'<li style="list-style:none"><div class="ref-item">'
+      +'<div class="ref-item-label">'+esc(r.label)+'</div>'
+      +'<div class="ref-item-url"><a href="'+esc(r.url)+'" target="_blank" rel="noopener">'+esc(truncUrl(r.url))+'</a></div>'
+      +'<button class="ref-del" onclick="delRef('+i+')" title="remover">x</button>'
+      +'</div></li>';
   }).join('');
 }
 
@@ -728,6 +797,8 @@ function buildCard(card,colColor){
     +'<div class="card-meta"><span class="tag '+cli.cls+'">'+cli.label+'</span><span class="tag '+tipoCls(tipo)+'">'+tipoLabel(tipo)+'</span>'
     +(card.resp?'<span class="tag tag-resp">'+esc(card.resp)+'</span>':'')
     +(card.briefing?'<span class="tag" style="background:rgba(167,139,250,0.1);color:#a78bfa;border-color:rgba(167,139,250,0.2)">briefing</span>':'')
+    +(card.roteiro?'<span class="tag" style="background:rgba(52,211,153,0.1);color:#34d399;border-color:rgba(52,211,153,0.2)">roteiro</span>':'')
+    +(card.refs&&card.refs.length?'<span class="tag" style="background:rgba(245,158,11,0.1);color:#f59e0b;border-color:rgba(245,158,11,0.2)">'+card.refs.length+' ref</span>':'')
     +dueHtml+'</div>'
     +linksHtml
     +'<button class="add-adj-btn" onclick="openDocsModal(\''+card.id+'\')">'
@@ -769,8 +840,10 @@ function openModal(id,startTab){
     document.getElementById('f-col').value=card.col||'briefing';
     document.getElementById('f-drive').value=card.drive||'';
     document.getElementById('f-briefing').value=card.briefing||'';
+    document.getElementById('f-roteiro').value=card.roteiro||'';
     modalTipo=card.tipo||'reels';
     modalDocs=[].concat((card.docs||[]).map(function(d){return{label:d.label,url:d.url};}));
+    modalRefs=[].concat((card.refs||[]).map(function(r){return{label:r.label,url:r.url};}));
     // load videos
     var vids=card.videos&&card.videos.length?card.videos:[{due:card.due||'',time:card.time||''}];
     document.getElementById('f-video-count').value=vids.length;
@@ -784,19 +857,20 @@ function openModal(id,startTab){
     document.getElementById('modal-title').textContent='novo conteudo';
     ['f-title','f-resp','f-drive'].forEach(function(i){document.getElementById(i).value='';});
     document.getElementById('f-briefing').value='';
+    document.getElementById('f-roteiro').value='';
     document.getElementById('f-client').value=activeClient!=='all'?activeClient:'jardim';
     document.getElementById('f-col').value='briefing';
     document.getElementById('f-video-count').value='1';
     renderVideoDates();
-    modalTipo='reels';modalDocs=[];
+    modalTipo='reels';modalDocs=[];modalRefs=[];
   }
-  renderTipoToggle();renderDocsList();updateDocsBadge();
+  renderTipoToggle();renderDocsList();updateDocsBadge();renderRefList();
   switchTab(startTab||'info');
   document.getElementById('modal').classList.add('open');
   setTimeout(function(){document.getElementById('f-title').focus();},60);
 }
 function openDocsModal(id){openModal(id,'docs');}
-function closeModal(){document.getElementById('modal').classList.remove('open');editingId=null;modalDocs=[];modalVideos=[];}
+function closeModal(){document.getElementById('modal').classList.remove('open');editingId=null;modalDocs=[];modalVideos=[];modalRefs=[];}
 
 function saveCard(){
   var title=document.getElementById('f-title').value.trim();
@@ -813,7 +887,9 @@ function saveCard(){
     drive:document.getElementById('f-drive').value.trim(),
     docs:[].concat(modalDocs),
     briefing:document.getElementById('f-briefing').value,
+    roteiro:document.getElementById('f-roteiro').value,
     videos:vids,
+    refs:[].concat(modalRefs),
   };
   if(editingId){
     var i=cards.findIndex(function(c){return c.id===editingId;});
