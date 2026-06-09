@@ -253,7 +253,7 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
 <div class="stats-bar">
   <div class="stat"><span class="stat-label">total</span><span class="stat-val" id="stat-total">0</span></div>
   <div class="stat-sep"></div>
-  <div class="stat"><span class="stat-label">em producao</span><span class="stat-val" id="stat-producao" style="color:var(--cyan-400)">0</span></div>
+  <div class="stat"><span class="stat-label">em produção</span><span class="stat-val" id="stat-producao" style="color:var(--cyan-400)">0</span></div>
   <div class="stat-sep"></div>
   <div class="stat"><span class="stat-label">pausados</span><span class="stat-val" id="stat-pausado" style="color:#ff9340">0</span></div>
   <div class="stat-sep"></div>
@@ -382,13 +382,14 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
 
 <script>
 var COLS=[
-  {id:'futuro',     label:'Futuro',                color:'#6B7CDB'},
-  {id:'producao',   label:'Em producao',            color:'#2FD4E8'},
-  {id:'pausado',    label:'Pausado',                color:'#FF9340'},
-  {id:'grafica',    label:'Na grafica',             color:'#B9D7EE'},
-  {id:'sol_ajuste', label:'Solicitacao de ajuste',  color:'#F59E0B'},
-  {id:'ag_ajuste',  label:'Aguardando ajuste',      color:'#A78BFA'},
-  {id:'concluido',  label:'Concluido',              color:'#4DCC8A'},
+  {id:'futuro',      label:'Futuro',                  color:'#6B7CDB'},
+  {id:'producao',    label:'Em produção',   color:'#2FD4E8'},
+  {id:'ag_aprovacao',label:'Aguardando aprovação', color:'#60A5FA'},
+  {id:'pausado',     label:'Pausado',                 color:'#FF9340'},
+  {id:'grafica',     label:'Na gráfica',         color:'#B9D7EE'},
+  {id:'sol_ajuste',  label:'Solicitação de ajuste', color:'#F59E0B'},
+  {id:'ag_ajuste',   label:'Aguardando ajuste',       color:'#A78BFA'},
+  {id:'concluido',   label:'Concluído',          color:'#4DCC8A'},
 ];
 var CLIENTS={
   jardim:{label:'Jardim',cls:'tag-client-jardim'},
