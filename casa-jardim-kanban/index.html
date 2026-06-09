@@ -259,6 +259,36 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
 
 /* pausado column highlight */
 .col-pausado .col-header .col-indicator{box-shadow:0 0 6px rgba(255,147,64,0.4);}
+
+/* LIXEIRA */
+.btn-trash{width:32px;height:32px;border-radius:var(--radius-md);background:var(--surface3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--fg-muted);transition:all var(--fast) var(--ease);position:relative;}
+.btn-trash svg{width:14px;height:14px;stroke-width:1.5;}
+.btn-trash:hover{background:rgba(255,80,80,0.1);border-color:rgba(255,80,80,0.2);color:#ff5c5c;}
+.trash-badge{position:absolute;top:-5px;right:-5px;background:#ff5c5c;color:var(--white);border-radius:99px;font-size:9px;font-weight:600;padding:1px 5px;display:none;}
+.trash-overlay{display:none;position:fixed;inset:0;z-index:400;}
+.trash-overlay.open{display:block;}
+.trash-panel{position:fixed;right:0;top:0;bottom:0;width:360px;background:var(--surface2);border-left:1px solid var(--border2);display:flex;flex-direction:column;z-index:401;transform:translateX(100%);transition:transform var(--mid) var(--ease);}
+.trash-overlay.open .trash-panel{transform:translateX(0);}
+.trash-header{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.trash-header h3{font-size:13px;font-weight:400;color:var(--fg-1);display:flex;align-items:center;gap:8px;}
+.trash-header h3 svg{width:14px;height:14px;stroke-width:1.5;color:#ff5c5c;}
+.trash-body{flex:1;overflow-y:auto;padding:12px 16px;}
+.trash-body::-webkit-scrollbar{width:3px;}
+.trash-body::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+.trash-item{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-md);padding:10px 12px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px;}
+.trash-item-info{flex:1;min-width:0;}
+.trash-item-title{font-size:12px;color:var(--fg-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.trash-item-meta{font-size:10px;color:var(--fg-muted);margin-top:3px;}
+.trash-item-actions{display:flex;gap:4px;flex-shrink:0;}
+.trash-restore{background:none;border:1px solid var(--border);border-radius:var(--radius-sm);width:24px;height:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--fg-muted);transition:all var(--fast);}
+.trash-restore svg{width:11px;height:11px;stroke-width:1.5;}
+.trash-restore:hover{border-color:var(--client-jardim);color:var(--client-jardim);}
+.trash-del-perm{background:none;border:1px solid var(--border);border-radius:var(--radius-sm);width:24px;height:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--fg-muted);transition:all var(--fast);}
+.trash-del-perm svg{width:11px;height:11px;stroke-width:1.5;}
+.trash-del-perm:hover{border-color:#ff5c5c;color:#ff5c5c;}
+.trash-empty{text-align:center;padding:32px 0;font-size:11px;color:var(--fg-muted);letter-spacing:0.04em;}
+.trash-empty svg{width:28px;height:28px;stroke-width:1;margin:0 auto 10px;display:block;opacity:0.25;}
+.trash-footer{padding:12px 16px;border-top:1px solid var(--border);font-size:10px;color:var(--fg-muted);text-align:center;letter-spacing:0.03em;}
 </style>
 </head>
 <body>
@@ -303,7 +333,11 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
     <button class="btn-history" onclick="toggleHistory()" title="historico">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
     </button>
-    <button class="btn-sync" id="btn-sync" onclick="openSync()">
+    <button class="btn-trash" id="btn-trash" onclick="toggleTrash()" title="lixeira">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/></svg>
+      <span class="trash-badge" id="trash-badge"></span>
+    </button>
+    <button class="btn-sync" id="btn-sync" onclick="openSync()" style="display:none;">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
       ClickUp
     </button>
@@ -382,19 +416,6 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
         </div>
       </div>
       <div class="field">
-        <label>tipo de conteudo</label>
-        <div class="tipo-toggle">
-          <button class="tipo-btn" id="btn-reels" onclick="toggleTipo('reels')">
-            <svg class="tipo-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25z"/></svg>
-            reels
-          </button>
-          <button class="tipo-btn" id="btn-foto" onclick="toggleTipo('foto')">
-            <svg class="tipo-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316z"/><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0zM18.75 10.5h.008v.008h-.008V10.5z"/></svg>
-            foto
-          </button>
-        </div>
-      </div>
-      <div class="field">
         <label>titulo / descricao do job</label>
         <input id="f-title" type="text" placeholder="Ex: Reels semana do lancamento" />
       </div>
@@ -457,6 +478,23 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
   </div>
 </div>
 
+<!-- LIXEIRA -->
+<div class="trash-overlay" id="trash-overlay" onclick="closeTrashOutside(event)">
+  <div class="trash-panel">
+    <div class="trash-header">
+      <h3>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/></svg>
+        lixeira
+      </h3>
+      <button class="modal-close" onclick="toggleTrash()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="trash-body" id="trash-body"></div>
+    <div class="trash-footer">itens sao excluidos permanentemente apos 15 dias</div>
+  </div>
+</div>
+
 <!-- HISTORY -->
 <div class="history-overlay" id="hist-overlay" onclick="closeHistory(event)">
   <div class="history-panel">
@@ -494,20 +532,21 @@ var _sb=supabase.createClient(
 
 function _rowToCard(r){
   return{
-    id:r.id,title:r.title,tipo:r.tipo||'reels',client:r.client||'jardim',
+    id:r.id,title:r.title,client:r.client||'jardim',
     col:r.col||'futuro',due:r.due||'',drive:r.drive||'',
-    pausa:r.pausa||'',obs:r.obs||'',cu_id:r.cu_id||''
+    pausa:r.pausa||'',obs:r.obs||'',cu_id:r.cu_id||'',
+    deleted_at:r.deleted_at||null
   };
 }
 function _cardToRow(c){
-  return{id:c.id,title:c.title,tipo:c.tipo,client:c.client,col:c.col,due:c.due,drive:c.drive,pausa:c.pausa,obs:c.obs,cu_id:c.cu_id||null};
+  return{id:c.id,title:c.title,client:c.client,col:c.col,due:c.due,drive:c.drive,pausa:c.pausa,obs:c.obs,cu_id:c.cu_id||null,deleted_at:c.deleted_at||null};
 }
 
 var cards=[];
+var trashedCards=[];
 var hist=[];
 var editingId=null,dragId=null;
-var activeClient='all',activeType='all',searchQ='';
-var modalTipo='reels';
+var activeClient='all',searchQ='';
 
 function addHist(type,msg){
   var ts=Date.now();
@@ -517,20 +556,29 @@ function addHist(type,msg){
 }
 
 async function loadData(){
+  var fifteenDaysAgo=new Date(Date.now()-15*24*3600*1000).toISOString();
+  // auto-purge cards older than 15 days in trash
+  await _sb.from('cj_cards').delete().not('deleted_at','is',null).lt('deleted_at',fifteenDaysAgo);
+
   var res=await _sb.from('cj_cards').select('*');
   var hres=await _sb.from('cj_hist').select('*').order('id',{ascending:false}).limit(150);
-  cards=(res.data||[]).map(_rowToCard);
+  var all=(res.data||[]).map(_rowToCard);
+  cards=all.filter(function(c){return!c.deleted_at;});
+  trashedCards=all.filter(function(c){return!!c.deleted_at;});
   hist=(hres.data||[]).map(function(h){return{type:h.type,msg:h.msg,time:h.ts};});
   renderBoard();
+  updateTrashBadge();
   _sb.channel('cj-kanban-rt').on('postgres_changes',{event:'*',schema:'public',table:'cj_cards'},function(payload){
     if(payload.eventType==='INSERT'||payload.eventType==='UPDATE'){
       var nc=_rowToCard(payload.new);
-      var idx=cards.findIndex(function(c){return c.id===nc.id;});
-      if(idx>=0)cards[idx]=nc; else cards.push(nc);
+      cards=cards.filter(function(c){return c.id!==nc.id;});
+      trashedCards=trashedCards.filter(function(c){return c.id!==nc.id;});
+      if(nc.deleted_at)trashedCards.push(nc); else cards.push(nc);
     } else if(payload.eventType==='DELETE'){
       cards=cards.filter(function(c){return c.id!==payload.old.id;});
+      trashedCards=trashedCards.filter(function(c){return c.id!==payload.old.id;});
     }
-    renderBoard();
+    renderBoard();updateTrashBadge();
   }).subscribe();
 }
 
@@ -549,21 +597,6 @@ function relTime(ts){
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function truncUrl(u){try{var p=new URL(u);return(p.hostname+p.pathname).replace(/\/$/,'').substring(0,32)+'...';}catch(e){return String(u).substring(0,32)+'...';}}
 
-function toggleTipo(t){
-  if(modalTipo===t&&modalTipo!=='both'){modalTipo=t;}
-  else if(modalTipo==='both'){modalTipo=(t==='reels')?'foto':'reels';}
-  else if(modalTipo!==t){modalTipo='both';}
-  else{modalTipo=t;}
-  renderTipoToggle();
-}
-function renderTipoToggle(){
-  var br=document.getElementById('btn-reels');
-  var bf=document.getElementById('btn-foto');
-  br.className='tipo-btn'+((modalTipo==='reels'||modalTipo==='both')?' active-reels':'');
-  bf.className='tipo-btn'+((modalTipo==='foto'||modalTipo==='both')?' active-foto':'');
-}
-function tipoLabel(t){if(t==='reels')return'Reels';if(t==='foto')return'Foto';if(t==='both')return'Reels + Foto';return'';}
-function tipoCls(t){if(t==='reels')return'tag-reels';if(t==='foto')return'tag-foto';return'tag-both';}
 
 function switchTab(tab){
   ['info','pausa','obs'].forEach(function(id){
@@ -587,8 +620,6 @@ function onColChange(){
 
 function cardVisible(card){
   if(activeClient!=='all'&&card.client!==activeClient)return false;
-  if(activeType==='reels'&&card.tipo!=='reels'&&card.tipo!=='both')return false;
-  if(activeType==='foto'&&card.tipo!=='foto'&&card.tipo!=='both')return false;
   if(searchQ){
     var q=searchQ.toLowerCase();
     var hay=(card.title+' '+(card.client||'')).toLowerCase();
@@ -599,11 +630,6 @@ function cardVisible(card){
 function setClient(c){
   activeClient=c;
   document.querySelectorAll('.client-tab').forEach(function(b){b.classList.toggle('active',b.dataset.client===c);});
-  applyFilters();
-}
-function setType(t){
-  activeType=t;
-  document.querySelectorAll('.filter-pill').forEach(function(b){b.classList.toggle('active',b.dataset.type===t);});
   applyFilters();
 }
 function applyFilters(){
@@ -659,7 +685,6 @@ function buildCard(card,colColor){
   el.className='card';el.draggable=true;el.dataset.id=card.id;
   el.style.setProperty('--col-color',colColor);
   var cli=CLIENTS[card.client||'jardim']||CLIENTS.jardim;
-  var tipo=card.tipo||'reels';
   var ds=dueStatus(card.due);
 
   var dueHtml='';
@@ -687,7 +712,7 @@ function buildCard(card,colColor){
     +'<button class="icon-btn" onclick="openModal(\''+card.id+'\')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897z"/></svg></button>'
     +'<button class="icon-btn danger" onclick="delCard(\''+card.id+'\')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></button>'
     +'</div></div>'
-    +'<div class="card-meta"><span class="tag '+cli.cls+'">'+cli.label+'</span><span class="tag '+tipoCls(tipo)+'">'+tipoLabel(tipo)+'</span>'
+    +'<div class="card-meta"><span class="tag '+cli.cls+'">'+cli.label+'</span>'
     +dueHtml+'</div>'
     +pausaHtml
     +linksHtml;
@@ -729,15 +754,12 @@ function openModal(id){
     document.getElementById('f-drive').value=card.drive||'';
     document.getElementById('f-pausa').value=card.pausa||'';
     document.getElementById('f-obs').value=card.obs||'';
-    modalTipo=card.tipo||'reels';
   } else {
     document.getElementById('modal-title').textContent='novo job';
     ['f-title','f-due','f-drive','f-pausa','f-obs'].forEach(function(i){document.getElementById(i).value='';});
     document.getElementById('f-client').value=activeClient!=='all'?activeClient:'jardim';
     document.getElementById('f-col').value='futuro';
-    modalTipo='reels';
   }
-  renderTipoToggle();
   onColChange();
   switchTab('info');
   document.getElementById('modal').classList.add('open');
@@ -750,7 +772,6 @@ function saveCard(){
   if(!title){switchTab('info');document.getElementById('f-title').focus();return;}
   var data={
     title:title,
-    tipo:modalTipo,
     client:document.getElementById('f-client').value,
     col:document.getElementById('f-col').value,
     due:document.getElementById('f-due').value,
@@ -771,12 +792,66 @@ function saveCard(){
   renderBoard();closeModal();
 }
 function delCard(id){
-  if(!confirm('excluir este job?'))return;
   var c=cards.find(function(x){return x.id===id;});
-  if(c)addHist('deleted','['+esc(c.title)+'] excluido');
-  cards=cards.filter(function(c){return c.id!==id;});
+  if(!c)return;
+  c.deleted_at=new Date().toISOString();
+  cards=cards.filter(function(x){return x.id!==id;});
+  trashedCards.unshift(c);
+  _sb.from('cj_cards').upsert(_cardToRow(c)).then(function(){});
+  addHist('deleted','['+esc(c.title)+'] movido para lixeira');
+  renderBoard();updateTrashBadge();toast('job movido para lixeira');
+}
+
+function updateTrashBadge(){
+  var badge=document.getElementById('trash-badge');
+  if(trashedCards.length>0){badge.style.display='inline';badge.textContent=trashedCards.length;}
+  else{badge.style.display='none';}
+}
+
+function toggleTrash(){
+  document.getElementById('trash-overlay').classList.toggle('open');
+  renderTrash();
+}
+function closeTrashOutside(e){if(e.target===document.getElementById('trash-overlay'))document.getElementById('trash-overlay').classList.remove('open');}
+function renderTrash(){
+  var body=document.getElementById('trash-body');
+  if(!trashedCards.length){
+    body.innerHTML='<div class="trash-empty"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/></svg>lixeira vazia</div>';
+    return;
+  }
+  body.innerHTML=trashedCards.map(function(c){
+    var cli=CLIENTS[c.client||'jardim']||CLIENTS.jardim;
+    var deletedDate=c.deleted_at?new Date(c.deleted_at):null;
+    var purgeDays=deletedDate?Math.max(0,15-Math.round((Date.now()-deletedDate)/86400000)):15;
+    return'<div class="trash-item">'
+      +'<div class="trash-item-info">'
+      +'<div class="trash-item-title">'+esc(c.title)+'</div>'
+      +'<div class="trash-item-meta"><span class="tag '+cli.cls+'" style="font-size:9px;padding:1px 6px;">'+cli.label+'</span> · expira em '+purgeDays+' dia'+(purgeDays!==1?'s':'')+'</div>'
+      +'</div>'
+      +'<div class="trash-item-actions">'
+      +'<button class="trash-restore" onclick="restoreCard(\''+c.id+'\')" title="restaurar"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/></svg></button>'
+      +'<button class="trash-del-perm" onclick="delPermanent(\''+c.id+'\')" title="excluir permanentemente"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></button>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+function restoreCard(id){
+  var c=trashedCards.find(function(x){return x.id===id;});
+  if(!c)return;
+  c.deleted_at=null;
+  trashedCards=trashedCards.filter(function(x){return x.id!==id;});
+  cards.push(c);
+  _sb.from('cj_cards').upsert(_cardToRow(c)).then(function(){});
+  addHist('created','['+esc(c.title)+'] restaurado da lixeira');
+  renderBoard();updateTrashBadge();renderTrash();toast('job restaurado');
+}
+function delPermanent(id){
+  if(!confirm('excluir permanentemente? nao pode ser desfeito.'))return;
+  var c=trashedCards.find(function(x){return x.id===id;});
+  trashedCards=trashedCards.filter(function(x){return x.id!==id;});
   _sb.from('cj_cards').delete().eq('id',id).then(function(){});
-  renderBoard();toast('job removido');
+  if(c)addHist('deleted','['+esc(c.title)+'] excluido permanentemente');
+  updateTrashBadge();renderTrash();toast('excluido permanentemente');
 }
 
 function toggleHistory(){document.getElementById('hist-overlay').classList.toggle('open');renderHistory();}
@@ -917,20 +992,32 @@ async function importSelected(){
 function closeSync(){document.getElementById('sync-overlay').classList.remove('open');}
 
 /* ── LOGIN ── */
+var userRole='client';
 (function(){
-  var KEY='cj_auth';
-  var PASS='Cas@Jardim2*6';
-  if(sessionStorage.getItem(KEY)==='1'){
+  var role=sessionStorage.getItem('cj_role');
+  if(role==='admin'||role==='client'){
+    userRole=role;
     document.getElementById('login-screen').classList.add('hidden');
+    applyRole();
     loadData();
   }
 })();
+function applyRole(){
+  var syncBtn=document.getElementById('btn-sync');
+  if(syncBtn)syncBtn.style.display=userRole==='admin'?'flex':'none';
+}
 function doLogin(){
   var val=document.getElementById('login-pass').value;
-  if(val==='Cas@Jardim2*6'){
-    sessionStorage.setItem('cj_auth','1');
+  if(val==='ADOISSS**2'){
+    userRole='admin';
+    sessionStorage.setItem('cj_role','admin');
     document.getElementById('login-screen').classList.add('hidden');
-    loadData();
+    applyRole();loadData();
+  } else if(val==='Cas@Jardim2*6'){
+    userRole='client';
+    sessionStorage.setItem('cj_role','client');
+    document.getElementById('login-screen').classList.add('hidden');
+    applyRole();loadData();
   } else {
     var err=document.getElementById('login-error');
     err.textContent='senha incorreta';
