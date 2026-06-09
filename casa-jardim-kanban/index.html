@@ -54,6 +54,39 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
 .btn-novo{height:32px;padding:0 16px;border-radius:var(--radius-pill);background:var(--blue-500);border:none;font-family:inherit;font-size:11px;font-weight:500;color:var(--white);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all var(--fast) var(--ease);letter-spacing:0.03em;}
 .btn-novo svg{width:12px;height:12px;stroke-width:2;}
 .btn-novo:hover{background:var(--blue-400);box-shadow:0 0 16px rgba(46,111,184,0.4);}
+.btn-sync{height:32px;padding:0 14px;border-radius:var(--radius-pill);background:none;border:1px solid var(--border);font-family:inherit;font-size:11px;color:var(--fg-2);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all var(--fast) var(--ease);letter-spacing:0.03em;}
+.btn-sync svg{width:13px;height:13px;stroke-width:1.5;}
+.btn-sync:hover{border-color:var(--border2);color:var(--fg-1);}
+.btn-sync.syncing svg{animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* SYNC MODAL */
+.sync-overlay{display:none;position:fixed;inset:0;background:rgba(5,8,15,0.88);backdrop-filter:blur(10px);z-index:600;align-items:center;justify-content:center;padding:20px;}
+.sync-overlay.open{display:flex;}
+.sync-box{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-xl);width:100%;max-width:480px;max-height:80vh;display:flex;flex-direction:column;}
+.sync-header{padding:20px 22px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.sync-header h3{font-size:13px;font-weight:400;color:var(--fg-1);}
+.sync-body{flex:1;overflow-y:auto;padding:16px 22px;}
+.sync-body::-webkit-scrollbar{width:3px;}
+.sync-body::-webkit-scrollbar-thumb{background:var(--border2);}
+.sync-task-list{display:flex;flex-direction:column;gap:6px;margin-top:12px;}
+.sync-task-item{display:flex;align-items:center;gap:10px;background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-md);padding:10px 12px;cursor:pointer;transition:border-color var(--fast);}
+.sync-task-item:hover{border-color:var(--border2);}
+.sync-task-item.selected{border-color:var(--blue-500);background:rgba(46,111,184,0.08);}
+.sync-task-check{width:16px;height:16px;border-radius:4px;border:1px solid var(--border2);background:var(--surface3);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.sync-task-item.selected .sync-task-check{background:var(--blue-500);border-color:var(--blue-500);}
+.sync-task-check svg{width:10px;height:10px;stroke:white;stroke-width:2.5;display:none;}
+.sync-task-item.selected .sync-task-check svg{display:block;}
+.sync-task-info{flex:1;min-width:0;}
+.sync-task-name{font-size:12px;color:var(--fg-1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sync-task-meta{font-size:10px;color:var(--fg-muted);margin-top:2px;}
+.sync-task-client{font-size:10px;padding:1px 7px;border-radius:var(--radius-pill);}
+.sync-status{font-size:12px;color:var(--fg-muted);padding:12px 0;text-align:center;}
+.sync-footer{padding:14px 22px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.sync-sel-count{font-size:11px;color:var(--fg-muted);}
+.sync-import-btn{height:32px;padding:0 18px;border-radius:var(--radius-pill);background:var(--blue-500);border:none;font-family:inherit;font-size:11px;font-weight:500;color:var(--white);cursor:pointer;transition:all var(--fast);}
+.sync-import-btn:hover{background:var(--blue-400);}
+.sync-import-btn:disabled{opacity:0.4;cursor:not-allowed;}
 
 /* FILTER BAR */
 .filter-bar{padding:10px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0;background:var(--surface1);}
@@ -270,6 +303,10 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
     <button class="btn-history" onclick="toggleHistory()" title="historico">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
     </button>
+    <button class="btn-sync" id="btn-sync" onclick="openSync()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+      ClickUp
+    </button>
     <button class="btn-novo" onclick="openModal()">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
       novo job
@@ -400,6 +437,26 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
   </div>
 </div>
 
+<!-- SYNC CLICKUP -->
+<div class="sync-overlay" id="sync-overlay">
+  <div class="sync-box">
+    <div class="sync-header">
+      <h3>importar do ClickUp</h3>
+      <button class="modal-close" onclick="closeSync()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="sync-body">
+      <div class="sync-status" id="sync-status">buscando tasks no ClickUp...</div>
+      <div class="sync-task-list" id="sync-task-list"></div>
+    </div>
+    <div class="sync-footer">
+      <span class="sync-sel-count" id="sync-sel-count">0 selecionados</span>
+      <button class="sync-import-btn" id="sync-import-btn" onclick="importSelected()" disabled>importar</button>
+    </div>
+  </div>
+</div>
+
 <!-- HISTORY -->
 <div class="history-overlay" id="hist-overlay" onclick="closeHistory(event)">
   <div class="history-panel">
@@ -439,11 +496,11 @@ function _rowToCard(r){
   return{
     id:r.id,title:r.title,tipo:r.tipo||'reels',client:r.client||'jardim',
     col:r.col||'futuro',due:r.due||'',drive:r.drive||'',
-    pausa:r.pausa||'',obs:r.obs||''
+    pausa:r.pausa||'',obs:r.obs||'',cu_id:r.cu_id||''
   };
 }
 function _cardToRow(c){
-  return{id:c.id,title:c.title,tipo:c.tipo,client:c.client,col:c.col,due:c.due,drive:c.drive,pausa:c.pausa,obs:c.obs};
+  return{id:c.id,title:c.title,tipo:c.tipo,client:c.client,col:c.col,due:c.due,drive:c.drive,pausa:c.pausa,obs:c.obs,cu_id:c.cu_id||null};
 }
 
 var cards=[];
@@ -733,6 +790,131 @@ function renderHistory(){
 }
 
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+/* ── CLICKUP SYNC ── */
+var CU_TOKEN='pk_272606384_9VQ6YWLV4S5ZOD3R5K0YQ4AMZQX29PTZ';
+var syncTasks=[];
+var selectedIds=new Set();
+
+async function cuFetch(path){
+  var r=await fetch('https://api.clickup.com/api/v2'+path,{headers:{'Authorization':CU_TOKEN}});
+  return r.json();
+}
+
+var CLIENT_KEYWORDS={
+  jardim:['jardim','jardim cafeteria','cafe','cafeteria'],
+  hey:['hey','hey burger','hey burgers','hey!'],
+};
+
+function detectClient(name){
+  var n=(name||'').toLowerCase();
+  for(var c in CLIENT_KEYWORDS){
+    if(CLIENT_KEYWORDS[c].some(function(k){return n.indexOf(k)>-1;}))return c;
+  }
+  return null;
+}
+
+async function openSync(){
+  document.getElementById('sync-overlay').classList.add('open');
+  document.getElementById('sync-task-list').innerHTML='';
+  document.getElementById('sync-status').textContent='buscando workspaces...';
+  document.getElementById('sync-import-btn').disabled=true;
+  selectedIds=new Set();syncTasks=[];
+  updateSyncCount();
+  try{
+    var teams=await cuFetch('/team');
+    var allTasks=[];
+    for(var t of (teams.teams||[])){
+      document.getElementById('sync-status').textContent='buscando spaces de '+t.name+'...';
+      var spaces=await cuFetch('/team/'+t.id+'/space?archived=false');
+      for(var sp of (spaces.spaces||[])){
+        var folders=await cuFetch('/space/'+sp.id+'/folder?archived=false');
+        for(var f of (folders.folders||[])){
+          var lists=await cuFetch('/folder/'+f.id+'/list?archived=false');
+          for(var l of (lists.lists||[])){
+            var client=detectClient(l.name)||detectClient(f.name)||detectClient(sp.name);
+            if(!client)continue;
+            document.getElementById('sync-status').textContent='lendo lista: '+l.name+'...';
+            var tasks=await cuFetch('/list/'+l.id+'/task?archived=false&subtasks=false');
+            for(var tk of (tasks.tasks||[])){
+              var due=tk.due_date?new Date(parseInt(tk.due_date)).toISOString().split('T')[0]:'';
+              allTasks.push({id:tk.id,name:tk.name,due:due,client:client,list:l.name});
+            }
+          }
+        }
+        // folderless lists
+        var flists=await cuFetch('/space/'+sp.id+'/list?archived=false');
+        for(var fl of (flists.lists||[])){
+          var fclient=detectClient(fl.name)||detectClient(sp.name);
+          if(!fclient)continue;
+          document.getElementById('sync-status').textContent='lendo lista: '+fl.name+'...';
+          var ftasks=await cuFetch('/list/'+fl.id+'/task?archived=false&subtasks=false');
+          for(var ftk of (ftasks.tasks||[])){
+            var fdue=ftk.due_date?new Date(parseInt(ftk.due_date)).toISOString().split('T')[0]:'';
+            allTasks.push({id:ftk.id,name:ftk.name,due:fdue,client:fclient,list:fl.name});
+          }
+        }
+      }
+    }
+    syncTasks=allTasks;
+    renderSyncTasks();
+  }catch(e){
+    document.getElementById('sync-status').textContent='erro ao conectar com ClickUp. Tente novamente.';
+    console.error(e);
+  }
+}
+
+function renderSyncTasks(){
+  var existing=new Set(cards.map(function(c){return c.cu_id;}).filter(Boolean));
+  var newTasks=syncTasks.filter(function(t){return!existing.has(t.id);});
+  var status=document.getElementById('sync-status');
+  var list=document.getElementById('sync-task-list');
+  if(!newTasks.length){
+    status.textContent='nenhuma task nova encontrada para Hey Burgers ou Jardim Cafeteria.';
+    list.innerHTML='';return;
+  }
+  status.textContent=newTasks.length+' task'+(newTasks.length!==1?'s':'')+' encontrada'+(newTasks.length!==1?'s':'')+' — selecione as que deseja importar:';
+  list.innerHTML=newTasks.map(function(t){
+    var cli=CLIENTS[t.client]||CLIENTS.jardim;
+    return'<div class="sync-task-item" id="sti-'+t.id+'" onclick="toggleSyncTask(\''+t.id+'\')">'
+      +'<div class="sync-task-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg></div>'
+      +'<div class="sync-task-info">'
+      +'<div class="sync-task-name">'+esc(t.name)+'</div>'
+      +'<div class="sync-task-meta">'+esc(t.list)+(t.due?' · entrega: '+fmtDate(t.due):'')+'</div>'
+      +'</div>'
+      +'<span class="sync-task-client tag '+cli.cls+'">'+cli.label+'</span>'
+      +'</div>';
+  }).join('');
+}
+
+function toggleSyncTask(id){
+  if(selectedIds.has(id))selectedIds.delete(id);
+  else selectedIds.add(id);
+  var el=document.getElementById('sti-'+id);
+  if(el)el.classList.toggle('selected',selectedIds.has(id));
+  updateSyncCount();
+}
+function updateSyncCount(){
+  var n=selectedIds.size;
+  document.getElementById('sync-sel-count').textContent=n+' selecionado'+(n!==1?'s':'');
+  document.getElementById('sync-import-btn').disabled=n===0;
+}
+
+async function importSelected(){
+  var toImport=syncTasks.filter(function(t){return selectedIds.has(t.id);});
+  for(var t of toImport){
+    var nc={id:Date.now().toString()+Math.random().toString(36).slice(2),cu_id:t.id,title:t.name,tipo:'reels',client:t.client,col:'futuro',due:t.due,drive:'',pausa:'',obs:''};
+    cards.push(nc);
+    await _sb.from('cj_cards').insert(_cardToRow(nc));
+    addHist('created','['+esc(t.name)+'] importado do ClickUp');
+    await new Promise(function(r){setTimeout(r,80);});
+  }
+  renderBoard();
+  toast(toImport.length+' job'+(toImport.length!==1?'s':'')+' importado'+(toImport.length!==1?'s':''));
+  closeSync();
+}
+
+function closeSync(){document.getElementById('sync-overlay').classList.remove('open');}
 
 /* ── LOGIN ── */
 (function(){
