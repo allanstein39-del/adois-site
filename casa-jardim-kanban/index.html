@@ -241,10 +241,7 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
 
 <!-- FILTER BAR -->
 <div class="filter-bar">
-  <button class="filter-pill fp-all active" data-type="all" onclick="setType('all')">todos</button>
-  <button class="filter-pill fp-reels" data-type="reels" onclick="setType('reels')">reels</button>
-  <button class="filter-pill fp-foto" data-type="foto" onclick="setType('foto')">foto</button>
-  <div class="filter-sep"></div>
+  <div class="filter-sep" style="display:none"></div>
   <span class="filter-count" id="filter-count"></span>
   <input class="search-input" id="search-input" type="text" placeholder="buscar job..." oninput="applyFilters()" />
 </div>
@@ -388,7 +385,6 @@ var COLS=[
   {id:'pausado',     label:'Pausado',                 color:'#FF9340'},
   {id:'grafica',     label:'Na gráfica',         color:'#B9D7EE'},
   {id:'sol_ajuste',  label:'Solicitação de ajuste', color:'#F59E0B'},
-  {id:'ag_ajuste',   label:'Aguardando ajuste',       color:'#A78BFA'},
   {id:'concluido',   label:'Concluído',          color:'#4DCC8A'},
 ];
 var CLIENTS={
@@ -544,7 +540,7 @@ function updateStats(){
   document.getElementById('stat-producao').textContent=vis.filter(function(c){return c.col==='producao';}).length;
   document.getElementById('stat-pausado').textContent=vis.filter(function(c){return c.col==='pausado';}).length;
   document.getElementById('stat-concluido').textContent=vis.filter(function(c){return c.col==='concluido';}).length;
-  document.getElementById('stat-ajuste').textContent=vis.filter(function(c){return c.col==='sol_ajuste'||c.col==='ag_ajuste';}).length;
+  document.getElementById('stat-ajuste').textContent=vis.filter(function(c){return c.col==='sol_ajuste';}).length;
 }
 
 function renderBoard(){
