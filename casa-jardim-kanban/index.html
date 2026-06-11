@@ -108,10 +108,57 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
 .stat-val{font-size:16px;font-weight:300;color:var(--fg-1);}
 .stat-sep{width:1px;height:20px;background:var(--border);}
 
+/* VIEW TABS */
+.view-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);padding:0 20px;background:var(--surface1);flex-shrink:0;}
+.view-tab{padding:12px 20px;font-family:inherit;font-size:11px;font-weight:400;color:var(--fg-muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-2px;letter-spacing:0.05em;text-transform:uppercase;transition:all var(--fast) var(--ease);display:flex;align-items:center;gap:7px;}
+.view-tab svg{width:13px;height:13px;stroke-width:1.5;}
+.view-tab:hover{color:var(--fg-2);}
+.view-tab.active{color:var(--fg-1);border-bottom-color:var(--blue-500);}
+.view-tab.active.tab-rotinas{color:#a78bfa;border-bottom-color:#a78bfa;}
+
 /* BOARD */
 .board-wrap{flex:1;overflow-x:auto;padding:20px;padding-bottom:40px;}
 .board{display:flex;gap:14px;align-items:flex-start;min-width:max-content;}
 .column{width:var(--col-min);flex-shrink:0;display:flex;flex-direction:column;gap:0;}
+
+/* ROTINAS */
+.rotinas-wrap{padding:24px 20px 40px;display:none;}
+.rotinas-wrap.active{display:block;}
+.rotinas-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.rotinas-title{font-size:13px;font-weight:400;color:var(--fg-1);}
+.btn-nova-rotina{height:32px;padding:0 16px;border-radius:var(--radius-pill);background:none;border:1px solid var(--border);font-family:inherit;font-size:11px;color:var(--fg-2);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all var(--fast) var(--ease);}
+.btn-nova-rotina svg{width:12px;height:12px;stroke-width:2;}
+.btn-nova-rotina:hover{border-color:#a78bfa;color:#a78bfa;}
+.rotinas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.rotina-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;border-top:2px solid #a78bfa;position:relative;}
+.rotina-card:hover{border-color:var(--border2);}
+.rotina-card-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;}
+.rotina-name{font-size:12px;font-weight:400;color:var(--fg-1);flex:1;line-height:1.45;}
+.rotina-actions{display:none;align-items:center;gap:3px;flex-shrink:0;}
+.rotina-card:hover .rotina-actions{display:flex;}
+.rotina-badges{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;}
+.rotina-freq{font-size:10px;font-weight:500;padding:2px 9px;border-radius:var(--radius-pill);background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2);}
+.rotina-next{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--fg-muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+.rotina-next svg{width:11px;height:11px;stroke-width:1.5;flex-shrink:0;}
+.rotina-next-val{color:var(--fg-2);}
+.rotina-next-today{color:var(--cyan-400);font-weight:500;}
+.rotina-desc{font-size:11px;color:var(--fg-muted);line-height:1.55;margin-top:6px;}
+.rotinas-empty{text-align:center;padding:48px 0;font-size:12px;color:var(--fg-muted);}
+.rotinas-empty svg{width:36px;height:36px;stroke-width:1;margin:0 auto 12px;display:block;opacity:0.2;}
+
+/* MODAL ROTINA */
+.rot-overlay{display:none;position:fixed;inset:0;background:rgba(5,8,15,0.88);backdrop-filter:blur(10px);z-index:500;align-items:center;justify-content:center;padding:20px;}
+.rot-overlay.open{display:flex;}
+.rot-modal{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-xl);width:100%;max-width:460px;display:flex;flex-direction:column;}
+.rot-header{padding:20px 22px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.rot-header h3{font-size:13px;font-weight:400;color:var(--fg-1);}
+.rot-body{padding:20px 22px;}
+.rot-footer{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;}
+.freq-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;}
+.freq-btn{padding:9px 0;border-radius:var(--radius-md);border:1px solid var(--border);background:var(--surface3);font-family:inherit;font-size:11px;color:var(--fg-muted);cursor:pointer;text-align:center;transition:all var(--fast) var(--ease);letter-spacing:0.03em;}
+.freq-btn:hover{border-color:var(--border2);color:var(--fg-2);}
+.freq-btn.active{background:rgba(167,139,250,0.12);border-color:rgba(167,139,250,0.35);color:#a78bfa;}
+.rot-config{margin-top:12px;}
 .col-header{display:flex;align-items:center;gap:8px;padding:0 4px 10px;flex-shrink:0;}
 .col-indicator{width:3px;height:14px;border-radius:2px;flex-shrink:0;}
 .col-label{font-size:11px;font-weight:400;color:var(--fg-2);letter-spacing:0.03em;flex:1;}
@@ -371,9 +418,77 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;}
   <div class="stat"><span class="stat-label">ajustes</span><span class="stat-val" id="stat-ajuste" style="color:#a78bfa">0</span></div>
 </div>
 
+<!-- VIEW TABS -->
+<div class="view-tabs">
+  <button class="view-tab active" id="vtab-kanban" onclick="setView('kanban')">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25zM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25z"/></svg>
+    Kanban
+  </button>
+  <button class="view-tab tab-rotinas" id="vtab-rotinas" onclick="setView('rotinas')">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+    Rotinas
+  </button>
+</div>
+
 <!-- BOARD -->
-<div class="board-wrap">
+<div class="board-wrap" id="view-kanban">
   <div class="board" id="board"></div>
+</div>
+
+<!-- ROTINAS -->
+<div class="rotinas-wrap" id="view-rotinas">
+  <div class="rotinas-header">
+    <span class="rotinas-title">rotinas recorrentes</span>
+    <button class="btn-nova-rotina" id="btn-nova-rotina" onclick="openRotModal()" style="display:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+      nova rotina
+    </button>
+  </div>
+  <div class="rotinas-grid" id="rotinas-grid"></div>
+</div>
+
+<!-- MODAL ROTINA -->
+<div class="rot-overlay" id="rot-overlay">
+  <div class="rot-modal">
+    <div class="rot-header">
+      <h3 id="rot-modal-title">nova rotina</h3>
+      <button class="modal-close" onclick="closeRotModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="rot-body">
+      <div class="field">
+        <label>nome da rotina</label>
+        <input id="rot-name" type="text" placeholder="Ex: Posts semanais, relatório mensal..." />
+      </div>
+      <div class="field">
+        <label>cliente</label>
+        <select id="rot-client">
+          <option value="all">Todos</option>
+          <option value="jardim">Jardim Cafeteria</option>
+          <option value="hey">Hey! Burgers</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>descricao (opcional)</label>
+        <textarea id="rot-desc" style="min-height:60px;" placeholder="Descreva brevemente o que é essa rotina..."></textarea>
+      </div>
+      <div class="field">
+        <label>frequencia</label>
+        <div class="freq-grid">
+          <button class="freq-btn active" data-freq="diaria" onclick="setFreq('diaria')">Diária</button>
+          <button class="freq-btn" data-freq="semanal" onclick="setFreq('semanal')">Semanal</button>
+          <button class="freq-btn" data-freq="quinzenal" onclick="setFreq('quinzenal')">Quinzenal</button>
+          <button class="freq-btn" data-freq="mensal" onclick="setFreq('mensal')">Mensal</button>
+        </div>
+      </div>
+      <div class="rot-config" id="rot-config"></div>
+    </div>
+    <div class="rot-footer">
+      <button class="btn-cancel" onclick="closeRotModal()">cancelar</button>
+      <button class="btn-save" onclick="saveRotina()">salvar</button>
+    </div>
+  </div>
 </div>
 
 <!-- MODAL -->
@@ -584,6 +699,7 @@ async function loadData(){
   hist=(hres.data||[]).map(function(h){return{type:h.type,msg:h.msg,time:h.ts};});
   renderBoard();
   updateTrashBadge();
+  await loadRotinas();
   _sb.channel('cj-kanban-rt').on('postgres_changes',{event:'*',schema:'public',table:'cj_cards'},function(payload){
     if(payload.eventType==='INSERT'||payload.eventType==='UPDATE'){
       var nc=_rowToCard(payload.new);
@@ -893,6 +1009,177 @@ function renderHistory(){
 }
 
 document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+/* ── VIEWS ── */
+var currentView='kanban';
+function setView(v){
+  currentView=v;
+  document.getElementById('view-kanban').style.display=v==='kanban'?'block':'none';
+  document.getElementById('view-rotinas').classList.toggle('active',v==='rotinas');
+  document.getElementById('vtab-kanban').classList.toggle('active',v==='kanban');
+  document.getElementById('vtab-rotinas').classList.toggle('active',v==='rotinas');
+  if(v==='rotinas')renderRotinas();
+}
+
+/* ── ROTINAS ── */
+var rotinas=[];
+var editingRotId=null;
+var rotFreq='diaria';
+var DIAS_SEMANA=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+var MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+async function loadRotinas(){
+  var res=await _sb.from('cj_rotinas').select('*').order('created_at',{ascending:true});
+  rotinas=(res.data||[]);
+}
+
+function nextOccurrence(rot){
+  var now=new Date();
+  var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  var freq=rot.recurrence;
+  var cfg=rot.config||{};
+  if(freq==='diaria')return null; // não mostra próxima para diária
+  if(freq==='semanal'||freq==='quinzenal'){
+    var targetDay=cfg.dayOfWeek||1;
+    var d=new Date(today);
+    var diff=(targetDay-d.getDay()+7)%7;
+    if(freq==='quinzenal'&&diff===0)diff=14;
+    else if(diff===0)diff=7;
+    d.setDate(d.getDate()+diff);
+    return d;
+  }
+  if(freq==='mensal'){
+    var targetDate=cfg.dayOfMonth||1;
+    var d=new Date(today.getFullYear(),today.getMonth(),targetDate);
+    if(d<=today)d=new Date(today.getFullYear(),today.getMonth()+1,targetDate);
+    return d;
+  }
+  return null;
+}
+
+function fmtNextDate(d){
+  if(!d)return null;
+  var today=new Date();today.setHours(0,0,0,0);
+  var tomorrow=new Date(today);tomorrow.setDate(today.getDate()+1);
+  if(d.getTime()===today.getTime())return{txt:'Hoje',today:true};
+  if(d.getTime()===tomorrow.getTime())return{txt:'Amanhã',today:false};
+  return{txt:d.getDate()+' de '+MESES[d.getMonth()],today:false};
+}
+
+function freqLabel(rot){
+  var f=rot.recurrence;var cfg=rot.config||{};
+  if(f==='diaria')return'Todo dia';
+  if(f==='semanal')return'Semanal · '+DIAS_SEMANA[cfg.dayOfWeek||1];
+  if(f==='quinzenal')return'Quinzenal · '+DIAS_SEMANA[cfg.dayOfWeek||1];
+  if(f==='mensal')return'Mensal · dia '+(cfg.dayOfMonth||1);
+  return f;
+}
+
+function renderRotinas(){
+  var btn=document.getElementById('btn-nova-rotina');
+  if(btn)btn.style.display=userRole==='admin'?'flex':'none';
+  var grid=document.getElementById('rotinas-grid');
+  if(!rotinas.length){
+    grid.innerHTML='<div class="rotinas-empty" style="grid-column:1/-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>nenhuma rotina criada ainda</div>';
+    return;
+  }
+  grid.innerHTML=rotinas.map(function(r){
+    var next=nextOccurrence(r);
+    var nextFmt=next?fmtNextDate(next):null;
+    var cli=r.client==='jardim'?CLIENTS.jardim:r.client==='hey'?CLIENTS.hey:null;
+    var nextHtml=next&&nextFmt?'<div class="rotina-next"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/></svg>próxima: <span class="rotina-next-val '+(nextFmt.today?'rotina-next-today':'')+'">'+nextFmt.txt+'</span></div>':'';
+    var adminActions=userRole==='admin'?'<div class="rotina-actions">'
+      +'<button class="icon-btn" onclick="openRotModal(\''+r.id+'\')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897z"/></svg></button>'
+      +'<button class="icon-btn danger" onclick="delRotina(\''+r.id+'\')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></button>'
+      +'</div>':'';
+    return'<div class="rotina-card">'
+      +'<div class="rotina-card-top"><span class="rotina-name">'+esc(r.name)+'</span>'+adminActions+'</div>'
+      +'<div class="rotina-badges"><span class="rotina-freq">'+freqLabel(r)+'</span>'+(cli?'<span class="tag '+cli.cls+'" style="font-size:10px;">'+cli.label+'</span>':'')+'</div>'
+      +(r.description?'<div class="rotina-desc">'+esc(r.description)+'</div>':'')
+      +nextHtml
+      +'</div>';
+  }).join('');
+}
+
+function setFreq(f){
+  rotFreq=f;
+  document.querySelectorAll('.freq-btn').forEach(function(b){b.classList.toggle('active',b.dataset.freq===f);});
+  renderRotConfig();
+}
+function renderRotConfig(){
+  var c=document.getElementById('rot-config');
+  if(rotFreq==='diaria'){c.innerHTML='';return;}
+  if(rotFreq==='semanal'||rotFreq==='quinzenal'){
+    c.innerHTML='<div class="field"><label>dia da semana</label><select id="rot-day">'
+      +DIAS_SEMANA.map(function(d,i){return'<option value="'+i+'">'+d+'</option>';}).join('')
+      +'</select></div>';
+    return;
+  }
+  if(rotFreq==='mensal'){
+    var opts='';for(var i=1;i<=28;i++)opts+='<option value="'+i+'">Dia '+i+'</option>';
+    c.innerHTML='<div class="field"><label>dia do mes</label><select id="rot-dom">'+opts+'</select></div>';
+    return;
+  }
+}
+function openRotModal(id){
+  editingRotId=id||null;
+  rotFreq='diaria';
+  if(id){
+    var r=rotinas.find(function(x){return x.id===id;});
+    document.getElementById('rot-modal-title').textContent='editar rotina';
+    document.getElementById('rot-name').value=r.name||'';
+    document.getElementById('rot-client').value=r.client||'all';
+    document.getElementById('rot-desc').value=r.description||'';
+    rotFreq=r.recurrence||'diaria';
+  } else {
+    document.getElementById('rot-modal-title').textContent='nova rotina';
+    ['rot-name','rot-desc'].forEach(function(i){document.getElementById(i).value='';});
+    document.getElementById('rot-client').value='all';
+  }
+  document.querySelectorAll('.freq-btn').forEach(function(b){b.classList.toggle('active',b.dataset.freq===rotFreq);});
+  renderRotConfig();
+  if(id){
+    var r=rotinas.find(function(x){return x.id===id;});
+    var cfg=r.config||{};
+    setTimeout(function(){
+      if((rotFreq==='semanal'||rotFreq==='quinzenal')&&document.getElementById('rot-day'))
+        document.getElementById('rot-day').value=cfg.dayOfWeek||1;
+      if(rotFreq==='mensal'&&document.getElementById('rot-dom'))
+        document.getElementById('rot-dom').value=cfg.dayOfMonth||1;
+    },50);
+  }
+  document.getElementById('rot-overlay').classList.add('open');
+  setTimeout(function(){document.getElementById('rot-name').focus();},60);
+}
+function closeRotModal(){document.getElementById('rot-overlay').classList.remove('open');editingRotId=null;}
+async function saveRotina(){
+  var name=document.getElementById('rot-name').value.trim();
+  if(!name){document.getElementById('rot-name').focus();return;}
+  var cfg={};
+  if((rotFreq==='semanal'||rotFreq==='quinzenal')&&document.getElementById('rot-day'))
+    cfg.dayOfWeek=parseInt(document.getElementById('rot-day').value);
+  if(rotFreq==='mensal'&&document.getElementById('rot-dom'))
+    cfg.dayOfMonth=parseInt(document.getElementById('rot-dom').value);
+  var data={name:name,client:document.getElementById('rot-client').value,description:document.getElementById('rot-desc').value.trim(),recurrence:rotFreq,config:cfg};
+  if(editingRotId){
+    await _sb.from('cj_rotinas').update(data).eq('id',editingRotId);
+    var idx=rotinas.findIndex(function(r){return r.id===editingRotId;});
+    if(idx>=0)rotinas[idx]=Object.assign({},rotinas[idx],data);
+    toast('rotina atualizada');
+  } else {
+    var newRot=Object.assign({id:Date.now().toString()},data);
+    await _sb.from('cj_rotinas').insert(newRot);
+    rotinas.push(newRot);
+    toast('rotina criada');
+  }
+  closeRotModal();renderRotinas();
+}
+async function delRotina(id){
+  if(!confirm('excluir esta rotina?'))return;
+  await _sb.from('cj_rotinas').delete().eq('id',id);
+  rotinas=rotinas.filter(function(r){return r.id!==id;});
+  renderRotinas();toast('rotina removida');
+}
 
 /* ── CLICKUP SYNC ── */
 var CU_TOKEN='pk_272606384_9VQ6YWLV4S5ZOD3R5K0YQ4AMZQX29PTZ';
