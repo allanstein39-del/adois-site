@@ -1038,20 +1038,17 @@ function nextOccurrence(rot){
   var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
   var freq=rot.recurrence;
   var cfg=rot.config||{};
-  if(freq==='diaria')return null; // não mostra próxima para diária
-  if(freq==='semanal'||freq==='quinzenal'){
-    var targetDay=cfg.dayOfWeek||1;
-    var d=new Date(today);
-    var diff=(targetDay-d.getDay()+7)%7;
-    if(freq==='quinzenal'&&diff===0)diff=14;
-    else if(diff===0)diff=7;
-    d.setDate(d.getDate()+diff);
-    return d;
+  if(freq==='diaria')return null;
+  if((freq==='semanal'||freq==='quinzenal')&&cfg.startDate){
+    var step=freq==='semanal'?7:15;
+    var ref=new Date(cfg.startDate+'T00:00:00');
+    // avança de step em step até passar de hoje
+    while(ref<=today)ref.setDate(ref.getDate()+step);
+    return new Date(ref);
   }
-  if(freq==='mensal'){
-    var targetDate=cfg.dayOfMonth||1;
-    var d=new Date(today.getFullYear(),today.getMonth(),targetDate);
-    if(d<=today)d=new Date(today.getFullYear(),today.getMonth()+1,targetDate);
+  if(freq==='mensal'&&cfg.dayOfMonth){
+    var d=new Date(today.getFullYear(),today.getMonth(),cfg.dayOfMonth);
+    if(d<=today)d=new Date(today.getFullYear(),today.getMonth()+1,cfg.dayOfMonth);
     return d;
   }
   return null;
@@ -1061,16 +1058,16 @@ function fmtNextDate(d){
   if(!d)return null;
   var today=new Date();today.setHours(0,0,0,0);
   var tomorrow=new Date(today);tomorrow.setDate(today.getDate()+1);
-  if(d.getTime()===today.getTime())return{txt:'Hoje',today:true};
-  if(d.getTime()===tomorrow.getTime())return{txt:'Amanhã',today:false};
-  return{txt:d.getDate()+' de '+MESES[d.getMonth()],today:false};
+  if(d.getTime()===today.getTime())return{txt:'Hoje — '+d.getDate()+'/'+String(d.getMonth()+1).padStart(2,'0'),today:true};
+  if(d.getTime()===tomorrow.getTime())return{txt:'Amanhã — '+d.getDate()+'/'+String(d.getMonth()+1).padStart(2,'0'),today:false};
+  return{txt:d.getDate()+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear(),today:false};
 }
 
 function freqLabel(rot){
   var f=rot.recurrence;var cfg=rot.config||{};
   if(f==='diaria')return'Todo dia';
-  if(f==='semanal')return'Semanal · '+DIAS_SEMANA[cfg.dayOfWeek||1];
-  if(f==='quinzenal')return'Quinzenal · '+DIAS_SEMANA[cfg.dayOfWeek||1];
+  if(f==='semanal')return'Semanal';
+  if(f==='quinzenal')return'Quinzenal';
   if(f==='mensal')return'Mensal · dia '+(cfg.dayOfMonth||1);
   return f;
 }
@@ -1110,9 +1107,7 @@ function renderRotConfig(){
   var c=document.getElementById('rot-config');
   if(rotFreq==='diaria'){c.innerHTML='';return;}
   if(rotFreq==='semanal'||rotFreq==='quinzenal'){
-    c.innerHTML='<div class="field"><label>dia da semana</label><select id="rot-day">'
-      +DIAS_SEMANA.map(function(d,i){return'<option value="'+i+'">'+d+'</option>';}).join('')
-      +'</select></div>';
+    c.innerHTML='<div class="field"><label>data de início / referência</label><input id="rot-startdate" type="date" /><div style="font-size:10px;color:var(--fg-muted);margin-top:5px;">A partir dessa data, o sistema calcula as próximas ocorrências automaticamente.</div></div>';
     return;
   }
   if(rotFreq==='mensal'){
@@ -1142,8 +1137,8 @@ function openRotModal(id){
     var r=rotinas.find(function(x){return x.id===id;});
     var cfg=r.config||{};
     setTimeout(function(){
-      if((rotFreq==='semanal'||rotFreq==='quinzenal')&&document.getElementById('rot-day'))
-        document.getElementById('rot-day').value=cfg.dayOfWeek||1;
+      if((rotFreq==='semanal'||rotFreq==='quinzenal')&&document.getElementById('rot-startdate'))
+        document.getElementById('rot-startdate').value=cfg.startDate||'';
       if(rotFreq==='mensal'&&document.getElementById('rot-dom'))
         document.getElementById('rot-dom').value=cfg.dayOfMonth||1;
     },50);
@@ -1156,8 +1151,11 @@ async function saveRotina(){
   var name=document.getElementById('rot-name').value.trim();
   if(!name){document.getElementById('rot-name').focus();return;}
   var cfg={};
-  if((rotFreq==='semanal'||rotFreq==='quinzenal')&&document.getElementById('rot-day'))
-    cfg.dayOfWeek=parseInt(document.getElementById('rot-day').value);
+  if((rotFreq==='semanal'||rotFreq==='quinzenal')&&document.getElementById('rot-startdate')){
+    var sd=document.getElementById('rot-startdate').value;
+    if(!sd){document.getElementById('rot-startdate').focus();return;}
+    cfg.startDate=sd;
+  }
   if(rotFreq==='mensal'&&document.getElementById('rot-dom'))
     cfg.dayOfMonth=parseInt(document.getElementById('rot-dom').value);
   var data={name:name,client:document.getElementById('rot-client').value,description:document.getElementById('rot-desc').value.trim(),recurrence:rotFreq,config:cfg};
