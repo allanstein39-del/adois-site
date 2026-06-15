@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adois - Comunicação Integrativa</title>
+<meta name="description" content="Adois é uma agência de publicidade em São Carlos especializada em criação de logotipo, criação de campanha, experiência do cliente, design de marca e identidade visual.">
+<meta name="keywords" content="agência de publicidade em São Carlos, agência de publicidade São Carlos, criação de logotipo, criação de campanha, experiência do cliente, design de marca, identidade visual, branding, comunicação integrada, Adois">
+<meta property="og:title" content="Adois · agência de publicidade em São Carlos · criação de logotipo e campanha">
+<meta property="og:description" content="Agência de publicidade em São Carlos. Criação de logotipo, campanha e experiência do cliente com estratégia e criatividade que caminham juntas.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Adois comunicação integrativa">
+<link rel="canonical" href="https://adoisc.com.br">
+<style>
+
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/blauer-nue-100.woff2") format("woff2"),
+       url("fonts/blauer-nue-100.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/blauer-nue-200.woff2") format("woff2"),
+       url("fonts/blauer-nue-200.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/blauer-nue-300.woff2") format("woff2"),
+       url("fonts/blauer-nue-300.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/blauer-nue-400.woff2") format("woff2"),
+       url("fonts/blauer-nue-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/blauer-nue-500.woff2") format("woff2"),
+       url("fonts/blauer-nue-500.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blauer Nue";
+  src: url("fonts/blauer-nue-600.woff2") format("woff2"),
+       url("fonts/blauer-nue-600.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+
+
+
+
+
+
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:"Blauer Nue",ui-sans-serif,system-ui,sans-serif;background:#05080F;color:#fff;overflow-x:hidden}
+
+/* CURSOR - desktop only */
+@media(hover:hover){
+  body{cursor:none}
+  .cursor{position:fixed;width:8px;height:8px;background:#2FD4E8;border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:transform .1s ease}
+  .cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(47,212,232,.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+  .cursor.big{transform:translate(-50%,-50%) scale(3)}
+  .cursor-ring.big{width:52px;height:52px;border-color:rgba(47,212,232,.75)}
+}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 56px;transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(5,8,15,.88);backdrop-filter:blur(20px) saturate(130%);border-color:rgba(255,255,255,.07)}
+.nav-logo{text-decoration:none;display:flex;align-items:center}
+.nav-logo img{height:48px;width:auto}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,.58);font-size:13px;font-weight:400;letter-spacing:.02em;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:#2FD4E8;transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:transparent;border:1px solid rgba(47,212,232,.38);border-radius:999px;color:#2FD4E8;font-size:13px;font-weight:500;text-decoration:none;transition:background .2s,border-color .2s,box-shadow .2s;font-family:inherit}
+.nav-cta:hover{background:rgba(47,212,232,.09);border-color:#2FD4E8;box-shadow:0 0 24px rgba(47,212,232,.18)}
+
+/* HAMBURGER */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:110}
+.nav-hamburger span{display:block;width:22px;height:1px;background:#fff;transition:transform .25s,opacity .25s}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(5,8,15,.97);backdrop-filter:blur(20px);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{text-decoration:none;color:rgba(255,255,255,.7);font-size:clamp(22px,5vw,32px);font-weight:200;letter-spacing:-.02em;transition:color .2s}
+.mobile-menu a:hover{color:#2FD4E8}
+.mobile-menu .mob-cta{margin-top:16px;padding:14px 36px;border:1px solid rgba(47,212,232,.4);border-radius:999px;color:#2FD4E8;font-size:16px;font-weight:500}
+
+/* BUTTONS */
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;background:#2E6FB8;border-radius:999px;color:#fff;font-size:14px;font-weight:500;text-decoration:none;transition:background .2s,box-shadow .2s,transform .16s;font-family:inherit;border:none}
+.btn-primary:hover{background:#1B4B8F;box-shadow:0 0 0 1px rgba(47,212,232,.28),0 0 36px rgba(47,212,232,.18);transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;background:transparent;border:1px solid rgba(255,255,255,.2);border-radius:999px;color:rgba(255,255,255,.8);font-size:14px;font-weight:400;text-decoration:none;transition:border-color .2s,color .2s,transform .16s;font-family:inherit}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5);color:#fff;transform:translateY(-1px)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s cubic-bezier(.2,.8,.2,1),transform .65s cubic-bezier(.2,.8,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
+
+/* SECTION EYEBROW */
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#2FD4E8;display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.eyebrow::before{content:'';width:22px;height:1px;background:#2FD4E8;display:block}
+
+/* SECTION TITLE */
+.section-title{font-size:clamp(32px,3.5vw,48px);font-weight:200;letter-spacing:-.03em;color:#fff;line-height:1.1;margin-bottom:16px}
+
+/* TICKER */
+.ticker-wrap{overflow:hidden;border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);padding:13px 0;background:rgba(5,8,15,.4)}
+.ticker-track{display:flex;animation:ticker 38s linear infinite;white-space:nowrap}
+.ticker-item{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28);padding:0 36px;flex-shrink:0}
+.ticker-item em{color:#2FD4E8;font-style:normal;margin:0 8px}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SPHERE */
+.sphere{border-radius:50%;background:radial-gradient(circle at 30% 25%,#B9D7EE 0%,#4A91D4 35%,#13315C 75%,#0A1628 100%)}
+
+/* FOOTER */
+footer{background:#030609;border-top:1px solid rgba(255,255,255,.06);padding:60px 56px 36px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:52px}
+.footer-brand img{height:52px;width:auto;margin-bottom:14px}
+.footer-desc{font-size:13px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.38);max-width:220px}
+.footer-col-title{font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:18px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{text-decoration:none;font-size:13px;font-weight:300;color:rgba(255,255,255,.48);transition:color .2s}
+.footer-links a:hover{color:#2FD4E8}
+.footer-bottom{padding-top:28px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:12px;color:rgba(255,255,255,.22)}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:#05080F}
+::-webkit-scrollbar-thumb{background:#13315C;border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:#2E6FB8}
+
+/* MOBILE NAV */
+@media(max-width:768px){
+  nav{padding:16px 24px}
+  .nav-links,.nav-cta{display:none}
+  .nav-hamburger{display:flex}
+  footer{padding:48px 24px 28px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:480px){
+  .footer-grid{grid-template-columns:1fr}
+}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0ms!important;transition-duration:0ms!important}}
+
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 56px 100px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-image:url("img/hero-bg.webp");background-size:cover;background-position:center;z-index:0}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(5,8,15,.78) 0%,rgba(10,22,40,.50) 50%,rgba(5,8,15,.82) 100%)}
+.hero-content{position:relative;z-index:2;max-width:1080px;margin:0 auto;width:100%}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#2FD4E8;margin-bottom:32px;opacity:0;transform:translateY(12px);animation:fadeUp .68s cubic-bezier(.2,.8,.2,1) .15s forwards}
+.hero-tag::before{content:'';width:24px;height:1px;background:#2FD4E8;display:block}
+.hero-headline{font-size:clamp(52px,8.5vw,110px);font-weight:100;line-height:1.0;letter-spacing:-.04em;color:#fff;margin-bottom:28px;opacity:0;transform:translateY(18px);animation:fadeUp .72s cubic-bezier(.2,.8,.2,1) .35s forwards}
+.hero-headline em{font-style:normal;font-weight:300;background:linear-gradient(90deg,#4A91D4,#2FD4E8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(16px,1.8vw,19px);font-weight:300;line-height:1.65;color:rgba(255,255,255,.62);max-width:540px;margin-bottom:52px;opacity:0;transform:translateY(12px);animation:fadeUp .68s cubic-bezier(.2,.8,.2,1) .55s forwards}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;opacity:0;transform:translateY(10px);animation:fadeUp .68s cubic-bezier(.2,.8,.2,1) .7s forwards}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+
+/* TICKER */
+.hero-ticker{position:absolute;bottom:0;left:0;right:0;z-index:2}
+
+/* STAT ROW */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:14px;overflow:hidden;margin-top:60px}
+.stat-item{background:rgba(255,255,255,.02);padding:32px 28px;text-align:center;transition:background .3s}
+.stat-item:hover{background:rgba(47,212,232,.04)}
+.stat-num{font-size:44px;font-weight:100;letter-spacing:-.04em;color:#fff;line-height:1;margin-bottom:6px}
+.stat-num span{color:#2FD4E8}
+.stat-label{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.33)}
+
+/* SECTION ABOUT PREVIEW */
+.home-about{padding:100px 56px;background:#05080F;border-top:1px solid rgba(255,255,255,.06)}
+.home-about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center;max-width:1080px;margin:0 auto}
+.about-text h2{font-size:clamp(34px,3.8vw,52px);font-weight:200;letter-spacing:-.03em;color:#fff;line-height:1.1;margin-bottom:24px}
+.about-text h2 strong{font-weight:600;color:#2FD4E8}
+.about-text p{font-size:16px;font-weight:300;line-height:1.75;color:rgba(255,255,255,.58);margin-bottom:16px}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 36px}
+.tag{padding:7px 16px;border:1px solid rgba(46,111,184,.38);border-radius:999px;font-size:12px;font-weight:500;letter-spacing:.03em;color:#7CB5E6;transition:border-color .2s,color .2s}
+.tag:hover{border-color:#2FD4E8;color:#2FD4E8}
+.sphere-wrap{display:flex;justify-content:center;align-items:center}
+.sphere-lg{width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#B9D7EE 0%,#4A91D4 35%,#13315C 75%,#0A1628 100%);box-shadow:inset -6px -8px 18px rgba(10,22,40,.45),inset 6px 8px 18px rgba(185,215,238,.35),0 0 70px rgba(47,212,232,.13);animation:sphereFloat 6s ease-in-out infinite;position:relative}
+.sphere-lg::after{content:'';position:absolute;inset:-18px;border-radius:50%;border:1px solid rgba(47,212,232,.1);animation:sphereRing 6s ease-in-out infinite reverse}
+@keyframes sphereFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes sphereRing{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.07);opacity:.9}}
+
+/* SERVICES PREVIEW */
+.home-services{padding:100px 56px;background:#080D19;position:relative;overflow:hidden}
+.home-services::before{content:'';position:absolute;top:-180px;right:-180px;width:550px;height:550px;background:radial-gradient(circle,rgba(15,174,197,.05) 0%,transparent 68%);pointer-events:none}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px;max-width:1280px;margin-left:auto;margin-right:auto}
+.service-card{padding:36px 32px;background:rgba(255,255,255,.022);border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;transition:background .3s,border-color .3s,transform .3s}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#2FD4E8,transparent);transform:scaleX(0);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.service-card:hover{background:rgba(47,212,232,.04);border-color:rgba(47,212,232,.18);transform:translateY(-3px)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-num{font-size:11px;font-weight:500;letter-spacing:.18em;color:rgba(47,212,232,.45);margin-bottom:18px}
+.service-orb{width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#B9D7EE 0%,#4A91D4 35%,#13315C 75%);margin-bottom:18px;box-shadow:0 0 18px rgba(47,212,232,.18)}
+.service-title{font-size:19px;font-weight:500;letter-spacing:-.01em;color:#fff;margin-bottom:12px}
+.service-body{font-size:14px;font-weight:300;line-height:1.65;color:rgba(255,255,255,.48)}
+
+/* CTA BAND */
+.cta-band{padding:96px 56px;background:linear-gradient(135deg,#0A1628 0%,#13315C 42%,#0B5B6E 80%,#05080F 100%);position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;top:-50%;right:-18%;width:80%;height:200%;background:radial-gradient(ellipse,rgba(15,174,197,.11) 0%,transparent 65%);pointer-events:none}
+.cta-inner{max-width:760px;margin:0 auto;text-align:center;position:relative;z-index:2}
+.cta-headline{font-size:clamp(34px,5vw,60px);font-weight:100;letter-spacing:-.04em;color:#fff;line-height:1.08;margin-bottom:18px}
+.cta-sub{font-size:17px;font-weight:300;color:rgba(255,255,255,.58);margin-bottom:42px}
+.cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .home-about-grid{grid-template-columns:1fr;gap:48px}
+  .sphere-wrap{display:none}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .hero{padding:120px 24px 80px}
+  .home-about,.home-services,.cta-band{padding:72px 24px}
+  .services-grid{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:1fr 1fr}
+}
+
+/* CLIENTS CAROUSEL */
+.clients-section{padding:56px 0;background:#05080F;border-top:1px solid rgba(255,255,255,.06);overflow:hidden}
+.clients-header{text-align:center;padding:0 56px;margin-bottom:36px}
+.clients-carousel{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%)}
+.clients-track{display:flex;align-items:center;gap:24px;list-style:none;width:max-content;padding:8px 0;animation:scroll-clients 55s linear infinite}
+.clients-track:hover{animation-play-state:paused}
+.client-item{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:148px;height:68px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;transition:border-color .2s,background .2s}
+.client-item:hover{background:rgba(47,212,232,.05);border-color:rgba(47,212,232,.2)}
+.client-item img{max-width:116px;max-height:52px;object-fit:contain;filter:brightness(0) invert(1);opacity:.45;transition:opacity .2s;display:block}
+.client-item:hover img{opacity:.8}
+@keyframes scroll-clients{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:600px){.clients-header{padding:0 24px}}
+</style>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preload" as="image" href="img/hero-bg.webp" type="image/webp">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><img src="img/logo.webp" alt="Adois agência de publicidade" width="92" height="37" loading="eager"></a>
+  <ul class="nav-links"><li><a href="index.html" class="active">início</a></li>
+<li><a href="sobre.html">sobre</a></li>
+<li><a href="servicos.html">serviços</a></li>
+<li><a href="manifesto.html">manifesto</a></li>
+<li><a href="vagas.html">vagas</a></li><li><a href="blog.html">blog</a></li>
+
+</ul>
+  <a href="contato.html" class="nav-cta">entrar em contato →</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">início</a><a href="sobre.html">sobre</a><a href="servicos.html">serviços</a><a href="manifesto.html">manifesto</a><a href="vagas.html">vagas</a>
+  <a href="contato.html" class="mob-cta">entrar em contato →</a>
+</div>
+
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">agência de publicidade · são carlos · brasil</div>
+    <h1 class="hero-headline">Comunicação<br>que começa<br>antes da <em>comunicação.</em></h1>
+    <p class="hero-sub">Observamos, escutamos e organizamos para que sua marca cresça com consistência. Estratégia e criatividade que caminham juntas.</p>
+    <div class="hero-actions">
+      <a href="servicos.html" class="btn-primary">ver serviços →</a>
+      <a href="sobre.html" class="btn-ghost">conheça a Adois</a>
+    </div>
+  </div>
+  <div class="hero-ticker">
+    <div class="ticker-wrap">
+      <div class="ticker-track">
+        <span class="ticker-item">Design de Marca<em>·</em></span>
+        <span class="ticker-item">Identidade Visual<em>·</em></span>
+        <span class="ticker-item">Criação de Logotipo<em>·</em></span>
+        <span class="ticker-item">Agência de Publicidade<em>·</em></span>
+        <span class="ticker-item">Branding Estratégico<em>·</em></span>
+        <span class="ticker-item">Comunicação Integrativa<em>·</em></span>
+        <span class="ticker-item">Posicionamento de Marca<em>·</em></span>
+        <span class="ticker-item">Experiência do Cliente<em>·</em></span>
+        <span class="ticker-item">Design de Marca<em>·</em></span>
+        <span class="ticker-item">Identidade Visual<em>·</em></span>
+        <span class="ticker-item">Criação de Logotipo<em>·</em></span>
+        <span class="ticker-item">Agência de Publicidade<em>·</em></span>
+        <span class="ticker-item">Branding Estratégico<em>·</em></span>
+        <span class="ticker-item">Comunicação Integrativa<em>·</em></span>
+        <span class="ticker-item">Posicionamento de Marca<em>·</em></span>
+        <span class="ticker-item">Experiência do Cliente<em>·</em></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+  CLIENTES — carrossel infinito
+  Para adicionar um logo: coloque o arquivo em img/clientes/ e
+  adicione um novo <li class="client-item"> seguindo o padrão abaixo.
+  O JS duplica os itens automaticamente — não precisa alterar mais nada.
+-->
+<section class="clients-section">
+  <div class="clients-header">
+    <div class="eyebrow reveal" style="justify-content:center">clientes</div>
+  </div>
+  <div class="clients-carousel">
+    <ul class="clients-track" id="clients-track">
+      <li class="client-item"><img src="img/clientes/cliente-01.webp" alt="Cliente 01" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-02.webp" alt="Cliente 02" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-03.webp" alt="Cliente 03" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-04.webp" alt="Cliente 04" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-05.webp" alt="Cliente 05" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-06.webp" alt="Cliente 06" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-07.webp" alt="Cliente 07" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-08.webp" alt="Cliente 08" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-09.webp" alt="Cliente 09" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-10.webp" alt="Cliente 10" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-11.webp" alt="Cliente 11" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-12.webp" alt="Cliente 12" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-13.webp" alt="Cliente 13" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-14.webp" alt="Cliente 14" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-15.webp" alt="Cliente 15" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-16.webp" alt="Cliente 16" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-17.webp" alt="Cliente 17" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-18.webp" alt="Cliente 18" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-19.webp" alt="Cliente 19" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-20.webp" alt="Cliente 20" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-21.webp" alt="Cliente 21" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-22.webp" alt="Cliente 22" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-23.webp" alt="Cliente 23" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-24.webp" alt="Cliente 24" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-25.webp" alt="Cliente 25" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-26.webp" alt="Cliente 26" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-27.webp" alt="Cliente 27" loading="lazy" onerror="this.style.display='none'"></li>
+      <li class="client-item"><img src="img/clientes/cliente-28.webp" alt="Cliente 28" loading="lazy" onerror="this.style.display='none'"></li>
+    </ul>
+  </div>
+</section>
+
+<section class="home-about">
+  <div class="home-about-grid">
+    <div class="about-text">
+      <div class="eyebrow reveal">sobre a Adois</div>
+      <h2 class="reveal rd1">Nascemos<br>da <strong>prática.</strong></h2>
+      <p class="reveal rd2">A Adois é uma agência de publicidade fundada por Carol e Allan, dois especialistas que acreditam que marcas fortes são construídas com processo, escuta e consistência.</p>
+      <p class="reveal rd2">Organizamos comunicação de dentro para fora. Ouvimos seu negócio, seu cliente e seu mercado antes de desenhar qualquer solução.</p>
+      <div class="about-tags reveal rd3">
+        <span class="tag">Agência de Publicidade</span>
+        <span class="tag">Design de Marca</span>
+        <span class="tag">Identidade Visual</span>
+        <span class="tag">Criação de Logotipo</span>
+        <span class="tag">Branding</span>
+        <span class="tag">São Carlos</span>
+      </div>
+      <div class="reveal rd3"><a href="sobre.html" class="btn-primary">conheça nossa história →</a></div>
+      <div class="stat-row reveal rd4">
+        <div class="stat-item"><div class="stat-num"><span class="count-up" data-target="80">0</span><span>+</span></div><div class="stat-label">marcas criadas</div></div>
+        <div class="stat-item"><div class="stat-num"><span class="count-up" data-target="12">0</span><span>+</span></div><div class="stat-label">anos de prática</div></div>
+        <div class="stat-item"><div class="stat-num"><span class="count-up" data-target="100">0</span><span>%</span></div><div class="stat-label">dedicação</div></div>
+        <div class="stat-item"><div class="stat-num"><span class="count-up" data-target="3">0</span><span>x</span></div><div class="stat-label">premiados</div></div>
+      </div>
+    </div>
+    <div class="sphere-wrap reveal rd2">
+      <div class="sphere-lg"></div>
+    </div>
+  </div>
+</section>
+
+<section class="home-services">
+  <div style="max-width:1080px;margin:0 auto">
+    <div class="eyebrow reveal">o que fazemos</div>
+    <h2 class="section-title reveal rd1">Serviços</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal"><div class="service-num">01</div><div class="service-orb"></div><div class="service-title">Design de Marca</div><p class="service-body">Construímos identidades que resistem ao tempo. Uma linguagem visual coerente que fala por sua marca antes de qualquer palavra.</p></div>
+    <div class="service-card reveal rd1"><div class="service-num">02</div><div class="service-orb"></div><div class="service-title">Identidade Visual</div><p class="service-body">Sistema completo com paleta de cores, tipografia e diretrizes de uso. Uma identidade que escala do digital ao impresso.</p></div>
+    <div class="service-card reveal rd2"><div class="service-num">03</div><div class="service-orb"></div><div class="service-title">Criação de Logotipo</div><p class="service-body">Processo fundamentado em pesquisa, referências e significado. Logotipos criados para durar, não para seguir tendência.</p></div>
+    <div class="service-card reveal rd1"><div class="service-num">04</div><div class="service-orb"></div><div class="service-title">Estratégia de Comunicação</div><p class="service-body">Análise de posicionamento, público e mercado para que cada peça comunicativa tenha propósito claro.</p></div>
+    <div class="service-card reveal rd2"><div class="service-num">05</div><div class="service-orb"></div><div class="service-title">Publicidade e Campanha</div><p class="service-body">Campanhas integradas que conectam marca e pessoa, da mídia offline ao digital, com consistência e impacto mensuráveis.</p></div>
+    <div class="service-card reveal rd3"><div class="service-num">06</div><div class="service-orb"></div><div class="service-title">Experiência do Cliente</div><p class="service-body">Mapeamos cada ponto de contato da sua marca e organizamos para que cada experiência reforce o que você quer comunicar.</p></div>
+  </div>
+  <div style="text-align:center;margin-top:48px" class="reveal"><a href="servicos.html" class="btn-ghost">ver todos os serviços →</a></div>
+</section>
+
+<section class="cta-band">
+  <div class="cta-inner">
+    <div class="eyebrow reveal" style="justify-content:center;margin-bottom:22px;">vamos conversar</div>
+    <h2 class="cta-headline reveal rd1">Vamos estruturar<br>a sua próxima<br>conversa.</h2>
+    <p class="cta-sub reveal rd2">Seja um projeto de criação de logotipo, redesign de identidade visual ou uma campanha completa. Começamos sempre ouvindo.</p>
+    <div class="cta-actions reveal rd3">
+      <a href="contato.html" class="btn-primary">entrar em contato →</a>
+      <a href="https://www.instagram.com/adoisc/" target="_blank" rel="noopener" class="btn-ghost">instagram @adoisc</a>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="img/logo.webp" alt="Adois comunicação integrativa" width="92" height="37" loading="lazy">
+      <p class="footer-desc">Agência de publicidade e design de marca em São Carlos. Comunicação que começa antes da comunicação.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">serviços</div>
+      <ul class="footer-links">
+        <li><a href="servicos.html">design de marca</a></li>
+        <li><a href="servicos.html">identidade visual</a></li>
+        <li><a href="servicos.html">criação de logotipo</a></li>
+        <li><a href="servicos.html">publicidade</a></li>
+        <li><a href="servicos.html">estratégia</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">agência</div>
+      <ul class="footer-links">
+        <li><a href="sobre.html">sobre nós</a></li>
+        <li><a href="manifesto.html">manifesto</a></li>
+        <li><a href="vagas.html">vagas</a></li>
+        
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">redes sociais</div>
+      <ul class="footer-links">
+        <li><a href="https://www.instagram.com/adoisc/" target="_blank" rel="noopener">instagram @adoisc</a></li>
+        <li><a href="mailto:contato@adoisc.com.br">contato@adoisc.com.br</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Adois comunicação integrativa · São Carlos, Brasil</span>
+    <span>agência de publicidade · design de marca · identidade visual</span>
+  </div>
+</footer>
+
+
+<script>
+// CURSOR
+(function(){
+  const cur=document.getElementById('cursor');
+  const ring=document.getElementById('cursor-ring');
+  if(!cur||!ring||!matchMedia('(hover:hover)').matches)return;
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cur.style.left=mx+'px';cur.style.top=my+'px';
+  });
+  (function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})();
+  document.querySelectorAll('a,button,.service-card,.team-card,.value-item,.tag,.stat-item').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.classList.add('big');ring.classList.add('big')});
+    el.addEventListener('mouseleave',()=>{cur.classList.remove('big');ring.classList.remove('big')});
+  });
+})();
+
+// NAV SCROLL
+const navbar=document.getElementById('navbar');
+if(navbar)window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+// HAMBURGER
+const hbg=document.getElementById('hamburger');
+const mob=document.getElementById('mobile-menu');
+if(hbg&&mob){
+  hbg.addEventListener('click',()=>{
+    hbg.classList.toggle('open');
+    mob.classList.toggle('open');
+    document.body.style.overflow=mob.classList.contains('open')?'hidden':'';
+  });
+  mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    hbg.classList.remove('open');mob.classList.remove('open');document.body.style.overflow='';
+  }));
+}
+
+// REVEAL
+const revObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+// COUNT UP
+const cntObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&!e.target.dataset.done){
+      e.target.dataset.done=1;
+      const tgt=+e.target.dataset.target,dur=1500,start=performance.now();
+      (function tick(now){const t=Math.min((now-start)/dur,1),ease=1-Math.pow(1-t,3);
+        e.target.textContent=Math.round(ease*tgt);if(t<1)requestAnimationFrame(tick);})(performance.now());
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.count-up').forEach(el=>cntObs.observe(el));
+
+// CLIENTS CAROUSEL — duplica os itens para o loop ser contínuo
+(function(){
+  const track=document.getElementById('clients-track');
+  if(!track)return;
+  Array.from(track.children).forEach(item=>track.appendChild(item.cloneNode(true)));
+})();
+</script>
+
+</body>
+</html>
