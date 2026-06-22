@@ -1,0 +1,237 @@
+/* ============================================================
+   VILLA Mobiliário Sob Medida — Design System (base: apresentação institucional)
+   Carvão granulado + dourado + tipografia geométrica arredondada
+   Assinatura: "moldura Villa" — cartão com um canto orgânico amplo
+   ============================================================ */
+
+:root{
+  --carvao:#3a3a3c;
+  --carvao-2:#2c2c2e;
+  --carvao-3:#242426;
+  --ouro:#b08d3e;
+  --ouro-claro:#e3c87a;
+  --ouro-grad:linear-gradient(100deg,#9c7c33 0%,#d8b95f 45%,#f0dfa0 60%,#c79f48 100%);
+  --champanhe:#e8e3d9;
+  --gelo:#f4f2ee;
+  --branco:#fbfaf7;
+  --texto-claro:#d9d6cf;
+  --texto-escuro:#3c3a36;
+  --hairline:rgba(216,185,95,.55);
+  --raio:20px;
+  --raio-villa:96px; /* canto orgânico assinatura */
+  --max:1180px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Jost',sans-serif;
+  font-weight:300;
+  background:var(--carvao);
+  color:var(--texto-claro);
+  font-size:17px;
+  line-height:1.65;
+  letter-spacing:.02em;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.display{font-family:'Comfortaa',sans-serif;font-weight:600;line-height:1.22}
+h1{font-size:clamp(1.9rem,4.6vw,3.3rem);color:#fff}
+h2{font-size:clamp(1.5rem,3.2vw,2.3rem);color:#fff}
+h3{font-size:1.12rem;color:#fff}
+
+/* grain nas seções escuras */
+.dark{position:relative;background:var(--carvao)}
+.dark::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.dark>*{position:relative;z-index:1}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+section{padding:88px 0}
+
+/* ---- utilitários de marca ---- */
+.eyebrow{
+  font-family:'Comfortaa',sans-serif;font-size:.78rem;font-weight:700;
+  letter-spacing:.14em;text-transform:none;color:var(--ouro-claro);
+}
+.eyebrow b{color:#fff;font-weight:700}
+.fio{width:96px;height:4px;border-radius:4px;background:var(--ouro-grad);margin:18px 0 26px}
+.ouro{background:var(--ouro-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:1.06rem;max-width:62ch}
+
+/* moldura Villa: um canto orgânico amplo */
+.moldura{border-radius:var(--raio) var(--raio) var(--raio) var(--raio-villa);overflow:hidden;position:relative}
+.moldura.alt{border-radius:var(--raio-villa) var(--raio) var(--raio) var(--raio)}
+.moldura.tr{border-radius:var(--raio) var(--raio-villa) var(--raio) var(--raio)}
+.moldura::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  border:1px solid rgba(255,255,255,.14);pointer-events:none;
+}
+.moldura img{width:100%;height:100%;object-fit:cover}
+.eco{position:relative}
+.eco::before{ /* eco dourado deslocado, como nos slides */
+  content:"";position:absolute;inset:auto;width:62%;height:62%;
+  right:-16px;top:-16px;border-radius:var(--raio) var(--raio-villa) var(--raio) var(--raio);
+  background:var(--ouro-grad);opacity:.85;z-index:-1;
+}
+
+/* ---- nav ---- */
+header{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  background:rgba(40,40,42,.82);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo{font-family:'Comfortaa',sans-serif;font-weight:700;font-size:1.45rem;color:#fff;letter-spacing:.22em;display:flex;align-items:baseline;gap:10px}
+.logo .v{background:var(--ouro-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo small{font-size:.55rem;letter-spacing:.3em;color:var(--texto-claro);font-weight:400;font-family:'Jost'}
+nav ul{display:flex;gap:30px;list-style:none;align-items:center}
+nav a{font-size:.86rem;letter-spacing:.08em;font-weight:400;color:var(--texto-claro);transition:color .2s}
+nav a:hover,nav a.ativo{color:var(--ouro-claro)}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Comfortaa',sans-serif;font-weight:700;font-size:.85rem;
+  padding:14px 28px;border-radius:999px;border:none;cursor:pointer;
+  background:var(--ouro-grad);color:#2b2417;transition:transform .2s,box-shadow .2s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(216,185,95,.28)}
+.btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn.ghost:hover{border-color:var(--ouro-claro);color:var(--ouro-claro);box-shadow:none}
+.menu-toggle{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer}
+
+/* ---- hero ---- */
+.hero{min-height:92vh;display:flex;align-items:flex-end;position:relative;padding:0}
+.hero .bg{position:absolute;inset:0}
+.hero .bg img{width:100%;height:100%;object-fit:cover}
+.hero .bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(40,40,42,.55) 0%,rgba(40,40,42,.15) 40%,rgba(36,36,38,.92) 100%)}
+.hero .wrap{position:relative;z-index:2;padding-bottom:96px;padding-top:170px}
+.hero p.sub{max-width:54ch;margin:18px 0 30px;font-size:1.08rem}
+.hero .ctas{display:flex;gap:16px;flex-wrap:wrap}
+
+/* faixa de provas */
+.provas{background:var(--carvao-3);border-top:1px solid rgba(255,255,255,.06);padding:26px 0}
+.provas .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.prova{display:flex;align-items:center;gap:12px;font-size:.9rem;letter-spacing:.04em}
+.prova b{font-family:'Comfortaa';color:var(--ouro-claro);font-size:1.25rem;font-weight:700}
+
+/* ---- seções claras ---- */
+.claro{background:var(--champanhe);color:var(--texto-escuro)}
+.claro h2,.claro h3{color:var(--texto-escuro)}
+.claro .eyebrow{color:var(--ouro)}
+
+/* grids */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+
+/* cards de ambiente / projeto */
+.card{position:relative;overflow:hidden;border-radius:var(--raio) var(--raio) var(--raio) 64px;aspect-ratio:4/3.1;cursor:pointer}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.card:hover img{transform:scale(1.05)}
+.card .tag{
+  position:absolute;left:0;bottom:0;right:0;padding:48px 22px 18px;
+  background:linear-gradient(180deg,transparent,rgba(30,30,32,.88));
+  font-family:'Comfortaa';font-weight:700;color:#fff;font-size:1rem;
+}
+.card .tag small{display:block;font-family:'Jost';font-weight:300;font-size:.8rem;color:var(--texto-claro)}
+
+/* diferenciais */
+.dif{ text-align:center;padding:30px 18px}
+.dif .ico{font-size:1.9rem;margin-bottom:14px;display:block;
+  background:var(--ouro-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dif h3{font-size:.98rem;margin-bottom:8px}
+.claro .dif{background:var(--gelo);border-radius:18px 18px 18px 48px;box-shadow:0 8px 26px rgba(60,55,45,.08)}
+.dif p{font-size:.88rem}
+
+/* ---- processo / timeline ---- */
+.etapas{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:20px}
+.etapa{background:var(--gelo);border-radius:14px 14px 14px 40px;padding:24px 22px;box-shadow:0 6px 22px rgba(60,55,45,.08)}
+.etapa .num{font-family:'Comfortaa';font-weight:700;font-size:1.5rem;
+  background:var(--ouro-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.etapa h3{font-size:.95rem;margin:8px 0 4px;color:var(--texto-escuro)}
+.etapa small{font-size:.8rem;color:#7a7468}
+.fabrica{
+  grid-column:1/-1;text-align:center;border:1.5px solid var(--ouro);
+  border-radius:999px;padding:20px;background:transparent;
+}
+.fabrica b{font-family:'Comfortaa';color:var(--ouro)}
+
+/* ---- filtros projetos ---- */
+.filtros{display:flex;gap:12px;flex-wrap:wrap;margin:34px 0 40px}
+.filtro{
+  font-family:'Comfortaa';font-weight:700;font-size:.8rem;
+  padding:11px 22px;border-radius:999px;cursor:pointer;
+  background:transparent;border:1px solid rgba(255,255,255,.28);color:var(--texto-claro);
+  transition:all .2s;
+}
+.filtro:hover{border-color:var(--ouro-claro);color:var(--ouro-claro)}
+.filtro.ativo{background:var(--ouro-grad);border-color:transparent;color:#2b2417}
+.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.galeria .card{aspect-ratio:4/3}
+.galeria .card.oculto{display:none}
+
+/* ---- padrões (swatches) ---- */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:18px}
+.swatch{border-radius:12px 12px 12px 34px;overflow:hidden;background:var(--gelo);box-shadow:0 6px 20px rgba(60,55,45,.1)}
+.swatch img{aspect-ratio:3/2;object-fit:cover;width:100%}
+.swatch span{display:block;padding:10px 14px;font-family:'Comfortaa';font-weight:700;font-size:.72rem;letter-spacing:.08em;color:var(--texto-escuro)}
+.abas{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 40px}
+
+/* ---- formulário ---- */
+form .campo{margin-bottom:18px}
+label{display:block;font-family:'Comfortaa';font-weight:700;font-size:.78rem;letter-spacing:.06em;margin-bottom:8px;color:var(--ouro-claro)}
+input,select,textarea{
+  width:100%;padding:14px 18px;border-radius:14px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
+  color:#fff;font-family:'Jost';font-size:.95rem;
+}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--ouro);outline-offset:1px}
+select option{color:#222}
+
+/* ---- CTA final / footer ---- */
+.cta-final{text-align:center}
+.cta-final h2{max-width:22ch;margin:0 auto 14px}
+footer{background:var(--carvao-3);border-top:1px solid rgba(255,255,255,.07);padding:54px 0 30px;font-size:.88rem}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+footer h3{font-size:.9rem;margin-bottom:14px;color:var(--ouro-claro)}
+footer ul{list-style:none}
+footer li{margin-bottom:8px}
+footer a:hover{color:var(--ouro-claro)}
+.assina{grid-column:1/-1;margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.07);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;color:#9a968e}
+
+/* whatsapp flutuante */
+.zap{
+  position:fixed;right:22px;bottom:22px;z-index:60;width:60px;height:60px;
+  border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 26px rgba(0,0,0,.35);transition:transform .2s;
+}
+.zap:hover{transform:scale(1.08)}
+.zap svg{width:32px;height:32px;fill:#fff}
+
+/* hero interno (páginas) */
+.hero-pg{padding:170px 0 70px}
+
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+@media(max-width:920px){
+  .g2{grid-template-columns:1fr;gap:40px}
+  .g3,.g4,.galeria{grid-template-columns:repeat(2,1fr)}
+  footer .wrap{grid-template-columns:1fr 1fr}
+  nav ul{
+    position:fixed;inset:74px 0 auto 0;background:rgba(36,36,38,.97);
+    flex-direction:column;padding:26px;gap:20px;display:none;
+  }
+  nav ul.aberto{display:flex}
+  .menu-toggle{display:block}
+}
+@media(max-width:560px){
+  .g3,.g4,.galeria{grid-template-columns:1fr}
+  section{padding:64px 0}
+  .provas .wrap{justify-content:flex-start}
+}
