@@ -1,0 +1,28 @@
+SITE VILLA MOBILIÁRIO SOB MEDIDA — pronto para hospedagem estática
+===================================================================
+
+COMO SUBIR NO HOSTGATOR
+1. cPanel > Gerenciador de Arquivos > pasta public_html
+2. Suba TODO o conteúdo desta pasta (index.html, css/, js/, img/ e demais .html)
+   - Dica: compacte em .zip, suba e extraia direto no File Manager.
+3. index.html é a home (abre sozinha no domínio).
+
+ESTRUTURA
+  index.html .......... Home (rolagem longa)
+  projetos.html ....... Portfólio filtrável por ambiente
+  padroes.html ........ Catálogo de padrões e acabamentos (com abas)
+  como-funciona.html .. Processo de 11 etapas + Book Técnico
+  sobre.html .......... História, fundadores, equipe, prêmios
+  contato.html ........ Formulário (abre WhatsApp preenchido)
+  css/villa.css ....... Todo o visual (cores, tipografia, layout)
+  js/components.js .... Cabeçalho, rodapé, botão WhatsApp e interações
+
+EDITAR DADOS DE CONTATO (um só lugar): topo do arquivo js/components.js
+  whatsapp / telefoneLabel / instagram
+
+TROCAR IMAGENS
+  - Estão em img/. Substitua mantendo o mesmo nome do arquivo.
+  - Padrões de acabamento: img/pad/ (amostra; a biblioteca completa pode ser adicionada).
+
+OBS: imagens atuais saíram da apresentação institucional (provisórias).
+Recomendado trocar por fotos reais em alta dos projetos da Villa.
