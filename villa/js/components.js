@@ -15,7 +15,7 @@ function navHTML(ativo){
   return `
   <header>
     <div class="wrap nav">
-      <a href="index.html" class="logo"><span class="v">V</span>ILLA<small>SOB&nbsp;MEDIDA</small></a>
+      <a href="index.html" class="logo"><img src="img/Villa%20logo_branco.png" alt="Villa Sob Medida"></a>
       <button class="menu-toggle" aria-label="Abrir menu" onclick="document.getElementById('menu').classList.toggle('aberto')">☰</button>
       <nav>
         <ul id="menu">
@@ -36,7 +36,7 @@ function footerHTML(){
   <footer class="dark">
     <div class="wrap">
       <div>
-        <div class="logo" style="margin-bottom:14px"><span class="v">V</span>ILLA<small>SOB&nbsp;MEDIDA</small></div>
+        <div class="logo" style="margin-bottom:14px"><img src="img/Villa%20logo_branco.png" alt="Villa Sob Medida"></div>
         <p style="max-width:34ch;font-size:.9rem">Móveis planejados sob medida em ${VILLA.cidade}. Onde cada detalhe faz a diferença.</p>
       </div>
       <div>
