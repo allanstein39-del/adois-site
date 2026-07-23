@@ -24,7 +24,7 @@ function navHTML(ativo){
           ${item('projetos.html','Projetos','projetos')}
           ${item('sobre.html','Sobre','sobre')}
           ${item('contato.html','Contato','contato')}
-          <li><a class="btn" href="${VILLA.zapMsg()}" target="_blank" rel="noopener">Solicitar orçamento</a></li>
+          <li><a class="btn" href="${VILLA.zapMsg()}" target="_blank" rel="noopener">Iniciar projeto</a></li>
         </ul>
       </nav>
     </div>
@@ -53,7 +53,7 @@ function footerHTML(){
         <ul>
           <li><a href="${VILLA.zapMsg()}" target="_blank" rel="noopener">WhatsApp ${VILLA.telefoneLabel}</a></li>
           <li><a href="${VILLA.instagram}" target="_blank" rel="noopener">Instagram ${VILLA.instaHandle}</a></li>
-          <li><a href="contato.html">Solicitar orçamento</a></li>
+          <li><a href="contato.html">Iniciar meu projeto</a></li>
         </ul>
       </div>
       <div class="assina">
@@ -98,18 +98,18 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   });
 
-  // formulário -> abre WhatsApp já preenchido (sem backend, ideal pra hospedagem estática)
-  const form=document.getElementById('form-orcamento');
-  if(form){
+  // formulários -> abrem WhatsApp já preenchidos (sem backend, ideal pra hospedagem estática)
+  document.querySelectorAll('.form-zap, #form-orcamento').forEach(form=>{
     form.addEventListener('submit',e=>{
       e.preventDefault();
       const d=new FormData(form);
       const txt=`Olá, Villa! Sou ${d.get('nome')||'—'}.`
         +`\nAmbiente de interesse: ${d.get('ambiente')||'—'}`
-        +`\nSou arquiteto(a)/designer: ${d.get('arquiteto')||'—'}`
+        +(d.get('cidade')?`\nCidade: ${d.get('cidade')}`:'')
+        +(d.get('arquiteto')?`\nSou arquiteto(a)/designer: ${d.get('arquiteto')}`:'')
         +(d.get('mensagem')?`\nMensagem: ${d.get('mensagem')}`:'')
-        +(d.get('telefone')?`\nMeu contato: ${d.get('telefone')}`:'');
+        +(d.get('telefone')?`\nMeu WhatsApp: ${d.get('telefone')}`:'');
       window.open(VILLA.zapMsg(txt),'_blank','noopener');
     });
-  }
+  });
 });
