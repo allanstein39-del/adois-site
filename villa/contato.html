@@ -17,25 +17,30 @@
   <div class="wrap g2" style="align-items:flex-start">
     <div>
       <p class="eyebrow">Vamos conversar</p>
-      <h1>Solicite seu orçamento</h1>
+      <h1>Quero iniciar meu projeto</h1>
       <div class="fio"></div>
       <p class="lead">Conte um pouco sobre o que você quer planejar. Ao enviar, abrimos uma conversa no WhatsApp já com seus dados — rápido e direto, do jeito que a gente gosta.</p>
 
-      <form id="form-orcamento" style="margin-top:34px">
+      <form id="form-orcamento" class="form-zap" style="margin-top:34px">
         <div class="campo">
           <label for="nome">Seu nome</label>
           <input id="nome" name="nome" type="text" placeholder="Como podemos te chamar?" required>
         </div>
         <div class="campo">
-          <label for="telefone">WhatsApp / telefone</label>
-          <input id="telefone" name="telefone" type="text" placeholder="(16) 9____-____">
+          <label for="telefone">WhatsApp</label>
+          <input id="telefone" name="telefone" type="text" placeholder="(16) 9____-____" required>
         </div>
         <div class="campo">
-          <label for="ambiente">Ambiente de interesse</label>
+          <label for="cidade">Cidade</label>
+          <input id="cidade" name="cidade" type="text" placeholder="Sua cidade" value="São Carlos">
+        </div>
+        <div class="campo">
+          <label for="ambiente">Ambientes desejados</label>
           <select id="ambiente" name="ambiente">
             <option>Cozinha</option>
             <option>Dormitório / Closet</option>
             <option>Sala / Home</option>
+            <option>Área gourmet</option>
             <option>Escritório / Comercial</option>
             <option>Projeto completo (casa toda)</option>
             <option>Outro</option>
@@ -52,12 +57,12 @@
           <label for="mensagem">Mensagem (opcional)</label>
           <textarea id="mensagem" name="mensagem" rows="4" placeholder="Conte sobre o espaço, prazos, referências…"></textarea>
         </div>
-        <button class="btn" type="submit" style="width:100%;justify-content:center">Enviar pelo WhatsApp</button>
+        <button class="btn" type="submit" style="width:100%;justify-content:center">Quero iniciar meu projeto</button>
       </form>
     </div>
 
     <aside>
-      <div class="moldura" style="margin-bottom:26px"><img src="img/showroom-recepcao.jpg" alt="Recepção da Villa"></div>
+      <div class="moldura" style="margin-bottom:26px"><img src="img/amb-comercial.jpg" alt="Recepção comercial planejada pela Villa"></div>
       <h3 style="margin-bottom:14px">Canais diretos</h3>
       <p style="margin-bottom:10px"><strong>WhatsApp</strong><br><a id="zap-direto" href="#" target="_blank" rel="noopener">(16) 99737-3078</a></p>
       <p style="margin-bottom:10px"><strong>Instagram</strong><br><a href="https://www.instagram.com/villa_mobiliariosobmedida/" target="_blank" rel="noopener">@villa_mobiliariosobmedida</a></p>
