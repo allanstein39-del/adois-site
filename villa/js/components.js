@@ -49,6 +49,15 @@ function footerHTML(){
         </ul>
       </div>
       <div>
+        <h3>Soluções</h3>
+        <ul>
+          <li><a href="cozinhas.html">Cozinhas planejadas</a></li>
+          <li><a href="closets.html">Closets sob medida</a></li>
+          <li><a href="corporativo.html">Móveis corporativos</a></li>
+          <li><a href="projetos-completos.html">Projetos completos</a></li>
+        </ul>
+      </div>
+      <div>
         <h3>Fale com a Villa</h3>
         <ul>
           <li><a href="${VILLA.zapMsg()}" target="_blank" rel="noopener">WhatsApp ${VILLA.telefoneLabel}</a></li>

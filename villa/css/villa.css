@@ -280,6 +280,24 @@ select option{color:#222}
 .depo .autor b{display:block;font-family:'Comfortaa';font-size:.9rem;color:var(--texto-escuro)}
 .depo .autor span{font-size:.78rem;color:#7a7468}
 
+/* ---- fotos de projetos entregues (depoimentos) ---- */
+.depo-fotos{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:34px 0 0}
+.depo-fotos img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px 14px 14px 30px;box-shadow:0 8px 24px rgba(60,55,45,.12)}
+@media(max-width:760px){.depo-fotos{grid-template-columns:repeat(3,1fr)}.depo-fotos img:nth-child(n+4){display:none}}
+
+/* ---- landing pages (Google Ads) ---- */
+.lp-selos{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:8px 0 4px}
+.lp-selo{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;
+  background:rgba(216,185,95,.1);border:1px solid var(--hairline);font-family:'Comfortaa';font-weight:700;font-size:.82rem;color:#fff}
+.claro .lp-selo{background:#fff;border-color:rgba(176,141,62,.3);color:var(--texto-escuro);box-shadow:0 6px 18px rgba(60,55,45,.08)}
+.lp-selo svg{width:20px;height:20px;fill:var(--ouro-claro);flex:0 0 auto}
+.claro .lp-selo svg{fill:var(--ouro)}
+.beneficios{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 30px;margin:26px 0 0;max-width:760px}
+.beneficios li{position:relative;padding-left:32px;font-size:1rem}
+.beneficios li::before{content:"";position:absolute;left:0;top:.1em;width:22px;height:22px;border-radius:50%;background:var(--ouro-grad)}
+.beneficios li::after{content:"";position:absolute;left:7px;top:.42em;width:7px;height:4px;border-left:2px solid #2b2417;border-bottom:2px solid #2b2417;transform:rotate(-45deg)}
+@media(max-width:560px){.beneficios{grid-template-columns:1fr}}
+
 /* ---- formulário curto (home) ---- */
 .form-curto{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px;margin:30px auto 0;text-align:left}
 .form-curto .campo{margin-bottom:0}
@@ -290,7 +308,7 @@ select option{color:#222}
 .cta-final{text-align:center}
 .cta-final h2{max-width:22ch;margin:0 auto 14px}
 footer{background:var(--carvao-3);border-top:1px solid rgba(255,255,255,.07);padding:54px 0 30px;font-size:.88rem}
-footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+footer .wrap{display:grid;grid-template-columns:1.8fr 1fr 1.1fr 1.1fr;gap:36px}
 footer h3{font-size:.9rem;margin-bottom:14px;color:var(--ouro-claro)}
 footer ul{list-style:none}
 footer li{margin-bottom:8px}
