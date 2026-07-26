@@ -22,6 +22,7 @@ function navHTML(ativo){
           ${item('index.html','Início','home')}
           ${item(ativo==='home'?'#diferenciais':'index.html#diferenciais','Diferenciais','diferenciais')}
           ${item('projetos.html','Projetos','projetos')}
+          ${item('arquitetos.html','Arquitetos','arquitetos')}
           ${item('sobre.html','Sobre','sobre')}
           ${item('contato.html','Contato','contato')}
           <li><a class="btn" href="${VILLA.zapMsg()}" target="_blank" rel="noopener">Iniciar projeto</a></li>
@@ -44,6 +45,7 @@ function footerHTML(){
         <ul>
           <li><a href="index.html#diferenciais">Diferenciais</a></li>
           <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="arquitetos.html">Arquitetos e designers</a></li>
           <li><a href="sobre.html">Sobre a Villa</a></li>
           <li><a href="contato.html">Contato</a></li>
         </ul>
