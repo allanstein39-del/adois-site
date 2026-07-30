@@ -232,6 +232,9 @@ nav a:hover,nav a.ativo{color:var(--ouro-claro)}
 }
 .filtro:hover{border-color:var(--ouro-claro);color:var(--ouro-claro)}
 .filtro.ativo{background:var(--ouro-grad);border-color:transparent;color:#2b2417}
+.claro .filtro{color:#000;border-color:rgba(43,36,23,.4)}
+.claro .filtro:hover{border-color:var(--ouro);color:var(--ouro)}
+.claro .filtro.ativo{color:#2b2417}
 .galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .galeria .card{aspect-ratio:4/3}
 .galeria .card.oculto{display:none}
