@@ -99,3 +99,10 @@ const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
 }), {threshold:.12});
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// evita o flash do traço amarelo (.slash) antes das fontes carregarem
+(function(){
+  var show = function(){ document.documentElement.classList.add('fonts-ready'); };
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(show); }
+  setTimeout(show, 1200);
+})();

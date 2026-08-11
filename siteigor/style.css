@@ -39,7 +39,8 @@ ul{list-style:none}
 
 /* riscos amarelos do KV */
 .slash{position:relative;display:inline-block}
-.slash::after{content:"";position:absolute;left:-6%;bottom:.06em;width:112%;height:.28em;background:var(--volt);z-index:-1;transform:skewX(-18deg)}
+.slash::after{content:"";position:absolute;left:-6%;bottom:.06em;width:112%;height:.28em;background:var(--volt);z-index:-1;transform:skewX(-18deg);opacity:0;transition:opacity .3s ease}
+.fonts-ready .slash::after{opacity:1}
 
 /* botões */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font-weight:800;font-size:.92rem;letter-spacing:.06em;text-transform:uppercase;padding:1rem 1.7rem;border-radius:8px;border:2px solid transparent;transition:transform .15s ease,background .2s,color .2s,border-color .2s;cursor:pointer}
@@ -270,6 +271,8 @@ footer.site{background:#000a29;padding:3rem 0 2.2rem;font-size:.85rem;color:rgba
 .foot-nav{display:flex;flex-wrap:wrap;gap:.4rem 1.3rem;font-weight:600}
 .foot-nav a:hover{color:var(--volt)}
 .foot-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.4rem}
+.foot-adois{color:inherit;text-decoration:underline;text-underline-offset:2px;transition:color .2s}
+.foot-adois:hover{color:var(--volt)}
 .foot-social{display:flex;gap:1rem}
 .foot-social a{width:38px;height:38px;border:1px solid rgba(255,255,255,.25);border-radius:50%;display:grid;place-items:center;transition:border-color .2s,color .2s}
 .foot-social a:hover{border-color:var(--volt);color:var(--volt)}
